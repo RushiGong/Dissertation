@@ -1,0 +1,350 @@
+\documentclass[letterpaper, 12pt]{report}
+\usepackage[margin=0.75in]{geometry}
+%\usepackage[english]{babel} 
+\usepackage[T1]{fontenc}
+\usepackage{graphicx, lipsum, textcomp, float} %figure formatting
+\usepackage{hyperref} %referancing package
+%\usepackage[version=4]{mhchem}  %chemical equations and formulas
+\usepackage{chemformula}
+%\usepackage{advdate, datenumber} %date packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{amsfonts}
+\usepackage{multirow}
+%\usepackage{comment}
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{listings}
+
+\usepackage{adjustbox}
+\usepackage{array, booktabs}
+\usepackage{nameref}
+
+%Listings
+\usepackage{minted}
+%\usepackage[finalizecache,cachedir=.]{minted}
+%\usepackage[frozencache,cachedir=.]{minted}
+
+%Font
+\renewcommand{\thelinenumber}{\raisebox{1pt}{\textcolor[RGB]{200,200,200}{\arabic{linenumber}}}}
+\usepackage[scaled]{beramono}
+\renewcommand{\familydefault}{\sfdefault} 
+\definecolor{darkgreen}{rgb}{0.05, 0.3, 0.1}
+
+\usepackage[htt]{hyphenat} %texttt hyphenation breaks
+
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{\oldtexttt{\textcolor{darkgreen}{#1}}}
+
+
+% Line spacing (double for title page, single for TOC, and 1.5 for body)
+\usepackage{setspace}
+
+% Bibliography
+\usepackage[
+    style=ieee, 
+    isbn=false, 
+    url=true, 
+    natbib=true, 
+    backend=bibtex,
+    maxcitenames=1,
+    mincitenames=1
+    ]{biblatex}
+\addbibresource{referencesAdam.bib}
+\addbibresource{extras/nimcsoRefs.bib}
+\addbibresource{extras/crystallRefs.bib}
+\addbibresource{extras/referencesSiegel.bib}
+\renewcommand*{\bibfont}{\footnotesize}
+
+% Smaller figure captions 
+\usepackage{caption}
+\captionsetup[figure]{font=footnotesize, labelfont=footnotesize}
+
+% Section titles
+\usepackage{titlesec}
+
+% Chapter
+\titleformat{\chapter}[display]
+{\Large\bfseries\centering}
+{Chapter \thechapter}{0.5em}{}[\vspace{2ex}\titlerule]
+\titlespacing*{\chapter}{0pt}{0pt}{30pt}
+
+% Section
+\titleformat{\section}[hang]
+{\large\bfseries}
+{\thesection}{0.5em}{}
+
+% Subection
+\titleformat{\subsection}[hang]
+{\large\bfseries}
+{\thesubsection}{0.5em}{}
+
+% less section skip in the table of contents
+\usepackage{tocbasic}
+
+% Section
+\DeclareTOCStyleEntry[
+  beforeskip=.2em plus 1pt,% default is 1em plus 1pt
+  pagenumberformat=\textbf
+]{tocline}{section}
+
+% Chapter
+\DeclareTOCStyleEntry[
+  entrynumberformat=\entrywithprefix{\chaptername},
+  dynnumwidth
+]{tocline}{chapter}
+\newcommand*\entrywithprefix[2]{#1~#2}
+
+% Appendix
+\usepackage[toc]{appendix}
+\newcommand{\mypart}[1]{\thispagestyle{empty}\part*{#1}}%\addtocounter{page}{-1}}
+
+
+% MISC
+\setlength\parindent{6pt} %paragraph indentation
+\setlength{\parskip}{6pt} %paragraph spacing
+
+%set hyperlinks colors
+\definecolor{mypurple}{RGB}{140,54,140}
+\definecolor{homered}{RGB}{127, 0, 10}
+\definecolor{officeorange}{RGB}{204, 75, 0}
+\definecolor{mauroblue}{RGB}{53, 48, 217}
+\definecolor{citegreen}{RGB}{15, 133, 13}
+\definecolor{hyperlinkpurple}{RGB}{42, 0, 163}
+\definecolor{subtlegray}{gray}{0.98}
+\definecolor{subduedgray}{gray}{0.75}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=hyperlinkpurple,
+    filecolor=mypurple,      
+    urlcolor=teal,
+    citecolor=citegreen
+}
+
+% Macros:
+% Full number and reference name hyperlinking
+\newcommand*{\fullref}[1]{\hyperref[{#1}]{\ref*{#1} on \nameref*{#1}}}
+% Acknoledgments on per-chapter basis
+\newcommand{\acknowledge}[1]{\textit{
+\small
+Acknowledgment: #1
+}}
+% TODO markers.
+\newcommand{\todo}{
+\begin{center}
+\textcolor{mauroblue}{
+\textit{
+This section is currently under preparation.
+}}
+\end{center}
+}
+
+
+
+
+% Notes:
+% Reference prefixing on Mac: sed -i '' -E 's/\\(label|ref|nameref|autoref|eqref){([^}]*)/\\\1{pysipfenn:\2/g' pysipfenn.tex
+% Graphics prefixing on Mac: sed -i '' -E 's/(\\includegraphics\[[^]]*\]{)([^}]*)/\1pysipfenn\/\2/g' pysipfenn.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   DOCUMENT   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+% Front matter manually formatted according to the rules 
+\pagenumbering{roman}
+\thispagestyle{empty}
+\setstretch{1}
+
+% Title page body
+{
+\centering
+The Pennsylvania State University\\
+The Graduate School\\
+\vfill
+\setstretch{2}
+{
+\Large
+\textbf{EFFICIENT MATERIALS INFORMATICS BETWEEN ROCKETS AND ELECTRONS}\\
+}
+\vfill
+A Dissertation in\\
+Materials Science and Engineering\\
+by\\
+Adam M. Krajewski\\
+\vfill
+© 2024 Adam M. Krajewski\\
+\setstretch{1}
+\vfill
+Submitted in Partial Fulfillment\\
+of the Requirements\\
+for the Degree of\\
+
+\vfill
+Doctor of Philosophy\\
+\vfill
+August 2024\\
+\vfill
+}
+
+% Committee page
+\newpage
+\setstretch{1.5}
+\setlength\parindent{0pt} %no paragraph indentation
+
+The dissertation of Adam M. Krajewski was reviewed and approved by the following:\\
+
+\textbf{Zi-Kui Liu}\\
+Dorothy Pate Enright Professor at the Department of Materials Science and Engineering\\
+Director of the Phases Research Laboratory\\
+Dissertation Advisor and Chair of the Committee\\
+
+\textbf{Allison M. Beese}\\
+Professor of Materials Science and Engineering\\
+Professor of Mechanical Engineering\\
+Director of Additive Manufacturing \& Design Graduate Program\\
+Co-director of Center for Innovative Materials Processing through Direct Digital Deposition\\
+
+\textbf{Ismaila Dabo}\\
+Associate Professor of Materials Science and Engineering\\
+Associate Professor of Physics\\
+
+\textbf{Wenrui Hao}\\
+Associate Professor of Mathematics\\
+
+\textbf{John Mauro}\\
+Program Head\\
+
+\vfill
+
+
+\newpage
+\chapter*{Abstract}
+
+The true power of computational research typically can lay in either what it accomplishes or what it enables others to accomplish. In this work, both avenues are simultaneously embraced across several distinct efforts existing at three general scales of abstractions of what a material is - atomistic, physical, and design. At each, an efficient materials informatics infrastructure is being built from the ground up based on (1) the fundamental understanding of the underlying prior knowledge, including the data, (2) deployment routes that take advantage of it, and (3) pathways to extend it in an autonomous or semi-autonomous fashion, while heavily relying on artificial intelligence (AI) to guide well-established DFT-based ab initio and CALPHAD-based thermodynamic methods.
+
+The resulting multi-level discovery infrastructure is highly generalizable as it focuses on encoding problems to solve them easily rather than looking for an existing solution. To showcase it, this dissertation discusses the design of multi-alloy functionally graded materials (FGMs) incorporating ultra-high temperature refractory high entropy alloys (RHEAs) towards gas turbine and jet engine efficiency increase reducing \ch{CO_2} emissions, as well as hypersonic vehicles. It leverages a new graph representation of underlying mathematical space using a newly developed algorithm based on combinatorics, not subject to many problems troubling the community. Underneath, property models and phase relations are learned from optimized samplings of the largest and highest quality dataset of HEA in the world, called ULTERA. At the atomistic level, a data ecosystem optimized for machine learning (ML) from over 4.5 million relaxed structures, called MPDD, is used to inform experimental observations and improve thermodynamic models by providing stability data enabled by a new efficient featurization framework.
+
+
+
+
+\setstretch{1}
+\newpage
+\tableofcontents
+
+\newpage
+\addcontentsline{toc}{chapter}{\listfigurename}
+\renewcommand{\listfigurename}{List of Figures}
+\listoffigures
+
+\newpage
+\addcontentsline{toc}{chapter}{\listtablename}
+\renewcommand{\listtablename}{List of Tables}
+\listoftables
+
+\newpage
+\chapter*{Acknowledgments}
+\label{acknowledgments}
+\addcontentsline{toc}{chapter}{\nameref{acknowledgments}}
+
+I would like to thank all of my family, friends, and collaborators who supported me along the way, with the spotlight given to my parents, \textbf{Mikołaj Krajewski} and \textbf{Izabella Krajewska}, without whom I would not (statistically) become a scientist, let alone become a \emph{doctor}. However, the degree is just a classifier in a database somewhere without being backed by science created while completing it. Thus, I would like to thank my advisor, \textbf{Zi-Kui Liu}, for guiding me over the last five years of exceptionally productive research that pushed me to \emph{do better than my best}.
+
+I want to thank my research group colleagues, whom I worked with over the years, including \textbf{Zi-Kui Liu}, who was a great colleague, in addition to being a great advisor, \textbf{ShunLi Shang, Yi Wang, Brandon Bocklund, Jorge Paz Soldan Palma, Hongyeun Kim, John Shimanek, Hui Sun, Rushi Gong, Shuang Lin, Alexander Richter, Luke Myers}, and \textbf{Ricardo Amaral}.
+
+I would like to thank my colleagues who, to the best of their abilities, kept me from falling into an abyss of scientific insanity through hours spent on less technical conversations. In particular, but in no particular order, I would like to acknowledge several of them who regularly attended my weekly office hours over the years: \textbf{Stephen Holoviak, Alexander Richter, Luke Myers, Cooper Pan, Curtis Warner, Ian Cunningham, James Ricardo, Ellie Franklin, Hamdan Almarzooqi, Jorge Paz Soldan Palma, Brandon Bocklund}, and \textbf{Stephanie Castro Baldivieso.}
+
+I would like to thank my Lawrence Livermore National Lab colleagues \textbf{Aurelien Perron, Brandon Bocklund, Kate Elder, Joseph McKeown}, and other amazing colleagues from the Materials Science Division at Lawrence Livermore National Lab (LLNL) for having the opportunity of working with them on solving challenging problems with great implementation flexibility which prompted me to deepen my understanding of highly dimensional design spaces, without which some of the work in this dissertation would never happen.
+
+On the software side, I would like to thank (1) \textbf{Jinchao Xu} from PSU/KAUST for his contribution to the development of SIPFENN; (2) \textbf{Richard Otis} and \textbf{Brandon Bocklund} from \textbf{Materials Genome Foundation} for supporting my work since 2019 in many ways, including invaluable guidance in organizing community workshops.
+
+In the Fall of 2023, I had an opportunity to be a Visiting PhD Student at the University of Cambridge, for which I am very grateful to \textbf{Gonville \& Caius College} which invited me, Caius Fellow \textbf{Gareth Conduit} for generously sponsoring said invitation, and \textbf{Peter and Carol Thrower} for sponsoring the fellowship enabling this travel.
+
+This work was made possible by the financial support and training provided by US Department of Energy (DOE) via Awards DE-FE0031553 and DE-EE0008456, DOE Advanced Research Projects Agency-Energy (ARPA-E) via DE-AR0001435, the DOE BES (Theoretical Condensed Matter Physics) via DE-SC0023185, US Office of Naval Research (ONR) via N00014-17-1-2567 and N00014-23-2721, The Pennsylvania State University via ICDS Seed Grant, US National Science Foundation (NSF) via CMMI-1825538, and Pathways to Enable Open-Source Ecosystems (POSE) via FAIN-2229690. Any opinions, findings, conclusions, or recommendations expressed in this publication are those of the author and do not necessarily reflect the views of the funding agencies.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\setlength\parindent{6pt} %paragraph indentation
+\setstretch{1.5}
+\pagenumbering{arabic}
+
+\include{introduction}
+
+\include{sipfenn}
+
+\include{pysipfenn}
+
+\include{mpdd}
+
+\include{crystall}
+
+\include{ultera}
+
+\include{pyqalloy}
+
+\include{nimcso}
+
+\include{inversedesign}
+
+\include{nimplex}
+
+\include{infeasibilitygliding}
+
+\include{pathplanning}
+
+% Appendices
+
+\begin{appendices}
+
+\mypart{Appendices}
+
+\include{supdiscussions}
+
+\include{tangentialsoft}
+
+\include{nimplexTutorial1}
+
+\include{nimplexTutorial2}
+
+\include{pysipfennTutorial1}
+
+\include{pysipfennTutorial2}
+
+\include{nimcsotutorial}
+
+\end{appendices}
+
+\printbibliography[
+heading=bibintoc,
+title={Combined Bibliography}
+]
+
+
+\newpage
+\chapter*{Vita}
+\thispagestyle{empty}
+\vspace{-6pt}
+
+{\small
+Adam Krajewski was born in Europe, where he spent his childhood and received pre-college education at a school nationally recognized for its university-level chemistry curriculum. He first came to the United States in 2013 and moved completely in 2015 to join the Materials Science Department at Case Western Reserve University. Within the first two months, Adam began research in Prof. Welsch's group. After just one year, he enrolled in graduate courses and also joined Prof. Willard's group, progressively moving from experiments towards theory, modeling, and simulations. In the Fall of 2017, he enrolled in graduate courses in Artificial Intelligence, starting to specialize in applying AI techniques, including Machine Learning, to his research which became focused on hidden process modeling, materials data processing, and data-driven design of magnetocaloric metallic glasses.
+
+After earning his B.S.E. degree in 2019, Adam moved directly to pursue PhD under world-renowned thermodynamics expert Prof. Zi-Kui Liu at Penn State. He had the pleasure of working on implementing various computational techniques, ranging from atomistic machine learning through materials data curation, to purely theoretical considerations, while having the support of colleagues who are specialists in applied ab-initio modeling, thermodynamic calculations, and materials discovery. Since 2022, he has also extensively collaborated with Lawrence Livermore National Lab, where he spent two summers on-site.
+
+Adam has published several computational tools and scientific publications listed under his ORCID record (\href{https://orcid.org/0000-0002-2266-0099}{0000-0002-2266-0099}) and Google Scholar (id:\href{https://scholar.google.com/citations?user=3tvHo8kAAAAJ}{3tvHo8kAAAAJ}) including 4 first-author publications listed below and 9 co-author publications. Furthermore, eight first-author papers are under preparation.
+
+\begin{itemize}
+
+    \item \textit{Extensible Structure-Informed Prediction of Formation Energy with improved accuracy and usability employing neural networks}, Comp. Mat. Sci., Jun. 2022, \href{https://doi.org/10.1016/j.commatsci.2022.111254}{10.1016/j.commatsci.2022.111254}
+
+
+    \item \textit{Efficient Structure-Informed Featurization and Property Prediction of Ordered, Dilute, and Random Atomic Structures}, arXiv, Apr. 2024., \href{https://doi.org/10.48550/arXiv.2404.02849}{10.48550/arXiv.2404.02849} 
+
+
+    \item \textit{Efficient Generation of Grids and Traversal Graphs in Compositional Spaces towards Exploration and Path Planning Exemplified in Materials}, arXiv, Feb. 2024., \href{https://doi.org/10.48550/arXiv.2402.03528}{10.48550/arXiv.2402.03528}
+
+    \item \textit{nimCSO: A Nim package for Compositional Space Optimization}, arXiv, Mar. 2024.,\\ \href{https://doi.org/10.48550/arXiv.2403.02340}{10.48550/arXiv.2403.02340}
+    
+\end{itemize}
+}
+
+\end{document}

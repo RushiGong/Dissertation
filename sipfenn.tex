@@ -1,0 +1,454 @@
+\chapter{Extensible Structure-Informed Prediction of Formation Energy with Improved Accuracy and Usability employing Neural Networks} \label{chap:sipfenn}
+
+\acknowledge{
+This chapter adapts verbatim the preprint version of \citet{Krajewski2022ExtensibleNetworks} published under \href{https://arxiv.org/abs/2008.13654v4}{arXiv:2008.13654v4} extended by additional discussions present in earlier versions published starting August 2020 under \href{https://arxiv.org/abs/2008.13654v1}{arXiv:2008.13654v1}. This work was co-authored with Jonathan Siegel, Jinhao-Xu, and Zi-Kui Liu. All text was written by Adam M. Krajewski with Jonathan Siegel co-writing Section \ref{sipfenn:ref:machinelearningoverview}. Jinhao Xu and Zi-Kui Liu provided edits and guidance.
+}
+
+
+
+
+\section{Introduction} \label{sipfenn:sec:Introduction}
+
+%\subsection{Motivation} 
+\label{sipfenn:ssec:Motivation}
+%Introducting paragraph
+In recent years the field of material data informatics has been growing in importance thanks to the proliferation of open-access databases \cite{Saal2013MaterialsOQMD,Kirklin2015TheEnergies, vandeWalle2018TheDatabase,Jain2013Commentary:Innovation,Curtarolo2013AFLOW:Discovery,Toher2018TheDiscovery,Pizzi2016AiiDA:Science} and new methods being implemented to predict a wide variety of material properties \cite{Isayev2017UniversalCrystals, Legrain2017HowSolids, Pilania1987MachineSuperlattices, Jung2019BayesianSteels, Ouyang2020ComputationalConductors,Bucior2019Energy-based,Chandrasekaran2019SolvingLearning, Kim2018Machine-learning-acceleratedCompounds,Wen2019MachineProperty, Scime2019UsingProcess}. Within these methods, machine learning (ML) and, more broadly, artificial intelligence (AI) is becoming dominant, as noted in two recent reviews \cite{Schmidt2019RecentScience, Vasudevan2019MaterialsPhysics}, which listed a total of around 100 recent studies that attempted to solve material science problems using ML and AI techniques. These studies report benefits such as a 30-fold increase in material discovery rate when guided by an ML-model \cite{Kim2018Machine-learning-acceleratedCompounds}, or the ability to create new state-of-the-art materials in highly complex design spaces like 6-component alloys \cite{Wen2019MachineProperty}. They also dive into new paradigms of materials science by handling previously unthinkable amounts of data, allowing the creation and analysis of an energy convex-hull calculated for all elements \cite{Aykol2019NetworkDiscovery, I.Hegde2020TheMaterials}, or a concurrent analysis of all available literature texts to find paths for material synthesis \cite{Kononova2019Text-minedRecipes}. In addition, some studies promise to solve significant industrial challenges such as detection of additive manufacturing flaws with relatively simple and accessible data, but above-human pattern recognition quality and speed \cite{Scime2019UsingProcess}.
+
+%Materials Discovery & Materials Stability 
+A common approach is to  focus on the discovery of candidate materials promising a new state-of-the-art performance, which must then be validated by experiment. The mismatch between the predictions and experiment measures the quality of the model, and reducing this gap is a major challenge due to the newly designed materials often being far from known materials, combined with attention placed on regions with extraordinary predictions.However, even if design models were perfectly accurate, many predicted materials cannot be physically made in the lab. An increasing number of studies attempt to solve this challenge by focusing not only on predicting how the material will perform but also on whether it can be manufactured \cite{Alberi2019TheRoadmap}. Generally, these include predicting materials' stability \cite{Balachandran2018PredictionsTheory, Li2019ThermodynamicLearning, I.Hegde2020TheMaterials, Im2022ThermodynamicModeling, Shang2021FormingJoints} and synthesizability \cite{Hattrick-Simpers2018AMaterials,Kononova2019Text-minedRecipes, Aykol2019NetworkDiscovery} with the stability being the more constraining parameter, as it determines whether the material could be stable or metastable in the use conditions, and therefore whether it can be synthesizable. Thus, predicting stability through prediction of fundamental thermodynamic properties such as formation energy is of special importance.
+
+%Machine Learning:
+In the present work, new ML models and a tool to quickly use them are developed to improve the process of materials discovery by efficient prediction the formation energy and streamlined incorporation into materials discovery frameworks that aim to screen billions rather than hundreds of candidates available with cost-intensive calculations like first-principles calculations based on the density functional theory (DFT). 
+
+%\subsection{Machine Learning Approach}
+\label{sipfenn:ssec:currentapproach}
+In simple terms, every ML model is composed of three essential elements: a database, a descriptor, and an ML technique (also known as ML algorithm). The first element, databases, contain prior knowledge and are becoming increasingly shared between many studies, thanks to being open-access and often containing orders of magnitude more experimental or computational data than could be feasibly collected for a single study \cite{Saal2013MaterialsOQMD,Kirklin2015TheEnergies, vandeWalle2018TheDatabase,Jain2013Commentary:Innovation,Curtarolo2013AFLOW:Discovery,Toher2018TheDiscovery,Pizzi2016AiiDA:Science}. Databases used within the present paper are detailed in Section \ref{sipfenn:sssec:Data}.
+
+The second element of an ML model is the descriptor (i.e., feature vector describing the material) which determines a representation of knowledge (data from the database) in a way relevant to the problem. It is typically built from many features, also known as attributes or vector components, which usually are determined through domain knowledge to be relevant or selected through correlation analysis. All combined, these features are a representation of some state whose meaning will be problem-specific.
+
+When treating materials on the single atomic configuration level, descriptors can be generally divided into composition-based (also known as stoichiometric, structure-invariant, or elemental) \cite{Jha2018ElemNet:Composition, Ward2016AMaterials, , Legrain2017HowSolids} and structure-informed \cite{Ward2017IncludingTessellations, Seko2017RepresentationProperties,Schutt2014HowProperties}. The first type usually provides a more compact representation at a much lower computational cost, as calculating a composition-based descriptor often needs to involve only simple linear algebra operations such as matrix multiplication \cite{Ward2016AMaterials}, or prior-knowledge-incorporating attention-based analysis of a graph representation of the composition \cite{Goodall2020PredictingStoichiometry}. In cases where deep neural networks (DNNs) are employed, descriptor calculation can be skipped altogether by passing a composition vector directly \cite{Jha2018ElemNet:Composition}.
+
+It is important to recognize that the descriptor choice impacts both the performance and applicability of the model. In the case of prediction of material properties, such as formation energy, selecting a composition-based descriptor, no matter how complex, limits the model to either a specific arrangement of atoms, such as BCC or amorphous, or some defined pattern of structures, such as the convex hull of lowest-energy structures. Such limitation of the problem domain, given a comparable amount of data, allows to quickly achieve much lower prediction error at a cost of fundamentally changing the problem, making a comparison between methods impossible. Furthermore, a composition-only representation is inherently unsuitable for the direct prediction of most material properties that depend on the atomic structure. The structure-informed descriptors can include much more information related to interatomic interactions, making them more robust and more physics-relevant. They also, implicitly or explicitly, include symmetries present in the material, which can be used to predict certain properties, such as zero piezoelectric response, with high confidence. Furthermore, such descriptors often include extensive composition-based arguments within them \cite{Ward2017IncludingTessellations}, making it possible to both recognize patterns in the property coming from different chemical species occupying the same structure and structural effects in the case of a single composition.
+
+At the same time, it is important to consider that physically existing materials are rarely described by a single atomic configuration, usually requiring considerations for defects and coexisting configurations. Thus, like a traditional DFT-based modeling, in order to reproduce real material behavior, a structure-informed model will often require utilization of a method such as CALPHAD \cite{Kaufman1970ComputerMetals, Liu2018OceanLearning}. One of such methods, recently developed by authors and named "zentropy theory" shows the potential to connect individual configurations to predict macroscopic properties, such as colossal positive and negative thermal expansions \cite{Liu2022ZentropyExpansion}.
+
+In some cases however, investigating all configurations can be a very challenging task (e.g., for high entropy alloys), necessitating the use of an elemental-only model trained to give predictions assuming future observations to be consistent with the past ones \cite{Debnath2021GenerativeAlloys}. 
+
+%\subsection{the present work Approach}
+\label{sipfenn:ssec:specificapproach}
+%\textbf{\textcolor{red}{Need to rework citations to new structure of Methods.}}\\
+
+The structure-informed representation which was the ground for the present work has been developed by Ward et al. based on information from the Voronoi tesselation of a crystal structure \cite{Ward2017IncludingTessellations}. Ward's descriptor contains 271 features that combine information from elemental properties of atoms, such as shell occurrences, with information about the their local environments, such as coordination number or bond lengths to neighbours. This approach was demonstrated to work excellently when comprehensively compared to two previous approaches based on the Coulomb matrix (CM) \cite{Schutt2014HowProperties} and on the partial radial distribution function (PRDF) \cite{Seko2017RepresentationProperties}, when trained on the same data from the Open Quantum Materials Database (OQMD) and with the same machine learning algorithm. A more detailed overview is given in \ref{sipfenn:ssec:descriptorused}.
+
+Ward et al. used an automated Random Forest ML algorithm \cite{Ward2017IncludingTessellations} set to a fully automatic parameter selection. While fairly common, that approach without complexity limit for the model, and when trained on over 400,000 materials, resulted in a forest composed of 100 trees with approximately 700,000 nodes each. Such model requires over 27 GB of RAM memory to run, making it unusable on a typical personal or lab computer. Such size also results in a relatively low efficiency, requiring over 100 ms to run on a high-performance lab computer \cite{Ward2017IncludingTessellations}.
+
+In the present work, aforementioned issues are resolved through a targeted design of the ML algorithm to fully utilize the data and its representation. This is done by consideration of the problem formulation and the deep neural network technique (see \ref{sipfenn:ref:machinelearningoverview}), combined with iterative model design (see \ref{sipfenn:sssec:NetDesign}), and by designing and testing over 50 neural networks belonging to around 30 designed architectures. Notably, in the time between Ward's work and the present paper, neural networks have been used in this application, e.g., \cite{Jha2019IRNet}, which uses residual neural networks. However, as we show in Section \ref{sipfenn:ssec:oqmdperformance}, the present paper provides more accurate predictions than both Ward's model and the state-of-the-art neural network model \cite{Jha2019IRNet}.
+
+Additionally, the present work brings two further improvements. The first one is good transfer learning ability, described in \ref{sipfenn:ssec:transferlearningresults} allowing other researchers, at a relatively small cost, to adjust the model to small problem-specific databases, typically consisting of tens of DFT calculations or less. This method substantially improves predictions for similar materials while retaining the general knowledge learnt from the large data set and demonstrates that the model learns features related to underlying physics. The second  improvement is the end-user usability. While most of the materials-related ML model are reported in a reproducible way with an evaluation of the performance \cite{Ward2017IncludingTessellations, Schutt2014HowProperties, Schutt2018SchNetMaterials, Seko2017RepresentationProperties}, only a fraction goes beyond to make models accessible to the community. the present work has been focused on creating a Findable, Accessible, Interoperable, and Reusable tool, inspired by FAIR principles \cite{FAIRFAIR}, created open-source with common and convertible data formats as is described in more detail in \ref{sipfenn:sssec:SoftwareUsed}. This lead to many standalone components combined into an end-user tool, described in \ref{sipfenn:ssec:SIPFENN}, that is ready to use without any costly computation to create the model and can be run on any modern computer, as low-power as smartphones.
+
+\section{Methodology} \label{sipfenn:sec:methodology}
+
+\subsection{Descriptor Used} \label{sipfenn:ssec:descriptorused}
+A descriptor of a material is a point in a well-defined multidimensional property space that can be used to represent knowledge associated with entries in a database in vector form. Within the present work, the property space has 271 dimensions (corresponding to 271 features) related to elemental properties and atomic structure of an arbitrary crystalline material, as designed by Ward et al. \cite{Ward2016AMaterials, Ward2017IncludingTessellations} utilizing the \texttt{voro++} code \cite{rycroft2009voro++}. These features can be categorized as:
+
+\begin{itemize}
+    \item \textbf{Elemental Attributes} (145 total): Attributes which only depend upon the elements present and their stoichiometry.
+    \begin{itemize}
+        \item \textbf{Stoichiometric Attributes} (6): Describe the components fractions.
+        \item \textbf{Elemental Properties Attributes} (132): Contain statistics taken over the various elemental properties, weighted by the stoichiometry of the structure.
+        \item \textbf{Attributes based on Valence Orbital Occupation} (4): Depend upon the distribution of valence electrons across different orbitals, i.e. on the total number of valence electrons in each orbital across the structure.
+        \item \textbf{Ionic Character Attributes} (3): Attributes which encode whether the material is ionically bonded. 
+    \end{itemize}
+    \item \textbf{Structural Attributes} (126 total): Attributes which depend on the precise structural configuration, i.e. exactly how the atoms are arranged in space.
+    \begin{itemize}
+        \item \textbf{Geometry Attributes} (16): Attributes which depend upon the spatial configuration of atoms only.
+        \item \textbf{Physical Property Differences Attributes} (110): Contain statistics taken over the differences between elemental properties of neighboring sites in the structure, weighted by the size of the Voronoi cell face between the neighbors.
+    \end{itemize}
+\end{itemize}
+
+A complete table list of features is given in Table \ref{sipfenn:feature-table}. Further details can be found in \cite{Ward2016AMaterials, Ward2017IncludingTessellations}.
+
+\begin{table}[H]
+    \footnotesize
+    \centering
+    \caption{List of Features with Descriptions. Site Statistics refers the mean, range, mean absolute error, maximum, minimum, and mode unless otherwise stated in the description. Difference Statistics refers to the mean, mean absolute error, minimum, maximum and range of the differences between neighboring sites in a structure, weighted by the size of the face between them in the Voronoi tessellation.}
+    \begin{tabular}{|p{2.25cm}|p{2cm}|c|c|}
+        \hline
+        \textbf{Site \hspace{0.3cm} Statistics} & \textbf{Difference \hspace{0.3cm} Statistics} & \textbf{Name} & \textbf{Description} \\
+        \hline
+        1-4 & - & Effective Coordination Number & mean, mean abs error, min, max\\
+        \hline
+        5-7 & - & Mean Bond Length & mean abs error, min, max\\
+        \hline
+        8-11 & - & Bond Length Variation & mean, mean abs error, min, max \\
+        \hline
+        12 & - & Cell Volume Variation & Variation in the voronoi cell volume\\
+        & & & no statistics \\
+        \hline
+        13-15 & - & Mean WC Magnitude & shells 1-3, global non-backtracking \\
+        \hline
+        16 & - & Packing Efficiency & no statistics \\
+        \hline
+        133-138 & 17-21 & Atomic Number & \\
+        \hline
+        139-144 & 22-26 & Mendeleev Number & \\ 
+        \hline
+        145-150 & 27-31 & Atomic Weight & \\ 
+        \hline
+        151-156 & 32-36 & Melting Temperature & \\ 
+        \hline
+        157-162 & 37-41 & Column & Group in Periodic Table \\ 
+        \hline
+        163-168 & 42-46 & Row & Period in Periodic Table\\ 
+        \hline
+        169-174 & 47-51 & Covalent Radius & \\ 
+        \hline
+        175-180 & 52-56 & Electronegativity & \\ 
+        \hline
+        181-210 & 57-81 & Valence Electron Count & Listed for s,p,d,f orbitals and total \\ 
+        \hline
+        211-240 & 82-106 & Unfilled Count & Number of unfilled orbitals \\
+         & & & Listed for s,p,d,f orbitals and total \\
+         \hline
+        241-246 & 107-111 & Ground State Volume & \\ 
+        \hline
+        247-252 & 112-116 & Ground State Band Gap & \\ 
+        \hline
+        253-258 & 117-121 & Ground State Magnetic Moment & \\ 
+        \hline
+        259-264 & 122-126 & Space Group Number & Index of Space group\\
+        \hline
+        127 & - & Number of Components & no statistics \\
+        \hline
+        128-132 & - & $\ell^p$-norms of Component Fractions & $p \in \{2,3,5,7,10\}$ \\
+        \hline
+        265-268 & - & Fraction of Valence Electrons & \\
+        & & in s,p,d,f orbitals & no statistics\\
+        \hline
+        269 & - & Can Form Ionic Compound & boolean, no statistics\\
+        \hline
+        270-271 & - & Ionic Character & max, mean over pairs of species\\
+        \hline
+    \end{tabular}
+    \label{sipfenn:feature-table}
+\end{table}
+
+\subsection{Machine Learning Techniques Overview} \label{sipfenn:ref:machinelearningoverview}
+This section gives a brief overview of the employed machine learning techniques and terminology, described in more detail in the Appendix \ref{sipfenn:appedix1}. The interest is placed on the statistical problem of regression, whose goal is to learn a functional relationship $f:X\rightarrow Y$ which minimizes the risk (also known as loss or expected error) \cite{vapnik1999overview} given by
+
+\begin{equation} \label{sipfenn:true_risk}
+    R(f) = \mathbb{E}_{x,y\sim \mathcal{P}} l(y,f(x)).
+\end{equation}
+
+Here $X$ denotes a space of input features, $Y$ denotes an output space, the expectation above is taken over an unknown distribution $\mathcal{P}$ on $X\times Y$ (representing the true relationship between inputs and outputs), and $l$ is a given loss function. 
+
+In the specific application considered here, the function $f$ which is to be learned, maps input material structures (arrangements of atoms) $x$ to the predicted formation energy $y$. The distribution $\mathcal{P}$ is unknown, but samples $(x_i,y_i)$ are given, consisting of structures $x_i$ and corresponding predictions $y_i$ which are used to learning $f$. In the present case, this data comes from the OQMD and other smaller materials databases.
+
+% \begin{figure}[h]
+%     \centering
+%     \includegraphics[width=0.65\textwidth]{sipfenn/neuralnetcolorized_V4.png}
+%     \caption{Simplified artificial neural network schematic}
+%     \label{sipfenn:fig:nnschematic-body}
+% \end{figure}
+
+In order to learn the relationship $f$ from the data, the empirical risk
+
+\begin{equation} \label{sipfenn:empirical_risk}
+    L(f) = \frac{1}{n}\displaystyle\sum_{i=1}^n l(y_i, f(x_i)),
+\end{equation}
+
+is minimized over a class of functions defined by a neural network architecture. A neural network architecture consists of a sequence of alternating linear functions and point-wise non-linear functions defined by an activation function (see \cite{goodfellow2016deep} for more information about neural networks). As the loss function $l$ in \eqref{sipfenn:empirical_risk} the $\ell^1$-loss function $l(y,x) = |x-y|$ is used. The neural networks are trained on this loss \eqref{sipfenn:empirical_risk} using the common ADAM optimizer \cite{kingma2014adam}. 
+
+An important issue when training complex statistical models is the overfitting, which occurs when a model accurately fits the training data but fails to generalize well to new examples. In order to detect overfitting, the standard practice of dividing the data into training, validation, and test datasets \cite{hastie2009elements} is used. In order to mitigate overfitting, dropout \cite{srivastava2014dropout} and weight decay, two standard methods for regularizing neural networks, are used. In Section \ref{sipfenn:sssec:DesignedModels}, Figure \ref{sipfenn:fig:trainingvalidation-body} illustrates overfitting mitigation effects on the training process of neural networks designed in the present paper.
+
+\subsection{Software Used} \label{sipfenn:sssec:SoftwareUsed}
+
+The choice of software for the machine learning portion of \texttt{SIPFENN} was Apache \texttt{MXNet} \cite{ChenMXNet:Systems} due to it's open source nature, model portability, and state-of-the-art scalability, allowing the same code to run on a laptop with a low-power CPU/GPU and a supercomputer (e.g., ORNL Summit) with hundreds of powerful GPU's. It's portability allows trained networks to be converted and used with other popular frameworks such as Google \texttt{Tensorflow}, \texttt{PyTorch}, or even Apple's \texttt{Core ML}, making results of the present paper highly accessible.
+
+\texttt{MXNet} framework was used through \texttt{Wolfram} and \texttt{Python} languages. \texttt{Wolfram} language was used primarily for the network architecture design, training, and testing, as it provides an excellent interface with detailed training results shown in real-time during the training process. It also provides good out-of-the-box performance due to its well-optimized memory handling when training on a single GPU setup. 
+
+Python, on the other hand, was used when writing the end-user tool for running previously trained networks. This choice was made so that the software is completely open-source and can be easily reused for specific purposes or incorporated within other packages. Furthermore, Python allowed quick implementation of a Graphical User Interface (GUI) through the \texttt{wxpython package}.
+
+As explored later in Chapter \ref{chap:pysipfenn}, over several years, the software evolved and developed into \texttt{pySIPFENN} framework which, as of April 2024, has moved to \texttt{PyTorch} for ML runtime and Open Neural Network Exchange (\texttt{ONNX}) format \cite{Bai2019ONNX:Exchange} for model storage and distribution.
+
+\subsection{Data Acquisition and Curation} \label{sipfenn:sssec:Data}
+
+Four sets of data were used within the present work. The largest by volume and significance was the Open Quantum Materials Database (OQMD) \cite{Kirklin2015TheEnergies, Saal2013MaterialsOQMD, Shen2022ReflectionsOQMD}, which contains the results of DFT calculations performed by the Vienna Ab Initio Simulation Package (VASP) \cite{Kresse1993AbMetals} for a broad spectrum of materials. The snapshot used here was extracted from the database by Ward et al. in 2017 and contained 435,792 unique compounds \cite{Ward2017IncludingTessellations}. The choice of 2017 snapshot rather than the current one was made to ensure direct performance comparison between new and previously reported methods. The second database was a part of the Inorganic Crystal Structure Database (ICSD), a subset of the OQMD with only experimentally obtained structures containing around 30,000 entries. ICSD was primarily used for the quick design of simple neural network architectures at the beginning, and OQMD used for more complex models designed later. 
+
+Two smaller data sets were used, in addition to these large databases. The first small dataset contained DFT-calculated formation energies of Fe-Cr-Ni ternary $\sigma$-phase endmembers in the 5-sublattice model \cite{Feurer2019Cr-Fe-NiCalculations}. As this model contains 5 chemically distinct positions (Wyckoff positions), populated by one of 3 elements, in total it included 243 ($3^5$) structures with 30-atom basis each. This data served as an example of a relatively complex structure that was not included in the OQMD. Furthermore, it was a test case of a material that is highly industry-relevant, as it causes steel embrittelment \cite{Hsieh2012OverviewSteels} and is costly to investigate using traditional methods due to compositional and configurational complexity. The second small dataset included 13 Special Quasirandom Structures (SQS), which are the best periodic supercell approximations to the true disordered state of metal alloys \cite{Zunger1990SpecialStructures, Jiang2004First-principlesStructures, Shin2006ThermodynamicStructures}. SQS structures in this set were binary alloys containing Fe, Ni, Co, and V, laying on deformed FCC (A1), BCC (A2), or HCP (A3) lattices. The main purpose of these smaller datasets was to test the performance in extrapolation from OQMD, in a particular case of interest for the author's.
+
+During the network design process described in \ref{sipfenn:sssec:NetDesign}, it was found that a small fraction of the OQMD dataset (under 0.03\%) contains anomalous values of formation energy above 10 eV/atom. In the extreme case of $CuO_2$ (OQMD ID: 647358) this value was 1123 eV/atom or 108350 kJ/mole. Since the source database contains hundreds of thousands of data points reported by many scientists, it can be expected that a small fraction of the data may contain some sort of errors and typos. In the present work, they were removed from all datasets used for training and evaluation.
+
+\subsection{Neural Network Design Process} \label{sipfenn:sssec:NetDesign}
+
+This section conceptually outlines the network design process leading to the final models. All essential details regarding the design and performance of intermediate models, useful for better understanding changes and for applying the similar approach in different problems, can be found in the Appendix \ref{sipfenn:appendix2}.
+
+The design started with the simplest single-layer neural network (perceptron) with the Sigmoid activation function, trained on the ICSD and its smaller subset, to provide a baseline for the design. Then, the process was conducted in the following steps:
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.56\textwidth]{sipfenn/SIPFENN_design_updated.png}
+    \caption{The model design process schematic.}
+    \label{sipfenn:fig:designprocess}
+    \end{figure}
+
+\textbf{1. }The network size has been increased step-wise while training on the ICSD dataset (30k+ entries). Results were extrapolated to estimate network size suitable for larger OQMD (400k+) to be 4 hidden layers in a (10000, 10000, 1000, 100) configuration.
+
+\textbf{2. }To improve convergence during the training, descriptor features values were normalized to their maximum values present in the OQMD dataset.
+
+\textbf{3. }Performance and time to convergence were improved by moving from Sigmoid activation function to a mix of Soft Sign, Exponential Linear Unit, and Sigmoid. This relatively simple model has improved performance over the existing Random Forest model \cite{Ward2017IncludingTessellations}, achieving MAE of 42 meV/atom on the same dataset.
+
+\textbf{4. }At this step, it was noticed that a small fraction (around 0.03\%) of data points exhibits extreme errors, as high as over 1,000,000 meV/atom causing some instability during the training process, despite the large batch size of 2048. They also caused a high deviation in test MAE values across repeated model training rounds. As describes in \ref{sipfenn:sssec:Data}, these were identified to be a few rare errors in the dataset and removed during later model design. 
+
+\textbf{5. }The network size was increased to around 1GB limit (maximum size target) by the addition of two more 10,000-width layers. This \textbf{OQMD-optimized} network has achieved the best performance on the OQMD out of all designed in the present paper, with an MAE of 28 meV/atom. Performance analysis can be found in \ref{sipfenn:ssec:oqmdperformance} and in Figure \ref{sipfenn:fig:oqmdperformance}.
+
+\textbf{6. }After the good performance on the OQMD was achieved, the design goals shifted to (1) reducing the training-set-to-validation-set error mismatch during the network training, while (2) keeping the test MAE on the OQMD on a suitable level (below 50 meV/atom), and (3) improving performance on datasets not presented to network before (see \ref{sipfenn:sssec:Data}). The first step was the introduction of Dropout layers\cite{srivastava2014dropout}, described in more detail in Appendix \ref{sipfenn:appedix1}, which allow for better distribution of knowledge across the network.
+
+\textbf{7. }The introduction of strong Dropout\cite{srivastava2014dropout} made the network prone to falling in local minima, which was solved by the introduction of a changing learning rate schedule.
+
+\textbf{8. }With optimized network architecture, lastly, the descriptor interpretation by the network has been modified through the introduction of L2 regularization \cite{L2Regularization}, a technique which assigns an error penalty for "attention" (input layer weights) to each of the descriptor features, effectively refining features in the descriptor to only the most significant ones. Figure \ref{sipfenn:fig:squaredweights} ranks them. The resulting \textbf{Novel Materials} model achieved a much lower training-set-to-validation-set error mismatch (1.15 vs 1.57 after 240 rounds), presented in Figure \ref{sipfenn:fig:trainingvalidation} as a function of training progress. On the OQMD test set, it achieved a higher, yet suitable 49 meV/atom.
+
+\textbf{9. }To cater to applications requiring very high throughput or low memory consumption, an additional \textbf{Small Size} network was designed by adding Dropout to one of the earlier networks, designed before the size increase step, and then reducing its size to the desired level. It was found that after reduction of total size from around 400MB to around 100MB, the network retained MAE of 42 meV/atom on an OQMD test set and further reduction was possible if needed for the application.
+
+\section{Results} \label{sipfenn:sec:Results}
+
+\subsection{Final Predictive Models} \label{sipfenn:sssec:DesignedModels}
+
+Throughout the architecture design process described in \ref{sipfenn:sssec:NetDesign}, detailed in Appendix \ref{sipfenn:appendix2}, and depicted in Figure \ref{sipfenn:fig:designprocess}, new networks were designed and tested in various ways, leading to about 50 predictive models (trained neural networks) with varying training parameters and training data. The majority of the intermediate networks were stored for the record, and are available upon request. Details regarding hyper-parameters and training routines used to obtain three resulting models can be found in the Appendix \ref{sipfenn:appedix1}.
+
+\begin{figure}[H]
+    \centering
+    \frame{\includegraphics[width=0.30\textwidth]{sipfenn/NN9_architecture.PNG}}
+    \hspace{6pt}
+    \frame{\includegraphics[width=0.30\textwidth]{sipfenn/NN20_architecture.PNG}}
+    \hspace{6pt}
+    \frame{\includegraphics[width=0.30\textwidth]{sipfenn/NN24_architecture.PNG}}
+    \caption{Three selected architectures designed within the present work. Optimized for: (Left) OQMD performance, (Middle) predicting new materials, (Right) small size at good performance. Internally in the code, they are designated as NN9, NN20, and NN24.}
+    \label{sipfenn:fig:architectures}
+\end{figure}
+
+Out of all trained neural networks, three were selected and can be considered final outcomes of the design process, optimized for different objectives. Their architectures are presented in Figure \ref{sipfenn:fig:architectures}. The first one, denoted NN9, was created specifically for the OQMD performance. This was the same objective as in the study by Ward et al. \cite{Ward2017IncludingTessellations} and its performance serves as a direct comparison to the Random Forest method employed in that paper \cite{Ward2017IncludingTessellations} and other works \cite{Schutt2014HowProperties, Seko2017RepresentationProperties}.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.52\textwidth]{sipfenn/validationtotraining_generalized.png}
+    \caption{Training Loss to Validation Loss in a model that does without (NN9) and with overfitting mitigation (NN20), plotted versus training progress.}
+    \label{sipfenn:fig:trainingvalidation-body}
+\end{figure}
+
+The second network was optimized for improved pattern recognition on OQMD and improved performance on non-OQMD datasets used in the present work (i.e. SQS/$\sigma$-phase datasets). This was achieved primarily through extensive overfitting mitigation, applied during design and training (see Figure \ref{sipfenn:fig:trainingvalidation-body}), which leads to a network with improved generalization/materials-discovery capability. Furthermore, one fo the overfitting mitigation methods, namely the regularization described in \ref{sipfenn:ref:machinelearningoverview}, have allowed identification of descriptor attributes that contributed the most to the predictive capability and the ones that were almost completely discarded once the penalty for considering them was assigned. Figure \ref{sipfenn:fig:squaredweights} presents the distribution of sums of squared weights between each neuron in the input layer (each of the 273 descriptor features) and all 10,000 neurons in the first hidden layer. 
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}[c]{0.65\textwidth}
+    \includegraphics[width=\textwidth]{sipfenn/squaredweightssumNN20_V2.png}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.33\textwidth}
+    \caption{Distribution of sums of squared input weights. High values correspond to attributes that were not lowered due to their contribution to pattern recognition of the model. 15 attributes with the highest values are labeled. The labels are taken from the descriptor definition in  \cite{Ward2016AMaterials}.}
+    \label{sipfenn:fig:squaredweights}
+    \end{minipage}
+\end{figure}
+
+Feature rankings, such as presented in Figure \ref{sipfenn:fig:squaredweights}, allow a more efficient selection of input features in future studies looking into the same problem; thus both reducing the number of features that need to be computed for each atomic configuration and the total number of weights in the network. Furthermore, it can be used to gain an insight into the model interpretability. Looking at the specific ranking for NN20, the high-impact features present a mix of elemental features, likely allowing the model to establish some formation energy baseline for a given composition, and structure-informed features allowing to distinguish between polymorphic configurations. High impact elemental features include different statistics on elemental melting temperatures and ground-state structure volume per atom. The structural features extend them by considering how they differ between neighboring atoms and also include purely structural features such as packing efficiency and variance in Wigner–Seitz cells volumes. A complete ranking of features is included in Appendix \ref{sipfenn:appendix3}.
+
+The third network, denoted NN24, was created for memory/power-constrained applications requiring a balance between OQMD performance and memory intensity and processing power required. Model parameters contained in this architecture occupy only 145MB, over 8 times less than two other models and around 200 times less than the model reported by Ward et al. \cite{Ward2017IncludingTessellations}.
+
+\subsection{OQMD Data Performance} \label{sipfenn:ssec:oqmdperformance}
+As described in \ref{sipfenn:sssec:NetDesign}, all three final networks were evaluated on a randomly selected subset of the OQMD to give a comparison between the state-of-the-art model presented by Ward et al. \cite{Ward2017IncludingTessellations} and the present ML method. This random subset consisted of 21,800 OQMD entries, constituting approximately $5\%$, which were not presented to the network, nor used for evaluation at any stage of the training process. This sample size was considered to be representative of the whole dataset once the small fraction ($0.026\%$) of likely incorrect entries were removed from the dataset as described in \ref{sipfenn:sssec:Data}. The random selection itself was initially performed separately for each training process and recorded after completion. Later, when networks were modified to mitigate overfitting, a single random subset was used for all of them to allow more careful design and more accurate comparative analysis of results. Figure \ref{sipfenn:fig:oqmdperformance} gives (1) prediction vs OQMD values of formation energy plot, (2) statistics related to the error in predictions relative to the OQMD values, and (3) a histogram of the absolute error in predictions relative to the OQMD values.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.31\textwidth]{sipfenn/NN9_test.png}
+    \hspace{0.01\textwidth}
+    \includegraphics[width=0.31\textwidth]{sipfenn/NN20_test.png}
+    \hspace{0.01\textwidth}
+    \includegraphics[width=0.31\textwidth]{sipfenn/NN24_test.png}
+    \includegraphics[width=0.31\textwidth]{sipfenn/nn9_histogram.png}
+    \hspace{0.01\textwidth}
+    \includegraphics[width=0.31\textwidth]{sipfenn/nn20_histogram.png}
+    \hspace{0.01\textwidth}
+    \includegraphics[width=0.31\textwidth]{sipfenn/nn24_histogram.png}
+    \caption{Performance of 3 selected neural networks on a random subset of 21,800 entries from OQMD. (Left) OQMD performance, (Middle) predicting new materials, (Right) small size at good performance. Internally in the code, they are designated as NN9, NN20, and NN24.}
+    \label{sipfenn:fig:oqmdperformance}
+\end{figure}
+
+\subsection{Existing Methods Comparison} \label{sipfenn:ssec:existing}
+In this section, the performance of the models is compared with a few similar existing approaches based on the OQMD dataset, when formation energy of a structure is predicted \cite{Ward2016AMaterials, Ward2017IncludingTessellations, Jha2019IRNet}, or its subset of the convex-hull structures, when formation energy of the most stable structure is predicted \cite{Jha2018ElemNet:Composition, Goodall2020PredictingStoichiometry}.  This division is made based on the reasoning presented in \ref{sipfenn:ssec:currentapproach}. While the latter type cannot be used to predict the formation energy of any arbitrary structure, the structure-informed models like \texttt{SIPFENN} (the present work) can be tested on the convex hull structures. 
+
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+ Method & Formation Energy MAE & Convex Hull MAE \\
+ \hline
+ \texttt{SIPFENN} (This Work) & \textbf{28.0 meV/atom} (OQMD Opt.) & 32meV/atom (Novel. Mat.) \\
+ \texttt{Ward2017} \cite{Ward2016AMaterials, Ward2017IncludingTessellations} & 80 meV/at & N/M \\
+ \texttt{ElemNet} \cite{Jha2018ElemNet:Composition} & N/A & 50 meV/at\\  
+ \texttt{IRNet} \cite{Jha2019IRNet} & 38 meV & N/M \\
+ \texttt{Roost} \cite{Goodall2020PredictingStoichiometry} & N/A & 29 meV/at | \textbf{24 meV/at}\\
+ \hline
+\end{tabular}
+\caption{Comparison of our method with existing state-of-the-art methods, as of late 2020, with OQMD-optimized \texttt{SIPFENN} model exhibiting state-of-the-art performance. N/A and N/M respectively stand for not applicable (out of domain) and not measured.}
+\label{sipfenn:comparison-results}
+\end{center}
+\vspace{-24pt}
+\end{table}
+
+The results are shown in Table \ref{sipfenn:comparison-results}. The \texttt{SIPFENN} convex hull MAE has been reported based on using the Novel Materials Model limiting the original test set to structures laying within 50meV/atom from the convex hull. From these results, we can see that the \texttt{SIPFENN} neural networks approach outperforms existing state-of-the-art methods for predicting the formation energy of any material. At the same time, while not being the best, it is capable of reaching performance levels of specialized models in predicting the formation energies of structures laying on the convex hull.
+
+\subsection{Non-OQMD Data Performance} \label{sipfenn:ssec:sigmasqsperformance}
+
+%\begin{figure}[H]
+%    \centering
+%    %\vspace{-48pt}
+%    \includegraphics[width=0.3\textwidth]{sipfenn/NN20_test_sigmasqs.png}
+%    \caption{Predictions of formation energy using the new-materials-optimized network (NN20) evaluated on (red) Fe-Cr-Ni $\sigma$-phase, and (blue) SQS structures. Compare to Figure \ref{sipfenn:fig:oqmdperformance} with the same axis for OQMD data.}
+%    \label{sipfenn:fig:sqssigmabroad}
+%    \vspace{-12pt}
+%\end{figure}
+
+Models created in the present work, specifically the ones optimized for predicting the formation energy of new materials, were designed and implemented to serve as tools for materials discovery. Evaluating their performance on data from the same source as the training set done in \ref{sipfenn:ssec:oqmdperformance} is inherently biased towards favoring models that provide the best fit to the prior (training) knowledge. This is amplified by the fact that many entries in the database are reported in groups that come from common studies and span similar materials, causing high domain clustering, which in some cases effectively makes such evaluation more akin to interpolation than extrapolation of knowledge.
+
+To partially mitigate the described issue, the performance of the models was also evaluated on two smaller non-OQMD databases, described in \ref{sipfenn:sssec:Data}, representing an example of chemistries and structures that were of interest to the authors project on Ni-based superalloys. At the same time, they were not directly presented to the network in any capacity during the training process.
+
+In all cases, models created in the present paper were able to achieve approximately the same performance as on a random selection from the OQMD. To give a more in-depth analysis of the results, Figure \ref{sipfenn:fig:sigmasqsperformance} shows a magnified view of the predictions and basic statistics on the agreement between predictions and the database for the three models developed in the present work.
+
+\begin{figure}[H]
+\centering
+    \includegraphics[width=0.3\textwidth]{sipfenn/NN9_sigmasqs.png}
+    \hspace{0.03\textwidth}
+    \includegraphics[width=0.3\textwidth]{sipfenn/NN24_sigmasqs.png}
+    \hspace{0.03\textwidth}
+    \includegraphics[width=0.3\textwidth]{sipfenn/NN20_sigmasqs.png}
+    \caption{Performance of 3 selected neural networks on non-OQMD data described in \ref{sipfenn:sssec:Data}. Evaluated on (red) Fe-Cr-Ni $\sigma$-phase and (blue) SQS dataset. Networks organized by columns; optimized for (left) OQMD performance, (middle) predicting new materials, (right) size-constrained applications. Internally in the code, they are designated as NN9, NN20, and NN24 respectively.}
+    \label{sipfenn:fig:sigmasqsperformance}
+\end{figure}
+
+While all three models performed at around the same MAE level as for the OQMD, network optimized for new materials, the NN20 and NN24, performed better in the non-OQMD test cases of interest, providing major increases in correlations, significant for ranking of end-member configurations, except for 4 SQS configurations which were underestimated. The Pearson correlation slightly decreased in the first case and slightly increased in the second case. In both cases, the mean absolute error decreased by about 20\% compared to the OQMD-optimized model.
+
+
+\subsection{Transfer Learning Capability} \label{sipfenn:ssec:transferlearningresults}
+In this section, the technique of transfer learning is considered. It has been observed among deep learning models across a variety of domains \cite{tan2018survey,cirecsan2012transfer,chang2017unsupervised,george2018deep} and refers the to the ability of properly trained deep learning models to `transfer' their knowledge to related tasks. In the least complex approach, one does this by simply 'fine-tuning' the parameters of the model using new training data (from the new task). This methodology has shown in practice that deep neural networks are often able to transfer knowledge between different but related tasks. Such a problem is analogous to many others in materials science, where general knowledge is used to make meaningful statements without statistically significant patterns in locally available data. 
+
+It is shown that a network trained on the OQMD database, which covers a broad yet limited spectrum of materials, can be quickly adjusted to materials outside of this spectrum with very little additional cost relative to the initial training. Specifically, the transfer learning capability of a network trained in this way on the set of all (243) Fe-Ni-Cr $\sigma$-phase 5-sublattice model endmembers, described in \ref{sipfenn:sssec:Data}, was tested. The ML model was first trained on a broad and general material dataset (OQMD) and then further trained (i.e., re-trained) for a given number of rounds on the new data (Fe-Ni-Cr $\sigma$-phase dataset) to adapt to the new system, while still conserving its broad knowledge, and can be thought of as fine-tuning a model to improve extrapolation outside of a prior knowledge space. 
+
+In order to achieve good performance, both the number of rounds and the learning rate have to be optimized. This can be accomplished by investigating the dependence of error on the fraction of available data while one of these parameters is fixed. Figure \ref{sipfenn:fig:transfersigmaLR} presents the dependence of transfer learning from new data for different learning rates expressed as fractions of default ADAM learning rate (0.001 shared across a vast majority of software). 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{sipfenn/transferLearning_MAE_vs_LearningRate.png}
+    \caption{MAE evolution of NN20 model re-trained for 25 additional rounds on an increasing fraction of data from Fe-Cr-Ni $\sigma-$dataset. Presents the dependence of transfer learning from new data for different learning rates expressed as fractions of default ADAM learning rate (0.001).}
+    \vspace{-12pt}
+    \label{sipfenn:fig:transfersigmaLR}
+\end{figure}
+
+As shown, in this case, the default learning rate (100\%)cannot be used for the transfer learning as it will adjust network parameters in both an unreliable and detrimental fashion, resulting in poor performance on the whole system of interest (both training and test sets) as shown in Figure \ref{sipfenn:fig:transfersigmaLR}. The same behavior would be observed if the process were conducted using an automated model design available in software such as \texttt{MATLAB} or \texttt{Mathematica}. The 10\% learning rate provided reliable enough outcomes and allowed a better performance improvement given little data, relative to using a 1\% learning rate (relative to the default). The second parameter to be optimized was the number of re-training rounds, as presented in Figure \ref{sipfenn:fig:transfersigmaARR}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{sipfenn/transferLearning_MAE_vs_rounds.png}
+    \includegraphics[width=0.48\textwidth]{sipfenn/transferLearning_R.png}
+    \caption{MAE and Person correlation (R) evolution of NN20 model re-trained at 10\% learning rate on an increasing fraction of data from Fe-Cr-Ni $\sigma-$dataset. Presents the dependence of transfer learning from new data for different re-training rounds numbers.}
+    \vspace{-12pt}
+    \label{sipfenn:fig:transfersigmaARR}
+\end{figure}
+
+Figure \ref{sipfenn:fig:transfersigmaARR} shows that use of too few retraining rounds causes unreliable outcomes, while too many causes overfitting for low amounts of new data. In the case of Fe-Cr-Ni $\sigma-$dataset, retraining for 10 or 25 rounds provides balanced results across the whole dataset. With parameters for the process set to 10\% learning rate and 25 additional rounds, the performance can be evaluated graphically, as presented in Figure \ref{sipfenn:fig:transfersigma}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.24\textwidth]{sipfenn/NN20_SigmaTransfer_0.png}
+    \includegraphics[width=0.24\textwidth]{sipfenn/NN20_SigmaTransfer_1.png}
+    \includegraphics[width=0.24\textwidth]{sipfenn/NN20_SigmaTransfer_3.png}
+    \includegraphics[width=0.24\textwidth]{sipfenn/NN20_SigmaTransfer_5.png}
+    \caption{Performance of a new-materials-optimized network (NN20) on $\sigma$-phase data. Left-to-right: as trained on the OQMD, with additional training on 10\%, 40\%, and 100\% of the Fe-Cr-Ni $\sigma-$phase end-member data. The points on the figure correspond to all end-members (both training and testing data). Corresponding MAE and R are presented in Figure \ref{sipfenn:fig:transfersigmaARR} (gray rhombus points).}
+    \vspace{-12pt}
+    \label{sipfenn:fig:transfersigma}
+\end{figure}
+
+
+As depicted, adding just 10\% of DFT-calculated data (24/243 endmembers) provided a significant improvement in the prediction quality over the system, including the other 90\%  was never shown to the model. This result indicates that the models in the present paper can be combined with partial data obtained through DFT calculations to create accurate predictive tools for a specific closed material system, such as sublattice endmembers, and potentially limit the number of calculations required within the study. This can then provide the ability to investigate broader material search spaces at a given computational cost.
+
+Furthermore, the presented transfer learning capability could be used for a more broad materials exploration without a well-defined finite search space like the ternary Fe-Cr-Ni $\sigma-$phase. In such a case, it is better to evaluate and report the performance of the model on a test set that wasn't presented during the training and report, as a function of the number of added data points (new DFT calculations). With such a problem statement, the transfer learning process has been repeated 1180 for the statistical significance of the outcomes, which are presented in Figure \ref{sipfenn:fig:transfersigmaVsDatapoints}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{sipfenn/transferLearning_vs_datapoints.png}
+    \includegraphics[width=0.48\textwidth]{sipfenn/transferLearning_vs_datapoints_LinLog.png}
+    \caption{MAE of predictions evaluated on test set data vs number of newly available training datapoints. 1180 blue points correspond to single transfer learning processes. Red plot gives mean MAE and standard deviation. Both plots contain the same data.}
+    \label{sipfenn:fig:transfersigmaVsDatapoints}
+    \vspace{-12pt}
+\end{figure}
+
+As presented in Figure \ref{sipfenn:fig:transfersigmaVsDatapoints}, adding just a small number of new data points allows to nearly half the MAE (around 20 datapoints). Furthermore, evident from the right plot, the mean performance increase is on average linear in log-lin scale and highly predictable ($R^2=0.98$).
+
+\subsection{Model Limitations} \label{sipfenn:ssec:modellimitations}
+As with any modeling tool, this modeling effort has some inherent limitations, coning from both data and methods used to create it. The most significant one comes from the type of data used for training of the model, where all data points correspond to DFT-relaxed structures, sitting in local minima in the configuration energy landscape. Thus, all energy predictions are given under an assumption that the input structure is fully relaxed with DFT settings inherited from the OQMD database \cite{Saal2013MaterialsOQMD}. At the same time, since the model was trained on many local energy minima configurations analyzed on the level of single-atom chemical environments, it should be able to approximate values for unrelaxed structures based on substitution from prototypes or similar compounds. Testing of this is performed by Ward 2017 \cite{Ward2017IncludingTessellations}, where it is shown that (a) in most of the test cases, the before-after relaxation energy difference is negligible in comparison to the DFT-ML difference for Ward 2017 model and usually much lower than the test MAE for models discussed in this work, and (b) in some particular cases ($Li_6CaCeO_6$) can be very high.
+
+When faced with a new configuration, the model can thus either be used to (1) give an accurate prediction if the configuration is already relaxed or (2) give an approximate result that needs to be validated with DFT if confidence in the result is needed. This is inherent to all structure-informed ML models. One possible solution to partially mitigate this limitation is to perform relaxation using the model, which should work reasonably well for most materials. 
+
+Discussion of such relaxation procedure in detail is extensive and beyond the scope of this work, yet a preliminary approach was constructed using the Novel Material Model (NN2) and deployed on all 16 end-members of Pd-Zn $\gamma$-brass crystal structure \cite{Dasgupta2022} in an iterative fashion. At each iteration, first, the local energy gradient for each atom was calculated by comparing the starting configuration with perturbations in x, y, z directions. Then, all atoms were displaced proportionally to the gradient in 100 discrete steps, reaching some local minimum, which acted as a starting point for the next iteration. An example for $Pd_8Zn_5$ is presented in Figure \ref{sipfenn:fig:localrelaxationpdzn}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{sipfenn/localRelaxation_6.png}
+    \caption{Local energy relaxation landscape of $Pd_8Zn_5$ $\gamma$-brass crystal structure from ideal positions guided iteratively by Novel Material Model (NN20).}
+    \label{sipfenn:fig:localrelaxationpdzn}
+\end{figure}
+
+As shown in \ref{sipfenn:fig:localrelaxationpdzn}, the resulting relaxation reduced predicted formation energy by 4 meV/atom for this particular end-member. In the other 15 cases, results were similar, ranging between near 0 and 15 meV/atom, converging into fine local minima, expected to correspond with true local relaxations; however, extensive research into the problem is needed before conclusions can be drawn.
+
+
+\subsection{End-User Implementation - SIPFENN} \label{sipfenn:ssec:SIPFENN}
+
+One of the main objectives of the present paper was to create a tool that is transparent, easy to use by the research community, and easily modifiable. This lead to the creation of \texttt{SIPFENN} (Structure-Informed Prediction of Formation Energy using Neural Networks) software. \texttt{SIPFENN} provides the user with near-instant access to the models presented in \ref{sipfenn:sssec:DesignedModels}. In the future, this selection will likely be further expanded. On the user side, the use of the software is as easy as selecting one of the models, specifying a folder containing structure information files like \texttt{POSCAR}s \cite{POSCARFile} or \texttt{CIF}s \cite{Hall1991TheCrystallography}, running the predictions, and saving results.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.67\textwidth]{sipfenn/SIPFENN_GraphicalAbstract_noPerformance.png}
+    \caption{SIPFENN schematic description of operation.}
+    \label{sipfenn:fig:sipfenn}
+\end{figure}
+
+SIPFENN was written entirely in Python to allow other researchers to easily modify it and adjust it to specific needs. Its schematic of operation is presented in Figure \ref{sipfenn:fig:sipfenn}. In broad scope, it first performs the structure analysis and modifications using the Python Materials Genomics library (\texttt{pymatgen}) \cite{Ong2013PythonAnalysis}. In the current implementation, it imports all structure files, analyzes the stoichiometry, creates unique names based on that, and exports them as POSCAR files. This is a rather simple task, however pymatgen is a powerful tool with a suit of more complex analytical tools that can be quickly implemented into \texttt{SIPFENN} by the user with even basic Python skills. Following the analysis, \texttt{SIPFENN} runs java-based Magpie \cite{Ward2016AMaterials} which calculates a descriptor for every imported structure and exports the result as a CSV file. This file is a descriptor table, where each row corresponds to a single material, and which can be stored and re-used later to run multiple predictive models at a fraction of the original computation time. It can also be used to create datasets for training procedures by replacing the last column with calculated or experimental values of formation energy.
+
+Finally, the descriptor table is imported into the \texttt{MXNet} library framework, allocated into the CPU or GPU memory based on user selection, and evaluated using the selected predictive model. Once results are obtained, they are exported in CSV format and can be analyzed by any spreadsheet software such as Microsoft Excel.
+
+\begin{figure}[H]
+    \centering
+    \frame{\includegraphics[width=0.55\textwidth]{sipfenn/sipfennGUI.PNG}}
+    \caption{A snapshot of the graphical user interface of SIPFENN.}
+    \label{sipfenn:fig:sipfennGUI}
+\end{figure}
+
+\texttt{SIPFENN} was planned as a command-line tool, however, it was recognized that some users, especially those with little computational background, may find that difficult. Therefore, a simple graphical user interface (GUI) was created using \texttt{wxPython} library. It incorporates all the capabilities of the command line version. Furthermore, it lets the user download the predictive models from a repository in a single click. A sample snapshot of the GUI before performing calculations is presented in Figure \ref{sipfenn:fig:sipfennGUI}.
+
+\section{Conclusions} \label{sipfenn:ssec:Conclusions}
+In the present paper new machine learning models and a ready-to-use tool were created, based on the dataset and descriptor design by Ward et al. \cite{Ward2017IncludingTessellations}. Models reported in this work significantly improve upon existing methods, both in terms of performance and accessibility. For the most direct comparison, one of the designed models has been optimized for performing well on a random subset of the OQMD database and achieved an MAE of 28 meV/atom, compared to 80 meV/atom in the original  Ward et al. paper \cite{Ward2017IncludingTessellations}, and to 38 meV/atom in the most recent model called \texttt{IRNet} \cite{Jha2019IRNet}. Furthermore, it was shown that the error of the model is lowered when applied to the problem of finding the convex hull energy, achieving levels comparable with the current state-of-the-art approaches \cite{Jha2018ElemNet:Composition, Goodall2020PredictingStoichiometry}.
+
+In addition, using appropriate overfitting mitigation efforts, such as Dropout and L2 regularization, models tuned for generalization to other types of materials datasets were developed. To test this, the models were evaluated on two datasets not contained within the OQMD, namely all end-members (243) of 5-sublattice topologically-close-packed Fe-Cr-Ni Sigma-phase \cite{Feurer2019Cr-Fe-NiCalculations, Hsieh2012OverviewSteels} and a few selected random-solution-approximating SQS \cite{Zunger1990SpecialStructures, Shin2006ThermodynamicStructures, Jiang2004First-principlesStructures}. The MAE values for these two test sets were found to be close to the values obtained on a test set from the OQMD. This exemplifies that the models are able to generalize to new datasets.
+%In total, over 50 neural networks were trained on the dataset of around 400,000 DFT calculation results contained within the OQMD database\cite{Saal2013MaterialsOQMD, Kirklin2015TheEnergies}. This process lead to three final neural networks specialized in defined objectives, including the state-of-the-art performance on the random subset of OQMD, with mean absolute error (MAE) of 28 meV/atom. The second and most advanced neural network was optimized for predicting new materials, and consequently its usability in new materials discovery.
+% The second network provides MAE of 42 meV/atom, which still constitutes a significant improvement over previous tools, but has reduced size, allowing the network to run on low power devices such as smartphones. 
+
+Furthermore, it was shown that models created within the present paper can be used for transfer learning, where vast knowledge of a broad spectrum of materials is combined with as little as a few DFT-datapoints from a specific materials system to provide excellent results within that specific system. Such at least partially process mitigates the issue of low data availability, present in numerous materials science problems, and consequently allows users to investigate a broader scope of materials at the same computational cost.
+
+Finally, the three neural network models designed within the present paper were used, in conjunction with additional software, to create an end-user tool called \texttt{SIPFENN}. \texttt{SIPFENN}'s capabilities extend far beyond allowing validation of the presented results. It is implemented to work without any intensive computations on the user side, using models accessible from a repository, requiring only a quick one-click model download  to run. It is very fast thanks to using one of the industry's leading ML frameworks capable of well-optimized computations on GPUs. Furthermore, it is an open-source tool written in \texttt{Python}, which can be easily modified to specific needs in a straightforward way without extensive changes in the code.
+
+
+\section{Software and Data Availability}
+
+As of 2022, the \texttt{SIPFENN} code has been deprecated in favor of highly improved \texttt{pySIPFENN} which was re-written with great stability, reliability, and deeper integration with other community tools. Chapter \ref{chap:pysipfenn} describes it in detail and Section \ref{pysipfenn:sec:softwareavaialbility} describes its availability along related workshops and tutorial materials.
+
+For archival purposes, the last version of \texttt{SIPFENN} code is available through Penn State's Phases Research Lab website at 
+\href{https://phaseslab.org/sipfenn}{https://phaseslab.org/sipfenn} in (1) a minimal version that can be run on pre-computed descriptors in CSV format as well as (2) ready-to-use version with pre-compiled Magpie \cite{Ward2016AMaterials}. \texttt{SIPFENN} contains hard-coded links to neural networks stored in the cloud that can be downloaded at a single-click (see Figure \ref{sipfenn:fig:sipfennGUI}). 
+
+All neural networks were made available in (1) open-source \texttt{MXNet} format maintained by Apache Foundation, used within \texttt{SIPFENN}, (2) closed-source \texttt{WLNet} format maintained by Wolfram Research and having the advantage of even easier deployment, as well as guaranteed forward compatibility with future versions of Wolfram Language, and in (3) Open Neural Network Exchange (\texttt{ONNX}) format \cite{Bai2019ONNX:Exchange} distributed through \texttt{pySIPFENN}, as of April 2024.
+
+For ensured longevity of results, original \texttt{SIPFENN} neural networks are stored through the courtesy of Zenodo.org service under DOI:~\href{https://doi.org/10.5281/zenodo.4006803}{10.5281/zenodo.4006803} at the CERN’s Data Centre.
+
+\pagebreak
+
+
+%\printbibliography[heading=subbibintoc]
