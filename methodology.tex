@@ -25,6 +25,8 @@
 \subsubsection{Modified quasichemical model with quadruplets approximation} \label{method:ssec:mqmqa}
 
 \subsection{Open-source software} \label{method:ssec:tools}
+The model parameters are evaluated in two steps in ESPEI. The first step is parameter generation. In this step, the thermochemical data from DFT-based first-principles calculations with all internal degrees of freedom specified [30,39], such as site fractions in each sublattice, are used to select the number of parameters and evaluate their values. The experimental thermochemical data can also be used in the first step if their internal degrees of freedom are specified, such as stoichiometric compounds or fully random solutions. This is because the minimization of Gibbs energy for the internal variables is not performed in the first step. PDUQ relies on the PyCalphad for predicting thermodynamic properties of interest and ESPEI for Bayesian samples to leverage the distribution of model parameters and estimate uncertainties based on the estimated Gaussian distribution of input data uncertainty [14,16]. The statistical distributions of model parameters are evaluated from the samples during MCMC optimization based on the Metropolis criteria [14].
+
 
 \section{Bayesian parameter estimation} \label{method:ssec:Bayesian}
 

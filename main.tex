@@ -19,7 +19,7 @@
 \usepackage{array, booktabs}
 \usepackage{nameref}
 \usepackage{etaremune}
-
+\DeclareUnicodeCharacter{2212}{-}
 %Listings
 \usepackage{minted}
 %\usepackage[finalizecache,cachedir=.]{minted}
@@ -51,15 +51,12 @@
     maxcitenames=1,
     mincitenames=1
     ]{biblatex}
-\addbibresource{referencesAdam.bib}
-\addbibresource{extras/nimcsoRefs.bib}
-\addbibresource{extras/crystallRefs.bib}
-\addbibresource{extras/referencesSiegel.bib}
+\addbibresource{references.bib}
 \renewcommand*{\bibfont}{\footnotesize}
 
 % Smaller figure captions 
 \usepackage{caption}
-\captionsetup[figure]{font=footnotesize, labelfont=footnotesize}
+\captionsetup[figure]{font=normalsize, labelfont=normalsize}
 
 % Section titles
 \usepackage{titlesec}
@@ -89,6 +86,9 @@
 % less section skip in the table of contents
 \usepackage{tocbasic}
 
+% Table
+\renewcommand{\arraystretch}{1.2}
+
 % Section
 \DeclareTOCStyleEntry[
   beforeskip=.2em plus 1pt,% default is 1em plus 1pt
@@ -105,7 +105,6 @@
 % Appendix
 \usepackage[toc]{appendix}
 \newcommand{\mypart}[1]{\thispagestyle{empty}\part*{#1}}%\addtocounter{page}{-1}}
-
 
 % MISC
 \setlength\parindent{6pt} %paragraph indentation
@@ -210,13 +209,14 @@ Associate Professor of Materials Science and Engineering\\
 \textbf{John Mauro}\\
 Dorothy Pate Enright Professor and Associate Head for Graduate Education\\
 Chair, Intercollege Graduate Degree Program in Materials Science and Engineering\\
+Program Head
 
 \vfill
 
 
 \newpage
 \chapter*{Abstract}
-Understanding atomic environments is essential for optimizing the performance and properties of materials by providing insights into structure-property relationships. For complex multi-component solution phases, advanced thermodynamic models are required to capture inherent complexities, such as short-range ordering. This work utilizes first-principles calculations and CALPHAD modeling to investigate atomic environments in materials with industrial applications in catalysts and molten salts. Open-source software tools, PyCalphad and ESPEI, facilitate high-throughput CALPHAD modeling, uncertainty quantification, and model selection through Bayesian parameter estimation within Markov Chain Monte Carlo approach. This work achieves atomic control of active-site ensembles in intermetallic catalysts for tailoring hydrogenation reactions, enables solution model selection and predictive modeling of critical characteristics in molten salts. Additionally, a template generator has been developed to allow users to customize thermodynamic models within PyCalphad. These advancements provide the community with extensive opportunities to comprehensively evaluate thermodynamic modeling with uncertainty quantification, accelerating materials design and discovery.
+Understanding atomic environments is essential for optimizing the performance and properties of materials by providing insights into structure-property relationships. For complex multi-component solution phases, advanced thermodynamic models are required to capture inherent complexities, such as short-range ordering. This work utilizes first-principles calculations and CALPHAD modeling to investigate atomic environments in materials with industrial applications in catalysts and molten salts. Open-source software tools, PyCalphad and ESPEI, facilitate high-throughput CALPHAD modeling, uncertainty quantification, and model selection through Bayesian parameter estimation within the Markov Chain Monte Carlo approach. This work achieves atomic control of active-site ensembles in intermetallic catalysts for tailoring hydrogenation reactions, enables solution model selection and predictive modeling of critical characteristics in molten salts. Additionally, a template generator has been developed to allow users to customize thermodynamic models within PyCalphad. These advancements provide the community with extensive opportunities to comprehensively evaluate thermodynamic modeling with uncertainty quantification, accelerating materials design and discovery.
 
 \setstretch{1}
 \newpage
@@ -240,7 +240,7 @@ Understanding atomic environments is essential for optimizing the performance an
 
 I would like to express heartfelt thanks to my advisor, Dr. Zi-Kui Liu, for guiding me over the last five years. His passion for research has deeply influenced me. I will always be grateful for his continuous guidance and encouragement in my professional and personal development.
 
-I would like to thank current and former colleagues from Phases Research Lab, Dr. Shun-Li Shang, Dr. Yi Wang, Dr. Brandon Bocklund, Dr. Jorge Paz Soldan Palma, Dr. John Shimanek, Dr. Hui Sun, Dr. Adam Krajewski, Dr. Nigel Hew, Shuang Lin, Alexander Richter, Zhening Yang, Luke Myers, and Ricardo Amaral. I am fortunate to have their guidance.
+I would like to thank current and former colleagues from Phases Research Lab, Dr. Shun-Li Shang, Dr. Yi Wang, Dr. Brandon Bocklund, Dr. Jorge Paz Soldan Palma, Dr. John Shimanek, Dr. Hui Sun, Dr. Adam Krajewski, Dr. Nigel Hew, Shuang Lin, Alexander Richter, Zhening Yang, Luke Myers, and Ricardo Amaral. I am so fortunate to have their guidance and grow together with them.
 
 I would like to thank Dr. Michael Janik for supporting the intermetallics work and guiding my early development during my PhD journey. I am also grateful for the opportunity to complete two internships at Argonne National Laboratory. I would like to thank my advisor at Argonne National Laboratory Nuclear Science and Engineering Division, Dr. Shayan Shahbazi, who prompted me to deepen my understanding of molten salts. I would like to thank the support from Dr. Hojong Kim and Dr. Xiaofeng Guo in the experimental work on molten salts projects.
 
@@ -280,7 +280,7 @@ This work was made possible by the financial support and training provided by th
 
 \printbibliography[
 heading=bibintoc,
-title={Combined Bibliography}
+title={Bibliography}
 ]
 
 
