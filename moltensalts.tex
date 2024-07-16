@@ -119,7 +119,121 @@ Thermodynamic modeling of the (LiF, NaF, KF, CrF${_2}$)-CrF${_3}$ system was car
 
 \subsection{Thermodynamic properties in (LiF, NaF, KF, CrF$_2$)-CrF$_3$ by first-principles calculations} \label{moltensalts:ssec:FLiNaKCrsolids}
 
+Table \ref{ms:tab:CrEOS} shows the predicted equilibrium properties of V$_0$, B$_0$, and B$^\prime$ by the EOS E-V fitting at 0 K in comparison with experimental bulk moduli \cite{yagi1978experimental, haussuhl1960thermo, boehler1980thermal, rao1974anderson, bensch1972third, jorgensen2004compression}. The B$_0$ results from GGA show a good agreement with experimental measurements. For the LiF compound, GGA predicts B$_0$ = 67.6 GPa and B$^\prime$ = 4.17, aligning well with the measured values of 65.4 GPa and 4.98 by Boehler et al. \cite{boehler1980thermal}. In comparison with the three measured B$_0$ values of 66.5 GPa by Yagi \cite{yagi1978experimental}, 76.9 GPa by Haussühl \cite{haussuhl1960thermo}, and 65.4 GPa by Boehler et al. \cite{boehler1980thermal}, the B$_0$ result by GGA shows a mean absolute error (MAE) of 4.2 GPa, while LDA predicts B$_0$ = 86.5 GPa with a higher MAE of 16.9 GPa. Considering the NaF compound, GGA predicts B$_0$ = 45.0 GPa, matching with the measured 45.9 GPa by Yagi \cite{yagi1978experimental} but lower than the measured values of 53.8 GPa by Haussühl \cite{haussuhl1960thermo}, 52.3 GPa by Rao \cite{rao1974anderson}, and 48.2 GPa by Bensch et al. \cite{bensch1972third} with the MAE around 5 GPa. On the other hand, LDA predicts B$_0$ = 61.4 GPa, which is higher than the experimental B$_0$ \cite{yagi1978experimental, haussuhl1960thermo, rao1974anderson, bensch1972third} with MAE = 11.4 GPa. Additionally, for the B$^\prime$ values of NaF, LDA predicts B$^\prime$ = 4.74, which is higher than the predicted 4.60 by GGA and closer to 5.89 reported by Bensch et al. \cite{bensch1972third}. Regarding the KF compound, the measured B$_0$ values (37.0 GPa by Yagi \cite{yagi1978experimental} and 35.5 GPa by Haussühl \cite{haussuhl1960thermo}) fall between the LDA result of 43.5 GPa and the GGA result of 28.9 GPa. The MAE value of LDA with respect to the measured B$_0$ values is 7.25 GPa, slightly lower than MAE = 7.35 GPa by GGA. As for the CrF$_3$ compound, GGA+U reports B$_0$ = 29.3 GPa, showing a 0.3\% difference compared to 29.2 GPa measured by Jørgensen et al. \cite{jorgensen2004compression}. LDA+U predicts B$_0$ = 46.2 GPa, which is 58\% higher than the measured 29.2 GPa \cite{jorgensen2004compression}. The present results indicate that LDA predicts smaller V$_0$ and higher B$_0$ values than those from GGA. It is consistent with the previous observations that LDA tends to underestimate lattice constants and overestimate cohesive energy with respect to GGA \cite{haas2009calculation, he2014accuracy}.
 
+\begin{table}[H]
+    \centering
+    \caption{Predicted equilibrium properties of volume V$_0$, bulk modulus B$_0$, and the first derivative of bulk modulus with respect to pressure B$^\prime$ for each compound based on the present EOS fitting at 0 K in the FLiNaK-CrF$_3$-CrF$_2$ system. Experimental data (marked with *) \cite{yagi1978experimental, haussuhl1960thermo, boehler1980thermal, rao1974anderson, bensch1972third, jorgensen2004compression} are also listed for comparison}
+    \begin{tabular}{>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{4cm}>{\raggedright\arraybackslash}m{3cm}>{\raggedright\arraybackslash}m{2cm}>{\raggedright\arraybackslash}m{2cm}}
+    \hline
+    \textbf{Phases}&\textbf{Method}&\textbf{V$_0$} (\r{A}$^3$/atom)&\textbf{B$_0$}&\textbf{B$^\prime$}\\
+    \hline
+    LiF&LDA&7.488&86.5&4.25\\
+    &GGA&8.419&67.6&4.17\\
+    &Yagi$^*$\cite{yagi1978experimental}&&66.5&\\
+    &Haussühl$^*$\cite{haussuhl1960thermo}&&76.9&\\
+    &Boehler et al.$^*$ \cite{boehler1980thermal}&&65.4&4.98\\
+    NaF&LDA&11.457&61.4&4.74\\
+	&GGA&13.020&45.0&4.60\\
+    &Yagi$^*$\cite{yagi1978experimental}&&45.9&\\
+    &Haussühl$^*$\cite{haussuhl1960thermo}&&53.8&\\
+    &Ramji Rao$^*$\cite{rao1974anderson}&&52.3&\\	
+    &Bensch et al.$^*$ \cite{boehler1980thermal}&&48.2&5.89\\
+    KF&LDA&17.363&43.5&5.06\\
+	&GGA&20.050&28.9&4.84\\
+	&Yagi$^*$\cite{yagi1978experimental}&&37.0&\\
+	&Haussühl$^*$\cite{haussuhl1960thermo}&&35.5&\\	
+    CrF$_3$&LDA+U&11.152&46.2&8.46\\
+	&GGA+U&12.902&29.3&7.29\\
+	&Jørgensen et al.$^*$\cite{jorgensen2004compression}&&29.2&10.3\\
+    CrF$_2$&LDA+U&12.443&71.1&2.74\\
+    Li$_3$CrF$_6$&LDA+U&9.543&56.1&5.85\\
+    Na$_3$CrF$_6$&LDA+U&11.577&57.5&5.46\\
+    Na$_5$Cr$_3$F$_{14}$&LDA+U&11.757&52.2&5.15\\
+    NaCrF$_4$&LDA+U&11.933&53.0&4.35\\
+    K$_3$CrF$_6$&LDA+U&15.705&51.5&5.67\\
+    K$_2$CrF$_5$&LDA+U&13.858&45.9&5.65\\
+    KCrF$_4$&LDA+U&13.920&38.1&4.88\\
+    K$_2$Cr$_5$F$_{17}$&LDA+U&13.314&49.3&6.91\\
+    Cr$_2$F$_5$&LDA+U&12.225&46.6&7.91\\
+    \hline
+    \end{tabular}
+    \label{ms:tab:CrEOS}
+\end{table}
+
+Figure \ref{ms:fig:FLiNaKCrphonon} compares the phonon DOS of LiF, NaF, and KF obtained using LDA and GGA in comparison with direct measurements by neutron scattering \cite{dolling1968lattice, buhrer1970lattice} or fittings in terms of measurements \cite{karo1969lattice}. Overall, the peak positions of the experimental phonon DOS are well reproduced by both LDA and GGA. However, in the low-frequency region (e.g., < 5 THz for LiF and NaF, and < 3 THz for KF), the phonon DOS predicted by LDA show a better match in both the shape and the peak position with respect to experimental data \cite{dolling1968lattice, buhrer1970lattice, karo1969lattice} than those from GGA. This observation suggests that LDA predicts more reliable thermodynamic properties of LiF, NaF, and KF when employing the phonon-based QHA since these properties are mainly regulated by phonon DOS at low-frequency regions \cite{shang2019achieving}. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{moltensalts/Moltensalts-FLiNaKCr-PhononDOS.jpg}
+    \caption{Predicted phonon density of states (DOS) of (a) LiF, (b) NaF, and (c) KF from DFT-based phonon calculations in comparison with phonon DOS from experiments \cite{dolling1968lattice, buhrer1970lattice, karo1969lattice}. Blue lines show results from the LDA approach, red dot-dashed lines show results from the GGA-PBE approach, and the green dotted lines are results from experiments \cite{dolling1968lattice, buhrer1970lattice, karo1969lattice}. }
+    \label{ms:fig:FLiNaKCrphonon}
+\end{figure}
+
+Figure \ref{ms:fig:FLiNaKCr-Benchmark} illustrates a comparison of the predicted heat capacity (C$_p$), entropy (S), and enthalpy (H$-$H$_{300}$) of LiF, NaF, and KF in terms of the phonon-based QHA, where the DFT calculations were conducted using both the LDA and GGA, and the predicted results are compared to the data from the SSUB database \cite{sgteurl}. In general, thermodynamic properties predicted by LDA align well with the results from SSUB. The most substantial difference between LDA and SSUB is the C$_p$ values of KF, where a 6\% disparity is noted. Furthermore, these comparisons reveal that the LDA results exhibit a better agreement with SSUB than the GGA results, particularly for LiF. For example, at 1100 K, the C$_p$ values predicted by LDA demonstrate only a 2\% difference compared to those from the SSUB \cite{sgteurl}, whereas an 18\% difference is observed when using GGA. Figure \ref{ms:fig:FLiNaKCr-Benchmark} indicates that the QHA in terms of LDA yields more reliable predictions of thermodynamic properties in LiF-NaF-KF-based system, agreeing with the observations in phonon DOS in Figure \ref{ms:fig:FLiNaKCrphonon}. Subsequent DFT calculations were hence performed using the LDA approach. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{moltensalts/Moltensalts-FLiNaKCr-Benchmark.jpg}
+    \caption{Predicted heat capacity C$_p$, entropy S, and enthalpy with reference at 300 K (H$-$H$_{300}$) of (a) LiF, (b) NaF, and (c) KF by DFT-based QHA via phonon calculations. Results by LDA is marked as solid blue lines, calculations by PBE are marked as dashed dot red lines, and the SSUB results \cite{sgteurl} are in dashed yellow lines. The SSUB results are implemented in the present modeling work.}
+    \label{ms:fig:FLiNaKCr-Benchmark}
+\end{figure}
+
+Figure \ref{ms:fig:FLiNaKCr-Benchmark-Cr} shows the present DFT predictions and the values in SSUB \cite{sgteurl} regarding C$_p$, S, and H$-$H$_{300}$ for CrF$_3$ and CrF$_2$. In general, the present predictions tend to be lower than those obtained from SSUB \cite{sgteurl}. For CrF$_3$, the DFT predicted C$_p$ = 19.77 J/mol-atom-K closely aligns with the SSUB value of 19.73 J/mol-atom-K at 300 K. As the temperature increases to 1300 K, the difference increases to 9\%. Similarly, for CrF$_2$, the C$_p$ = 21.22 J/mol-atom-K at 300 K by DFT is in good agreement with the value of 21.66 from SSUB. At a higher temperature of 1140 K, the difference expands to 12\%. Regarding entropy, DFT predicts lower S values for both CrF$_3$ and CrF$_2$ than those in SSUB across the temperature range shown in Figure \ref{ms:fig:FLiNaKCr-Benchmark-Cr}. At high temperatures (e.g., 1600 K for CrF$_3$ and 1140 K for CrF$_2$), it shows a 10\% difference in CrF$_3$ and 14\% in CrF$_2$. It is found that a good agreement is observed regarding H$-$H$_{300}$ values of CrF$_3$ and CrF$_2$ between the DFT calculations and the SSUB at lower temperatures (< 1000 K for CrF$_3$ and < 600 K for CrF$_2$). H$-$H$_{300}$ from DFT becomes slightly lower than that in SSUB \cite{sgteurl} with increasing temperature, with the differences, for example, around 5\% in CrF$_3$ at 1650 K and 9\% in CrF$_2$ at 1140 K.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\linewidth]{moltensalts/Moltensalts-FLiNaKCr-Benchmark-Cr.jpg}
+    \caption{Predicted heat capacity C$_p$, entropy S, and enthalpy with reference at 300 K (H$-$H$_{300}$) of (a) CrF$_3$ and (b) CrF$_2$ by DFT-based QHA via phonon calculations marked in solid lines in comparison with SSUB \cite{sgteurl} in dashed lines.}
+    \label{ms:fig:FLiNaKCr-Benchmark-Cr}
+\end{figure}
+
+Table \ref{ms:tab:FLiNaK-Cr-Hf} shows the present DFT values of formation enthalpy ($\Delta_fH_m$) of these ternary compounds using the LDA+U approach, together with the reactions to form these compounds. Table \ref{ms:tab:FLiNaK-Cr-Hf} shows that the $\Delta_fH_m$ values are negative for all ternary compounds with reference to their corresponding binary compounds. Yin et al. \cite{yin2018thermodynamic, yin2014thermodynamic} conducted DFT calculations for Li3CrF6 and Na3CrF6. Predicted $\Delta_fH_m$ values from the Materials Project \cite{jain2013commentary} and the Open Quantum Materials Database (OQMD) \cite{kirklin2015open} are also listed in Table \ref{ms:tab:FLiNaK-Cr-Hf} and displayed in Figure \ref{ms:fig:FLiNaKCr-Hf}. The present DFT calculations by LDA+U predict higher $\Delta_fH_m$ values of Li3CrF6 and Na3CrF6 than those by Yin et al. \cite{yin2018thermodynamic, yin2014thermodynamic} using GGA. The present DFT calculations align better with results from the Materials Project \cite{jain2013commentary} and OQMD \cite{kirklin2015open} than calculations from Yin et al. \cite{yin2018thermodynamic, yin2014thermodynamic}. Figure \ref{ms:fig:FLiNaKCr-Hf} displays the convex hulls for the LiF-CrF$_3$, NaF-CrF$_3$, and KF-CrF$_3$ systems based on the $\Delta_fH_m$ values listed in Table \ref{ms:tab:FLiNaK-Cr-Hf}. These convex hulls serve as indicators regarding the stability of ternary compounds in these systems. Li3CrF6 is on the convex hull, suggesting that it is stable in the LiF-CrF$_3$ system. In the NaF-CrF$_3$ system, Na3CrF6 is located on the hull, indicating its stability at 0 K. Na5Cr3F14 shows an elevation of 1.09 kJ/mol-atom above the hull, and NaCrF4 shows 0.42 kJ/mol-atom above the hull. In the KF-CrF$_3$ system, K2CrF5 is on the convex hull at 0 K. K2Cr5F17 is the farthest away from the convex hull (1.31 kJ/mol-atom above it), while K3CrF6 and KCrF4 are 0.62 kJ/mol-atom and 0.61 kJ/mol-atom above the hull, respectively. These calculations at 0 K suggest that Na5Cr3F14, NaCrF4, K2Cr5F17, K3CrF6, and KCrF4 are not stable at 0 K, while De Kozak \cite{DeKozak1969} reported the existence of the above ternary compounds at high temperature. It suggests that phonon-based QHA is necessary to investigate the thermodynamic properties of ternary compounds at high temperatures.
+
+\begin{table}[H]
+    \centering
+    \caption{DFT-based results of formation enthalpy ($\Delta_fH_m$) at 0 K of ternary compounds in the AF-CrF3 (A=Li, Na, and K) systems with the reference states as shown in the reactions. DFT results from Yin et al. \cite{yin2018thermodynamic, yin2014thermodynamic}, the Materials Project \cite{jain2013commentary}, and the Open Quantum Materials Database (OQMD) \cite{kirklin2015open} are listed for comparison.}
+    \begin{tabular}{>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{5cm}>{\raggedright\arraybackslash}m{3cm}>{\raggedright\arraybackslash}m{5cm}}
+    \hline
+    \textbf{Compound}&\textbf{Reaction}&\textbf{$\Delta_fH_m$ (J/mol-atom)}&\textbf{Source}\\
+    \hline
+    Li3CrF6&Li3CrF6$=$3LiF$+$CrF3&$-1815$&This work\\
+    &&$-4144$&Yin et al. \cite{yin2014thermodynamic}\\
+    &&$-2238$&Materials Project \cite{jain2013commentary}\\
+    &&$-2161$&OQMD \cite{kirklin2015open}\\
+    Na3CrF6&Na3CrF6$=$3NaF$+$CrF3&$-7849$&This work\\
+	&&$-8592$&Yin et al. \cite{yin2018thermodynamic}\\
+    &&$-6657$&Materials Project \cite{jain2013commentary}\\
+    &&$-8683$&OQMD \cite{kirklin2015open}\\
+    Na3CrF6&Na3CrF6$=$3NaF$+$CrF3&$-7849$&This work\\
+	&&$-8592$&Yin et al. \cite{yin2018thermodynamic}\\
+    &&$-6657$&Materials Project  \cite{jain2013commentary}\\
+    &&$-8683$&OQMD \cite{kirklin2015open}\\
+    Na5Cr3F14&Na5Cr3F14$=$5NaF$+$3CrF3&$-5447$&This work\\
+	&&$-5148$&Materials Project \cite{jain2013commentary}\\
+	&&$-6859$&OQMD \cite{kirklin2015open}\\
+    NaCrF4&NaCrF4$=$NaF$+$CrF3&$-4816$&This work\\
+    &&$-5071$&Materials Project \cite{jain2013commentary}\\
+	&&$-6657$&OQMD \cite{kirklin2015open}\\
+    K3CrF6&K3CrF6$=$3KF$+$CrF3&$-8621$&This work\\
+    &&$-11038$&Materials Project \cite{jain2013commentary}\\
+	&&$-13855$&OQMD \cite{kirklin2015open}\\
+    K2CrF5&K2CrF5$=$2KF$+$CrF3&$-12322$&This work\\
+	&&$-12446$&Materials Project \cite{jain2013commentary}\\
+    KCrF4&KCrF4$=$KF$+$CrF3&$-8631$&This work\\
+    &&$-9970$&Materials Project \cite{jain2013commentary}\\
+    K2Cr5F17&K2Cr5F17$=$2KF$+$5CrF3&$-3974$&This work\\
+    \hline
+    \end{tabular}
+    \label{ms:tab:FLiNaK-Cr-Hf}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{moltensalts/Moltensalts-FLiNaKCr-DFTHf.jpg}
+    \caption{Convex hull of ternary compounds in LiF-CrF3 (green), NaF-CrF3 (red), and KF-CrF3 (blue) at 0 K from DFT-based calculations from the present work. Circles ($\circ$) are the formation enthalpy of compounds from the present work; cross markers ($\times$) are the formation enthalpy of compounds from Yin et al. \cite{yin2018thermodynamic, yin2014thermodynamic}; plus markers ($+$) result from The Materials Project \cite{jain2013commentary}; and diamond markers ($\diamond$) results from OQMD \cite{kirklin2015open}. }
+    \label{ms:fig:FLiNaKCr-Hf}
+\end{figure}
 
 
 
