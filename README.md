@@ -15,5 +15,5 @@ Understanding atomic environments is essential for optimizing the performance an
 
 Rushi Gong was born on October 15, 1997, in the city of Yiyang, Hunan Province in China. She graduated from Beihang University, Beijing, China in 2019 with a B.S. in Materials Science and Engineering and a minor in Mathematics. In 2020, Rushi began her Ph.D. studies at the Pennsylvania State University, advised by Dr. Zi-Kui Liu.
 
-As of 2024, Rushi has published several scientific publications listed under her ORCID record [0009-0004-0543-581X](https://orcid.org/0009-0004-0543-581X) and Google Scholar (id:[naO8fOgAAAAJ](https://scholar.google.com/citations?user=naO8fOgAAAAJ) including 3 first-author publications and 5 co-author publications.
+As of 2024, Rushi has published several scientific publications listed under her ORCID record [0009-0004-0543-581X](https://orcid.org/0009-0004-0543-581X) and Google Scholar (id:[naO8fOgAAAAJ](https://scholar.google.com/citations?user=naO8fOgAAAAJ)) including 3 first-author publications and 5 co-author publications.
 
