@@ -3,7 +3,7 @@
 \section{Introduction} \label{intermetallics:sec:intro}
 
 \section{Thermodynamic modeling of the Pd-Zn system with uncertainty \\quantification} \label{intermetallics:sec:PdZn}
-Pd–Zn intermetallic catalysts show encouraging combinations of activity and selectivity on well-defined active site ensembles.\cite{Dasgupta2022} Thermodynamic description of the Pd–Zn system, delineating phase boundaries and enumerating site occupancies within intermediate alloy phases, is essential to determining the ensembles of Pd–Zn atoms as a function of composition and temperature. 
+Pd–Zn intermetallic catalysts show encouraging combinations of activity and selectivity on well-defined active site ensembles \cite{Dasgupta2022}. Thermodynamic description of the Pd–Zn system, delineating phase boundaries and enumerating site occupancies within intermediate alloy phases, is essential to determining the ensembles of Pd–Zn atoms as a function of composition and temperature. 
 
 Combining the present extensive first-principles calculations and available experimental data, the Pd–Zn system was remodeled using the CALculation of PHAse Diagrams (CALPHAD) approach. High throughput modeling tools with uncertainty quantification, i.e., ESPEI and PyCalphad, were incorporated in the phase analysis. The site occupancies across the $\gamma$ phase composition region were given special attention. A four-sublattice model was used for the $\gamma$ phase owing to its four Wyckoff positions, i.e., the outer tetrahedral (OT) site 8c, the inner tetrahedral (IT) site 8c, the octahedral (OH) site 12e, and the cuboctahedral (CO) site 24g. The site fractions of Pd and Zn calculated from the present thermodynamic model show the occupancy preference of Pd in the OT and OH sublattices in agreement with experimental observations. The force constants obtained from DFT-based phonon calculations further support the tendency of Pd to occupy the OH sublattice compared with the IT and CO sublattice. The catalytic ensembles changing from Pd monomers (Pd1) to trimers (Pd3) on the $\gamma$ phase surface are attributed to the increasing Pd occupancy in the OH sublattice.
 
@@ -19,16 +19,16 @@ The Pd–Zn system contains 6 solution phases, i.e., Liquid, FCC, HCP, BCC$\_$B2
         \hline
          \textbf{Phase name} & \textbf{Strukturbericht} & \textbf{Space group} & \textbf{Pearson symbol} & \textbf{Model} \\
         \hline
-         Liquid($L$) &  &  &  & $(Pd,Zn)_1$ \\
-         FCC$\_$A1 & A1 & $Fm\Bar{3}m$ & cF4 & $(Pd,Zn)_1$ \\
-         HCP$\_$Zn & A3 & $P6_3/mmc$ & hP2 & $(Pd,Zn)_1$ \\
-         BCC$\_$A2 & A2 & $Im\Bar{3}m$ & cI2 & $(Pd,Zn)_1$ \\
-         BCC$\_$B2 ($\beta$) & B2 & $Pm\Bar{3}m$ & cP2 & $(Pd,Zn)_{0.5}(Pd,Zn)_{0.5}$ \\
-         FCC$\_$L1$_0$($\beta_1$) & L1$_0$ & $P4/mmm$ & tP2 & $(Pd,Zn)_1(Pd,Zn)_1$ \\
-         Gamma ($\gamma$) & D8$_2$ & $I4\Bar{3}m$ & cI52 & $(Pd,Zn)_2(Pd,Zn)_3(Pd,Zn)_2(Pd,Zn)_6$ \\
-         Pd$_2$Zn &  & $Pnma$ & oP12(C23) & $(Pd)_2(Zn)_1$ \\
-         PdZn$_2$ &  & $Cmm2$ & oS48 & $(Pd)_1(Zn)_2$ \\
-         Pd$_9$Zn$_{91}$ &  &  &  & $(Pd)_{0.09}(Zn)_{0.91}$ \\
+         Liquid($L$) &  &  &  & (Pd,Zn)$_1$ \\
+         FCC$\_$A1 & A1 & $Fm\Bar{3}m$ & cF4 & (Pd,Zn)$_1$ \\
+         HCP$\_$Zn & A3 & $P6_3/mmc$ & hP2 & (Pd,Zn)$_1$ \\
+         BCC$\_$A2 & A2 & $Im\Bar{3}m$ & cI2 & (Pd,Zn)$_1$ \\
+         BCC$\_$B2 ($\beta$) & B2 & $Pm\Bar{3}m$ & cP2 & (Pd,Zn)$_{0.5}$(Pd,Zn)$_{0.5}$ \\
+         FCC$\_$L1$_0$($\beta_1$) & L1$_0$ & $P4/mmm$ & tP2 & (Pd,Zn)$_1$(Pd,Zn)$_1$ \\
+         Gamma ($\gamma$) & D8$_2$ & $I4\Bar{3}m$ & cI52 & (Pd,Zn)$_2$(Pd,Zn)$_3$(Pd,Zn)$_2$(Pd,Zn)$_6$ \\
+         Pd$_2$Zn &  & $Pnma$ & oP12(C23) & (Pd)$_2$(Zn)$_1$ \\
+         PdZn$_2$ &  & $Cmm2$ & oS48 & (Pd)$_1$(Zn)$_2$ \\
+         Pd$_9$Zn$_{91}$ &  &  &  & (Pd)$_{0.09}$(Zn)$_{0.91}$ \\
         \hline
     \end{tabular}
     \label{intermetallics:PdZn_phases}
@@ -36,66 +36,52 @@ The Pd–Zn system contains 6 solution phases, i.e., Liquid, FCC, HCP, BCC$\_$B2
 
 Phase equilibrium properties of the Pd–Zn system published before 2006 were reviewed by Vizdal et al. \cite{vizdal2006experimental}. Massalski \cite{massalski1986binary} reported the solubility of Zn in FCC to be about mole fraction of Zn $x_{Zn}$ = $0.18 - 0.20$, and similar values were also observed by Hansen and Anderko \cite{hansen1958constitution}. The maximum solubility of Zn in FCC was around $x_{Zn}$ = $0.26$ at 1000 reported by Chiang et al. \cite{ChiangIpserChang1977} and Kou and Chang \cite{kou1975thermodynamics}. The solubility of Pd in HCP was reported to be lower than $x_{Zn}$ = 0.01 \cite{vizdal2006experimental, massalski1986binary, hansen1958constitution}. Vizdal et al. \cite{vizdal2006experimental} measured the temperatures of the invariant reactions in the Zn-rich region using differential thermal analysis (DTA). Thermochemical measurements for the Pd-Zn system are scarce. Kou and Chang \cite{kou1975thermodynamics} measured the activities of Zn ($\alpha_{Zn}$) in $\beta_1$, showing that increases from $-$9.146 to $-$1.464 with $x_{Zn}$ from 0.3762 to 0.5779. They also reported the enthalpies of formation of as $-66.5$ kJ/mol-atom at 1000. Chiang et al. \cite{ChiangIpserChang1977} measured the vapor pressures of Zn between 750 and 1300 K with $x_{Zn}$ = 0$-$0.83 using the isopiestic method. From these measurements, they determined the activities of Pd and Zn in FCC, $\beta$, and $\beta_1$, and partial molar Gibbs energy and enthalpy in $\beta_1$. According to Chiang et al. \cite{ChiangIpserChang1977}, at 1273 K, the activity values of $ln\alpha_{Zn}$ increase from −15.24 to −1.48 with increasing $x_{Zn}$ from 0.01 to 0.6; and the partial molar Gibbs energy and enthalpy reach the lowest values at $x_{Zn}$ = 0.5, which are $-$50.8 $\pm$ 2.0 kJ/mol-atom and $-$73.9 $\pm$ 10.0 kJ/mol-atom, respectively. Amore et al. \cite{amore2009thermochemistry} used calorimetry to obtain the enthalpy of formation between −33.7 and −35.1 kJ/mol-atom for the alloys with $x_{Zn}$ = 0.77$-$0.8. Site occupancy in $\gamma$ was reported by Edström et al. \cite{strom1969x}, Gourdon et al. \cite{gourdon2006intergrowth}, and Dasgupta et al. \cite{Dasgupta2022} using X-ray diffraction (XRD). The OT sites were fully occupied by Pd, the OH sites were occupied by Pd and Zn, the IT and CO sites were occupied by Zn.
 
-The Gibbs energy functions of pure Pd and Zn are taken from the Scientific Group Thermodata Europe (SGTE) pure element database \cite{dinsdale1991sgte}. The designation HCP$\_$Zn has been used for Zn to differentiate from the typical HCP$\_$A3 metals since the ratio of lattice parameters $c/a = 1.86$ for Zn is higher than the typical HCP metals with $c/a = 1.57 - 1.62$ \cite{schmid2012zinc}. Schmid-Fetzer \cite{schmid2012zinc} suggested eliminating $HCP\_Zn$ from the thermodynamic database. However, Dinsdale \cite{dinsdale2021modelling} indicated that Schmid-Fetzer's argument is less accurate due to the extra stability when compositions close to pure Zn by first-principles calculations. In the present work, terminal Zn-rich solid solutions ($x_{Zn}$ near 1) designated as HCP$\_$Zn are hence selected as the standard reference state for Zn from the SGTE \cite{dinsdale1991sgte}.
+The Gibbs energy functions of pure Pd and Zn are taken from the Scientific Group Thermodata Europe (SGTE) pure element database \cite{dinsdale1991sgte}. The designation HCP$\_$Zn has been used for Zn to differentiate from the typical HCP$\_$A3 metals since the ratio of lattice parameters $c/a = 1.86$ for Zn is higher than the typical HCP metals with $c/a = 1.57 - 1.62$ \cite{schmid2012zinc}. Schmid-Fetzer \cite{schmid2012zinc} suggested eliminating HCP$\_$Zn from the thermodynamic database. However, Dinsdale \cite{dinsdale2021modelling} indicated that Schmid-Fetzer's argument is less accurate due to the extra stability when compositions close to pure Zn by first-principles calculations. In the present work, terminal Zn-rich solid solutions ($x_{Zn}$ near 1) designated as HCP$\_$Zn are hence selected as the standard reference state for Zn from the SGTE \cite{dinsdale1991sgte}.
 
-Gibbs energies of the solution phases $\theta$ of $L$, FCC, BCC and HCP are formulated as,
-
+Gibbs energies of the solution phases $\theta$ of $L$, FCC, BCC and HCP are formulated as:
 \begin{equation} \label{intermetallics:solutionGeq}
     G_m^{\theta} = \sum_{i=Pd,Zn}x_i^oG_i^{\theta} + RT\sum_{i=Pd,Zn}x_i\ln x_i + ^{xs}G
 \end{equation}
 where $x_i$ is the mole fraction of component $i$, $G_i^{\theta}$ the Gibbs energy of component $i$, $R$ the gas constant, $T$ the temperature, and $^{xs}G$ the excess Gibbs energy. The first term represents the mechanical mixing of the endmembers, here the pure elements. The second term represents the ideal configurational entropy of mixing contribution to Gibbs energy. The third term represents the excess Gibbs energy, which is described by the Redlich-Kister polynomial \cite{redlich1948algebraic}:
-
 \begin{equation} \label{intermetallics:solutionRK}
     ^{xs}G = x_{Pd}x_{Zn}\sum_{k=0}{^kL_{Pd,Zn}}(x_{Pd}-x_{Zn})^k
 \end{equation}
-
 where $^kL_{Pd,Zn}$ is the $k$th interaction term between Pd and Zn, modeled as:
-
 \begin{equation} \label{intermetallics:solutionL}
     ^kL_{Pd,Zn} = A+BT+CT\ln T
 \end{equation}
-
 where $A$, $B$, and $C$ are model parameters to be evaluated.
 
 The BCC$\_$B2 $\beta$ phase (space group $Pm\Bar{3}m$ with two Wyckoff sites 1a and 1c) appears at high temperatures. To account for the order-disorder transition between BCC$\_$A2/B2, a partitioning model is adopted, which treats the ordered and disordered components separately but with the same Gibbs energy function \cite{ansara1988thermodynamic, ansara1997reply}. The general Gibbs energy for modeling this order-disorder transition is formulated as:
-
 \begin{equation} \label{intermetallics:disorderG}
     G_m=G_m^{ord}(y_i^\prime,y_i^{\prime\prime})+G_m^{dis}(x_i)-G_m^{ord}(y_i^\prime=x_i, y_i^{\prime\prime}=x_i)
 \end{equation}
+where $x_i$  is the mole fraction of Pd or Zn, $y_i^{(s)}$ is the site fraction of component $i$ on sublattice $s$, $G_m^{dis}(x_i)$ is the Gibbs energy of BCC$\_$A2 disordered phase as described by (\ref{intermetallics:solutionGeq}). $G_m^{dis}(x_i)-G_m^{ord}(y_i^{\prime}=x_i, y_i^{\prime\prime}=x_i)$ is ordered contribution to Gibbs energy. A two-sublattice model (Pd,Zn)$_{0.5}$(Pd,Zn)$_{0.5}$ is applied for the ordered BCC$\_$B2 phase. 
 
-where $x_i$  is the mole fraction of Pd or Zn, $y_i^{(s)}$ is the site fraction of component $i$ on sublattice $s$, $G_m^{dis}(x_i)$ is the Gibbs energy of BCC$\_$A2 disordered phase as described by (\ref{intermetallics:solutionGeq}). $G_m^{dis}(x_i)-G_m^{ord}(y_i^{\prime}=x_i, y_i^{\prime\prime}=x_i)$ is ordered contribution to Gibbs energy. A two-sublattice model $(Pd,Zn)_{0.5}(Pd,Zn)_{0.5}$ is applied for the ordered BCC$\_$B2 phase. 
-
-FCC$\_$L1$_0$ $\beta_1$ phase is stable at low temperatures (space group $P4/mmm$ with two Wyckoff sites 1a and 1d). A two-sublattice model $(Pd,Zn)_1(Pd,Zn)_1$ is applied for this phase with the Gibbs energy formula formulated as:
-
+FCC$\_$L1$_0$ $\beta_1$ phase is stable at low temperatures (space group $P4/mmm$ with two Wyckoff sites 1a and 1d). A two-sublattice model (Pd,Zn)$_1$(Pd,Zn)$_1$ is applied for this phase with the Gibbs energy formula formulated as:
 \begin{equation} \label{intermetallics:L10G}
     \begin{aligned}
     G_m & =\sum_{i=Pd,Zn}{\sum_{j=Pd,Zn}{y_i^\prime y_j^{\prime\prime}}{^o}G_{i:j}}+RT(\sum_{i=Pd,Zn}{y_i^\prime\ln{\left(y_i^\prime\right)}}+\sum_{j=Pd,Zn}{y_j^{\prime\prime}\ln{\left(y_j^{\prime\prime}\right)}})\\&+y_{Pd}^{\prime}y_{Zn}^{\prime}\left(y_{Pd}^{\prime\prime}L_{Pd,Zn:Pd}+y_{Zn}^{\prime\prime}L_{Pd,Zn:Zn}\right)+y_{Pd}^{\prime\prime}y_{Zn}^{\prime\prime}\left(y_{Pd}^\prime L_{Pd:Pd,Zn}+y_{Zn}^\prime L_{Zn:Pd,Zn}\right)
     \end{aligned}
 \end{equation}
-
 where $y_i^{(s)}$ is the site fraction of component $i$ on sublattice $s$, ${^o}G_{i:j}$ are the Gibbs energies of the endmembers $(i:j)$, and $L$ are the interaction parameters, which can be expanded using the Redlich-Kister polynomials \cite{redlich1948algebraic} in the same way as in (\ref{intermetallics:solutionRK}) and (\ref{intermetallics:solutionL}). According to the Pd-Zn phase diagram \cite{vizdal2006experimental}, the FCC$\_$A1 and the FCC$\_$L1$_0$ phase are separated by the phases of Pd$_2$Zn and BCC$\_$B2; FCC$\_$A1 and FCC$\_$L1$_0$ are treated as two phases in the present work for the sake of simplicity.
 
-The $\gamma$ phase has four Wyckoff sites (space group $I\bar{4}3m$). A four-sublattice model \\ $(Pd,Zn)_2(Pd,Zn)_3(Pd,Zn)_2(Pd,Zn)_6$ is adopted according to its Wyckoff sites (IT, 8c), (OH, 12e), (OT, 8c), and (CO, 24g), respectively. The Gibbs energy of $\gamma$ phase is written as: 
-
+The $\gamma$ phase has four Wyckoff sites (space group $I\bar{4}3m$). A four-sublattice model \\ (Pd,Zn)$_2$(Pd,Zn)$_3$(Pd,Zn)$_2$(Pd,Zn)$_6$ is adopted according to its Wyckoff sites (IT, 8c), (OH, 12e), (OT, 8c), and (CO, 24g), respectively. The Gibbs energy of $\gamma$ phase is written as: 
 \begin{equation} \label{intermetallics:gammaG}
     \begin{aligned}
     G_m&=\sum_{i=Pd,Zn}\sum_{j=Pd,Zn}\sum_{k=Pd,Zn}\sum_{l=Pd,Zn}{y_i^\prime y_j^{\prime\prime}y_k^{\prime\prime\prime}y_l^{\prime\prime\prime\prime}{{^o}G}_{i:j:k:l}}\\&+RT\left(2\sum_{i=Pd,Zn}{y_i^{\prime}\ln{\left(y_i^{\prime}\right)}}+3\sum_{j=Pd,Zn}{y_j^{\prime\prime}\ln{\left(y_j^{\prime\prime}\right)}}\right)\\&+RT\left(2\sum_{k=Pd,Zn}{y_k^{\prime\prime\prime}\ln{\left(y_k^{\prime\prime\prime}\right)}}+6\sum_{l=Pd,Zn}{y_l^{\prime\prime\prime\prime}\ln{\left(y_l^{\prime\prime\prime\prime}\right)}}\right)\\&+{^{xs}}G_m
     \end{aligned}
 \end{equation}
-
 where $y_i^{(s)}$ is the site fraction of component $i$ on sublattice $s$, $s=^\prime, \prime\prime, \prime\prime\prime$, and $\prime\prime\prime\prime$ representing the IT, OH, OT, and CO sublattice, respectively, and ${^{xs}}G_m$ is the excess Gibbs energy. In the present work, we considered only the interaction parameters on the second sublattice (the OH site) due to the lower values of formation enthalpy for the endmembers (Zn)$_2$(Pd)$_3$(Pd)$_2$(Pd)$_6$ and (Zn)$_2$(Zn)$_3$(Pd)$_2$(Zn)$_6$ from DFT-based calculations along with experimental observations \cite{strom1969x, gourdon2006intergrowth} showing the OH site occupied by both Pd and Zn. Hence, the excess Gibbs energy is as follows:
-
 \begin{equation} \label{intermetallics:gammaGex}
     {^{xs}}G_m=y_{Pd}^{\prime\prime}y_{Zn}^{\prime\prime}y_{Zn}^\prime y_{Pd}^{\prime\prime\prime}{y_{Zn}^{\prime\prime\prime\prime}L}_{Zn:Pd,Zn:Pd:Zn}
 \end{equation}
 
 In the present work, Pd$_2$Zn, PdZn$_2$, and Pd$_9$Zn$_{91}$ are treated as stoichiometric compounds (phases) with their Gibbs energies expressed as:
-
 \begin{equation} \label{intermetallics:stoiG}
-    G^{{Pd}_e{Zn}_f}=e{^o}G_{Pd}^{fcc}+f{^o}G_{Zn}^{hcp}+D+ET
+    G^{{Pd}_e{Zn}_f}=e\:{^o}G_{Pd}^{fcc}+f\:{^o}G_{Zn}^{hcp}+D+ET
 \end{equation}
-
-where ${^o}G_{Pd}^{fcc}$ and ${^o}G_{Zn}^{hcp}$ are Gibbs energies of $FCC-Pd$ and $HCP-Zn$, respectively, and D and E are parameters to be evaluated.
+where ${^o}G_{Pd}^{fcc}$ and ${^o}G_{Zn}^{hcp}$ are Gibbs energies of FCC-Pd and HCP-Zn, respectively, and $D$ and $E$ are parameters to be evaluated.
 
 %%% CALPHAD modeling details
 Thermodynamic modeling of the Pd-Zn system was carried out using the open-source software ESPEI \cite{bocklund2019espei} and PyCalphad \cite{otis2017pycalphad} as introduced in Section \ref{method:ssec:tools}.  In the present work, the Gibbs energy functions of stoichiometric compounds and endmembers in the $\beta$, $\beta_1$, and $\gamma$ phases were evaluated from DFT-based first-principles calculations with the computational details in the following paragraph, and results discussed in Section \ref{intermetallics:ssec:PdZndft}. All model parameters are simultaneously optimized through the Bayesian parameter estimation approach using the MCMC method \cite{bocklund2019espei}. In the present modeling of the Pd-Zn system, the input data are primarily the experimental phase equilibrium information, including phase boundary data \cite{vizdal2006experimental, massalski1986binary, hansen1958constitution} and thermochemical data \cite{amore2009thermochemistry, ChiangIpserChang1977} were used to refine model parameters. Each model parameter employed two chains with a standard derivation of 0.1 when initializing in a Gaussian distribution. The chain values can be tracked during the modeling process, and the MCMC steps were performed until the model parameters converged. The uncertainty quantification of model parameters and calculated thermodynamic properties and phase stability from the models is performed using PDUQ \cite{paulson2019quantified} (see Section \ref{method:ssec:tools}). In the present work, the values from the last MCMC step were used to estimate the uncertainty, 95\% uncertainty interval (or Bayesian credible intervals containing 95\% of the invariant samples) was applied to quantify the uncertainty. 
@@ -103,7 +89,7 @@ Thermodynamic modeling of the Pd-Zn system was carried out using the open-source
 %%% First-principles details
 DFT-based first-principles and phonon calculations were performed to obtain Helmholtz energies of intermetallic compounds and endmembers at finite temperatures, which are equal to Gibbs energies under ambient pressure. See details of this QHA method in Section \ref{method:sec:firstprinciples}. The Vienna Ab initio Simulation Package (VASP) \cite{kresse1996efficient} was employed for all DFT-based calculations. The projector augmented-wave method (PAW) was used to account for electron-ion interactions to increase computational efficiency compared with the full potential methods \cite{blochl1994projector, kresse1999ultrasoft}. Electron exchange and correlation effects were described using the generalized gradient approximation (GGA) as implemented by Perdew, Burke, and Ernzerhof (PBE) \cite{perdew1996generalized}. The GGA includes the electronic density and its gradient as exchange-correlation functionals. Furthermore, the hybrid exchange-correlation functional HSE06 \cite{heyd2003hybrid} was applied to calculate the enthalpy of formation with higher accuracy. The plane-wave basis cutoff energy was 277 eV for relaxations and 520 eV for the final static calculations. The convergence criterion of the electronic self-consistency was set as 10-6 eV/atom for relaxations and static calculations. 
 
-Table \ref{intermetallics:PdZn_DFT_details} provides parameters for first-principles and phonon calculations, including reciprocal k-points meshes and supercell sizes for compounds Pd$_2$Zn, $PdZn$, PdZn$_2$, 16 endmembers of $\gamma$ phase (26 atoms for each endmember in the primitive cell of $\gamma$ phase), and $Pd_8Zn_{44}$ (the key endmember of $\gamma$ phase in its crystallographic cell). The phonon calculations were performed using the supercell method. The phonon DOS and force constants were analyzed using the YPHON code \cite{wang2014yphon}. Note that Table \ref{intermetallics:PdZn_DFT_details} includes the supercell sizes and k-points meshes for phonon calculations, while the plane-wave cutoff energy of 277 eV was used for phonon calculations. 
+Table \ref{intermetallics:PdZn_DFT_details} provides parameters for first-principles and phonon calculations, including reciprocal k-points meshes and supercell sizes for compounds Pd$_2$Zn, PdZn, PdZn$_2$, 16 endmembers of $\gamma$ phase (26 atoms for each endmember in the primitive cell of $\gamma$ phase), and Pd$_8$Zn$_{44}$ (the key endmember of $\gamma$ phase in its crystallographic cell). The phonon calculations were performed using the supercell method. The phonon DOS and force constants were analyzed using the YPHON code \cite{wang2014yphon}. Note that Table \ref{intermetallics:PdZn_DFT_details} includes the supercell sizes and k-points meshes for phonon calculations, while the plane-wave cutoff energy of 277 eV was used for phonon calculations. 
 
 \begin{table}[H]
     \normalsize

@@ -1,14 +1,33 @@
-\chapter{Computational Methodology} \label{chap:method}
+\chapter{Computational methodology} \label{chap:method}
+To investigate atomic environments in materials, theoretical simulations are essential for gaining insights into local structures and properties. This chapter will discuss two computational methods: first-principles calculations and CALPHAD modeling. First-principles calculations based on density functional theory (DFT) are used to predict stable structures and the thermochemical properties of materials. CALPHAD modeling integrates experimental data and simulation strengths to develop comprehensive thermodynamic descriptions of materials and further predict phase relations for materials design.
 
 \section{First-principles calculations} \label{method:sec:firstprinciples}
+DFT-based first-principles calculations are used to obtain thermodynamic properties at 0 K at finite temperatures through quasi-harmonic approximation (QHA). The Helmholtz energy $F(V,T)$ as a function of volume ($V$) and temperature ($T$) in terms of QHA can be determined by \cite{shang2010first}:
+\begin{equation} \label{method:eq:qhaF}
+    F\left(V,T\right)=E\left(V\right)+F_{el}\left(V,T\right)+F_{vib}(V,T)
+\end{equation}
+where the first term $E\left(V\right)$ is static energy at 0 K without the zero-point vibrational energy. In the present work, a four-parameter Birch-Murnaghan (BM4) equation of state (EOS) \cite{shang2010first} as shown in (\ref{method:eq:EOS}) is used to obtain equilibrium properties at zero external pressure (P = 0 GPa), including the static energy E$_0$, volume (V$_0$), bulk modulus (B$_0$) and its pressure derivate (B$^\prime$).
+\begin{equation} \label{method:eq:EOS}
+    E\left(V\right)=k_1+k_2V^{-2/3}+k_3V^{-4/3}+k_4V^{-2}
+\end{equation}
+where $k_1$, $k_2$, $k_3$, and $k_4$ are fitting parameters. The second term in (\ref{method:eq:qhaF}), $F_{el}\left(V,T\right)$, represents the temperature-dependent thermal electronic contribution \cite{wang2004thermodynamic}:
+\begin{equation} \label{method:eq:Fel}
+    F_{el}(V,T)=E_{el}(V,T)-T\:S_{el}(V,T)
+\end{equation}
+where $E_{el}$ and $S_{el}$ are the internal energy and entropy of thermal electron excitations, respectively, which can be obtained by the electronic density of states (DOS). Note that the thermal electronic contribution to Helmholtz free energy is negligible for non-metal, considering the Fermi level lies in the band gap. The third term in (\ref{method:eq:qhaF}), $F_{vib}(V,T)$, represents the vibrational contribution \cite{wang2004thermodynamic, van2002effect} given by:
+\begin{equation} \label{method:eq:Fvib}
+    F_{vib}(V,T)=k_BT\sum_{q}\sum_{j}\ln{\left\{2\sinh{\left[\frac{\hbar\omega_j(q,V)}{2k_BT}\right]}\right\}}
+\end{equation}
+where $\omega_j\left(q,V\right)$ represents the frequency of the $j_{th}$ phonon mode at wave vector $q$ and volume $V$, and $\hbar$ the reduced Plank constant. 
 
-\subsection{Density functional theory at 0 K and finite temperatures} \label{method:ssec:dft}
-%Introducting paragraph
-
-\subsection{Ab initio molecular dynamics} \label{method:ssec:AIMD}
-%Introducting paragraph
+The Vienna Ab initio Simulation Package (VASP) \cite{kresse1996efficient} is used for all DFT-based calculations in the present work. Detailed settings of first-principles calculations for intermetallic catalysts and molten salts are discussed in Section \ref{intermetallics:ssec:PdZnmodel} and \ref{moltensalts:ssec:FLiNaKCrmodel}.
 
 \section{CALPHAD modeling} \label{method:sec:calphad}
+In the CALPHAD method, the general form of Gibbs energy of a phase can be expressed as:
+\begin{equation} \label{method:eq:Gm}
+    G_m=^{srf}G_m-T\:S_m+^{phys}G_m+^{xs}G
+\end{equation}
+where $^{srf}G_m$ represents the reference Gibbs energy, $T\:S_m$ is the ideal configurational entropy contribution to the Gibbs energy, $^{phys}G_m$ represents the contribution of physical models to the Gibbs energy, such as magnetic transitions, and $^{xs}G$ is the excess Gibbs energy describing the remaining part of the real Gibbs energy \cite{lukas2007computational}. In the present work, various models are employed to describe these contributions to the Gibbs energy, considering the atomic environments of phases.
 
 \subsection{Compound energy formalism} \label{method:ssec:CEF}
 %Introducting paragraph
