@@ -8,9 +8,9 @@ DFT-based first-principles calculations are used to obtain thermodynamic propert
 \end{equation}
 where the first term $E\left(V\right)$ is static energy at 0 K without the zero-point vibrational energy. In the present work, a four-parameter Birch-Murnaghan (BM4) equation of state (EOS) \cite{shang2010first} as shown in (\ref{method:eq:EOS}) is used to obtain equilibrium properties at zero external pressure (P = 0 GPa), including the static energy E$_0$, volume (V$_0$), bulk modulus (B$_0$) and its pressure derivate (B$^\prime$).
 \begin{equation} \label{method:eq:EOS}
-    E\left(V\right)=k_1+k_2V^{-2/3}+k_3V^{-4/3}+k_4V^{-2}
+    E\left(V\right)=a_1+a_2V^{-2/3}+a_3V^{-4/3}+a_4V^{-2}
 \end{equation}
-where $k_1$, $k_2$, $k_3$, and $k_4$ are fitting parameters. The second term in (\ref{method:eq:qhaF}), $F_{el}\left(V,T\right)$, represents the temperature-dependent thermal electronic contribution \cite{wang2004thermodynamic}:
+where $a_1$, $a_2$, $a_3$, and $a_4$ are fitting parameters. The second term in (\ref{method:eq:qhaF}), $F_{el}\left(V,T\right)$, represents the temperature-dependent thermal electronic contribution \cite{wang2004thermodynamic}:
 \begin{equation} \label{method:eq:Fel}
     F_{el}(V,T)=E_{el}(V,T)-T\:S_{el}(V,T)
 \end{equation}
@@ -25,12 +25,50 @@ The Vienna Ab initio Simulation Package (VASP) \cite{kresse1996efficient} is use
 \section{CALPHAD modeling} \label{method:sec:calphad}
 In the CALPHAD method, the general form of Gibbs energy of a phase can be expressed as:
 \begin{equation} \label{method:eq:Gm}
-    G_m=^{srf}G_m-T\:S_m+^{phys}G_m+^{xs}G
+    G_m=\:^{srf}G_m-T\:^{cnf}S_m +\:^{phys}G_m +\:^{xs}G_m
 \end{equation}
-where $^{srf}G_m$ represents the reference Gibbs energy, $T\:S_m$ is the ideal configurational entropy contribution to the Gibbs energy, $^{phys}G_m$ represents the contribution of physical models to the Gibbs energy, such as magnetic transitions, and $^{xs}G$ is the excess Gibbs energy describing the remaining part of the real Gibbs energy \cite{lukas2007computational}. In the present work, various models are employed to describe these contributions to the Gibbs energy, considering the atomic environments of phases.
+where $^{srf}G_m$ represents the surface of reference Gibbs energy, $T\:^{cnf}S_m$ is the ideal configurational entropy contribution to the Gibbs energy, $^{phys}G_m$ represents the contribution of physical models to the Gibbs energy, such as magnetic transitions, and $^{xs}G_m$ is the excess Gibbs energy describing the remaining part of the real Gibbs energy \cite{lukas2007computational}. Considering the atomic environments of each phase, various models are employed to describe these contributions to the Gibbs energy in the present work.
 
 \subsection{Compound energy formalism} \label{method:ssec:CEF}
 %Introducting paragraph
+A crystalline solid phase may have crystallographically different sublattices and the constituents may prefer different sublattices. This is a form of long-range order (LRO) and must be included in the modeling \cite{lukas2007computational}. For the solution phase, where phase can vary with composition, compound energy formalism (CEF) \cite{hillert1970regular, sundman1981regular} is used to describe the Gibbs energy. In the CEF, the selection of sublattices typically corresponds to the crystallographic sublattices associated with different Wyckoff positions. For complex phases requiring many sublattices, simplifications are often made to reduce the number of sublattices. Each sublattice may be described with a stoichiometric coefficient and contain any number of species, i.e. atoms, molecules, ions, or vacancies. 
+
+For example, a phase with two sublattices can be represented by the formula:
+\begin{equation} \label{method:eq:CEFphasemodel}
+    ({\rm A,B})_k({\rm C,D})_l
+\end{equation}
+where A and B are mixed on the first sublattice (I), and C and D are mixed on the second sublattice (II). $k$ and $l$ are the stoichiometric coefficients. The constitution of the phase is described by site fraction, $y$, e.g. $y_{J}^{(s)}$ represents the mole fraction of species $J$ on the $s$ sublattice. Thus, the summation of site fraction $y_{J}$ of species over each sublattice equals 1. In the limit, there will be only one type of species on each sublattice, this configuration is called endmember. Endmembers of the phase with model (\ref{method:eq:CEFphasemodel}) are (A)${_k}$(C)${_l}$, (A)${_k}$(D)${_l}$, (B)${_k}$(C)${_l}$, and (B)${_k}$(D)${_l}$. The surface of reference energy term in (\ref{method:eq:Gm}) can be expressed as:
+\begin{equation} \label{method:eq:CEFGsrf}
+    ^{srf}G_m=\sum y_i^{({\rm I})}y_j^{({\rm II})}\:^{o}G_{i:j}
+\end{equation}
+where $^{o}G_{i:j}$ is the Gibbs energy of the endmember compound ($i$)${_k}$($j$)${_l}$ (here $i$ = A and B, $j$ = C and D). The ideal configurational entropy contribution to the Gibbs energy is described as:
+\begin{equation} \label{method:eq:CEFScnf}
+    \begin{aligned}
+        -T\:^{cnf}S_m&=RT\sum n_s \sum y_J^{(s)} \ln (y_J^{(s)})\\
+        &=RT(k\sum_{i={\rm A,B}} y_i^{({\rm I})}\ln (y_i^{({\rm I})})+l\sum_{j={\rm C,D}} y_j^{({\rm II})}\ln (y_j^{({\rm II})}))
+    \end{aligned}
+\end{equation}
+where $R$ is the ideal gas constant, $n_s$ is the stoichiometric coefficient of the sublattice $s$ (here $n_s$ = $k$ and $l$). The excess Gibbs energy is described as:
+\begin{equation} \label{method:eq:CEFGxs}
+    ^{xs}G_m=y_{\rm A}^{({\rm I})}y_{\rm B}^{({\rm I})}\sum_{j={\rm C,D}} y_j^{({\rm II})} L_{{\rm A,B}:j}+y_{\rm C}^{({\rm II})}y_{\rm D}^{({\rm II})}\sum_{i={\rm A,B}} y_i^{({\rm I})} L_{i:{\rm C,D}}+y_{\rm A}^{({\rm I})}y_{\rm B}^{({\rm I})}y_{\rm C}^{({\rm II})}y_{\rm D}^{({\rm II})}L_{{\rm A,B}:{\rm C,D}}
+\end{equation}
+where $L$ is the interaction parameters, which can be expanded in a Redlich-Kister polynomial \cite{redlich1948algebraic}. For example, binary interaction term $L_{{\rm A,B}: {\rm C}}$ in (\ref{method:eq:CEFGxs}) can be expressed as:
+\begin{equation} \label{method:eq:CEFLabc}
+    L_{{\rm A,B}: {\rm C}} = \sum_{v=0}(y_{\rm A}^{({\rm I})}-y_{\rm B}^{({\rm I})})^v\:^vL_{{\rm A, B:C}}
+\end{equation}
+forming the polynomial basis with increasing orders of $v$. The reciprocal interaction parameters is described by:
+\begin{equation} \label{method:eq:CEFLabcd}
+    L_{{\rm A,B}:{\rm C,D}}=^0L_{{\rm A,B}:{\rm C,D}}+(y_{\rm A}^{({\rm I})}-y_{\rm B}^{({\rm I})})\:^1L_{{\rm A,B}:{\rm C,D}}+(y_{\rm C}^{({\rm II})}-y_{\rm D}^{({\rm II})})\:^2L_{{\rm A,B}:{\rm C,D}}
+\end{equation}
+The temperature dependence of these excess parameters is often modeled by:
+\begin{equation} \label{method:eq:CEFLT}
+    ^vL= b_1 + b_2\:T +b_3T\ln T
+\end{equation}
+where $b_1$, $b_2$, and $b_3$ are adjustable parameters.
+
+There are several cases of the CEF worth mentioning. A sublattice model
+that has only one constituent in every sublattice will have no internal degrees of freedom
+with a fixed composition. It is used as a model for the stoichiometric compound (or the line compound). In addition, the constituents on a sublattice may be a complex species instead of a pure element, for example, using an \textit{associate} to represent clusters of short-range ordering in the liquid, commonly referred to as the associate model \cite{sommer1982association} and will be discussed in Section \ref{method:sssec:assm}.
 
 \subsection{Thermodynamic models for liquid} \label{method:ssec:liqmodels}
 %Introducting paragraph
