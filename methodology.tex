@@ -56,7 +56,7 @@ where $L$ is the interaction parameters, which can be expanded in a Redlich-Kist
 \begin{equation} \label{method:eq:CEFLabc}
     L_{{\rm A,B}: {\rm C}} = \sum_{v=0}(y_{\rm A}^{({\rm I})}-y_{\rm B}^{({\rm I})})^v\:^vL_{{\rm A, B:C}}
 \end{equation}
-forming the polynomial basis with increasing orders of $v$. The reciprocal interaction parameters is described by:
+forming the polynomial basis with increasing orders of $v$. The reciprocal interaction parameters are described by:
 \begin{equation} \label{method:eq:CEFLabcd}
     L_{{\rm A,B}:{\rm C,D}}=^0L_{{\rm A,B}:{\rm C,D}}+(y_{\rm A}^{({\rm I})}-y_{\rm B}^{({\rm I})})\:^1L_{{\rm A,B}:{\rm C,D}}+(y_{\rm C}^{({\rm II})}-y_{\rm D}^{({\rm II})})\:^2L_{{\rm A,B}:{\rm C,D}}
 \end{equation}
@@ -72,9 +72,23 @@ with a fixed composition. It is used as a model for the stoichiometric compound 
 
 \subsection{Thermodynamic models for liquid} \label{method:ssec:liqmodels}
 %Introducting paragraph
+In the liquid phase, the constituents have no fixed environment and the number of nearest neighbors can vary. For the simple case, one sublattice model as shown in \ref{method:ssec:CEF} can be used to describe the random mixing of constituents in the liquid. However, for liquids with complex phenomena, such as short-range ordering (SRO) or ionic characteristics, alternative models are used to describe the Gibbs energy.
 
 \subsubsection{Associate model} \label{method:sssec:assm}
 %Introducting paragraph
+To account for SRO, fictitious constituents, or \textit{associates}, are introduced in the model. For an experimentally determined sharp minimum in the enthalpy curve, the selection of stoichiometry of the associate usually corresponds to the composition of the minimum. For example, for a binary A-B liquid with AB associate introduced, the surface of reference Gibbs energy can be described as:
+\begin{equation} \label{method:eq:assmGsrf}
+    ^{srf}G_m=\sum_{i={\rm A,AB,B}} y_i\:^{o}G_{i}
+\end{equation}
+where the site fraction $y_i$ is used here to denote that the constituent fractions (A, AB, and B) are not the same as the mole fractions of the components (A and B). $^{o}G_{i}$ is the Gibbs energy of the constituent $i$. The ideal configurational entropy contribution can be expressed as:
+\begin{equation} \label{method:eq:assmScnf}
+    -T\:^{cnf}S_m=RT\sum_{i={\rm A,AB,B}}y_i\ln y_i
+\end{equation}
+where the summation of $i$ is over all the constituents (here $i$ = A, AB, and B). The excess Gibbs energy can be modeled as:
+\begin{equation} \label{method:eq:assmGex}
+    ^{xs}G_m=y_{\rm A}y_{\rm AB}L_{\rm A,AB}+y_{\rm AB}y_{\rm B}L_{\rm AB,B}+y_{\rm A}y_{\rm B}L_{\rm A,B}+y_{\rm A}y_{\rm AB}y_{\rm B}L_{\rm A,AB,B}
+\end{equation}
+where the interaction terms $L$ can also be expanded with Redlich-Kister polynomial \cite{redlich1948algebraic} as in (\ref{method:eq:CEFLT}).
 
 \subsubsection{Two-sublattice ionic model} \label{method:sssec:ionic}
 %Introducting paragraph
