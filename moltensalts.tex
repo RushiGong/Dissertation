@@ -1,6 +1,11 @@
 \chapter{Thermodynamic modeling of fluoride and chloride molten salts with model selection, uncertainty quantification, and uncertainty propagation} \label{chap:moltensalts}
 
 \section{Introduction} \label{moltensalts:sec:intro}
+Chromium (Cr) is one of the key elements in current reference structural materials for fluoride salt reactors, for example, the Hastelloy-N as the container material (72\%Ni-16\%Mo-7\%Cr-5\%Fe in wt.\%) \cite{koger1972evaluation, manly1958metallurgical}. In the fluoride salt environment, Cr in Ni-based alloy is more susceptible to corrosion compared to other metal elements \cite{olson2009materials, ouyang2014long, liu2020corrosion}. For example, Olson et al. \cite{olson2009materials} performed corrosion tests on a number of Ni-based alloys with different Cr alloying contents. They showed the dissolution of Cr into molten salt and correlated the relationship between Cr content and corrosion resistance \cite{olson2009materials}. Ouyang et al. \cite{ouyang2014long} investigated the corrosion behavior of Hastelloy-N in FLiNaK after 100-1000 h at 700 $^o$C, and the aggregate dissolution of Cr was observed. Recently, Liu et al. \cite{liu2020corrosion} studied Hastelloy-N and showed that the corrosion rate of Cr in FLiNaK-CrF$_3$ is higher than that in FLiBe-CrF$_3$ with Cr$^{3+}$ as the product. Thus, it is important to investigate solubility and multivariate distribution patterns of Cr in FLiNaK. The LiF-NaF-KF system has been extensively studied by many researchers in terms of modeling. Chartrand and Pelton \cite{chartrand2001thermodynamic}, Wang et al. \cite{wang2014phase}, and Ard et al. (MSTDB-TC database) \cite{ard2022development} have investigated this system through CALPHAD modeling. However, we noticed that thermodynamic modeling of the FLiNaK-CrF$_3$ system has been performed based on incomplete and empirically estimated thermochemical data by Yin et al. \cite{yin2018thermodynamic, yin2015thermodynamic} and Dumaire et al. \cite{dumaire2021thermodynamic}. A comprehensive study on the thermodynamic properties of all solid and liquid phases in the FLiNaK-CrF$_3$ system is yet to be conducted.
+
+Chloride molten salts have gained significant attention for their potential applications in advanced nuclear reactors and pyroprocessing techniques \cite{sridharan2012thermal, mourogov2006potentialities, iizuka1997actinides}. Effective separation of fission products, such as lanthanides using pyroprocessing techniques, requires a comprehensive understanding of the thermodynamic properties of molten salts. The CALPHAD  modeling approach \cite{liu2020computational, lukas2007computational} is effective in investigating phase equilibrium and thermodynamic properties in multicomponent systems. For the modeling of complex molten salts, various thermodynamic models within the CALPHAD framework have been developed to capture intricate behaviors such as short-range ordering, including the associate model, two-sublattice ionic model, and MQMQA (see Section \ref{method:ssec:liqmodels}). However, systematically comparing these models and selecting the most appropriate model for molten salts remain a challenge due to different physical interpretations and the complexities involved in quantifying model performance.
+
+In the present work, the fluoride system (LiF, NaF, KF, CrF${_2}$)-CrF${_3}$ and the chloride system LiCl-KCl-LaCl${_3}$ are modeled using the CALPHAD method, supplemented with thermochemical data by first-principles calculations. The open-source software tools of ESPEI \cite{bocklund2019espei} and PyCalphad \cite{otis2017pycalphad} were employed for the modeling process, which facilitates Bayesian parameter estimation, UQ, and Bayesian model selection in modeling molten salts. The present work compares thermodynamic models commonly used in CALPHAD modeling for liquid, providing insights into an effective model selection strategy. 
 
 \section{Revisiting thermodynamics in (LiF, NaF, KF, CrF${_2}$)-CrF${_3}$ by first-principles calculations and CALPHAD modeling} \label{moltensalts:sec:FLiNaKCr}
 The thermodynamic description of the (LiF, NaF, KF, CrF$_2$)-CrF$_3$ systems has been revisited, aiming for a better understanding of the effects of Cr on the FLiNaK molten salt. First-principles calculations based on DFT were performed to determine the electronic and structural properties of each compound, including the formation enthalpy, volume, and bulk modulus. DFT-based phonon calculations were carried out to determine the thermodynamic properties of compounds, for example, enthalpy, entropy, and heat capacity as functions of temperature. Phonon-based thermodynamic properties show a good agreement with experimental data of binary compounds LiF, NaF, KF, CrF$_3$, and CrF$_2$, establishing a solid foundation to determine thermodynamic properties of ternary compounds as well as to verify results estimated by the Neumann-Kopp rule. Additionally, DFT-based AIMD simulations were employed to predict the mixing enthalpies of liquid salts. Using DFT-based results and experimental data in the literature, the (LiF, NaF, KF, CrF$_2$)-CrF$_3$ system has been remodeled in terms of the CALPHAD approach using the MQMQA for liquid. Calculated phase stability in the present work shows an excellent agreement with experiments, indicating the effectiveness of combining DFT-based total energy, phonon, and AIMD calculations, and CALPHAD modeling to provide the thermodynamic description in complex molten salt systems.
@@ -153,7 +158,7 @@ Figure \ref{ms:fig:FLiNaKCrphonon} compares the phonon DOS of LiF, NaF, and KF o
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{moltensalts/Moltensalts-FLiNaKCr-PhononDOS.jpg}
+    \includegraphics[width=0.45\linewidth]{moltensalts/Moltensalts-FLiNaKCr-PhononDOS.jpg}
     \caption{Predicted phonon density of states (DOS) of (a) LiF, (b) NaF, and (c) KF from DFT-based phonon calculations in comparison with phonon DOS from experiments \cite{dolling1968lattice, buhrer1970lattice, karo1969lattice}. Blue lines show results from the LDA approach, red dot-dashed lines show results from the GGA-PBE approach, and the green dotted lines are results from experiments \cite{dolling1968lattice, buhrer1970lattice, karo1969lattice}. }
     \label{ms:fig:FLiNaKCrphonon}
 \end{figure}
@@ -227,7 +232,7 @@ Figure \ref{ms:fig:FLiNaKCr-DFTcompounds} shows the predicted heat capacities C$
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{moltensalts/Moltensalts-FLiNaKCr-DFTcompounds.jpg}
+    \includegraphics[width=0.45\linewidth]{moltensalts/Moltensalts-FLiNaKCr-DFTcompounds.jpg}
     \caption{Predicted heat capacities of ternary compounds in the (a) LiF–CrF$_3$, (b) NaF–CrF$_3$, and (c) KF-CrF$_3$ systems by DFT-based QHA via phonon calculations (solid lines) compared with the Dumaire et al. \cite{dumaire2021thermodynamic}'s work (dashed lines). The QHA results are implemented in the present modeling work for ternary compounds.}
     \label{ms:fig:FLiNaKCr-DFTcompounds}
 \end{figure}
@@ -244,6 +249,7 @@ Figure \ref{ms:fig:FLiNaKCr-Phasediagram} shows the phase diagrams of the (LiF, 
     \caption{Predicted phase diagrams of the (a) LiF–CrF$_3$, (b) NaF–CrF$_3$, (c) KF-CrF$_3$, and (d) CrF$_2$–CrF$_3$ systems by the present CALPHAD modeling in comparison with experimental data \cite{de1975systeme, DeKozak1969, sturm1962phase}.}
     \label{ms:fig:FLiNaKCr-Phasediagram}
 \end{figure}
+\newpage
 \begingroup
 \renewcommand\arraystretch{0.8}
 \begin{longtable}[H]{>{\raggedright\arraybackslash}m{2cm}>{\raggedright\arraybackslash}m{6cm}>{\raggedright\arraybackslash}m{1.5cm}>{\raggedright\arraybackslash}m{3cm}>{\raggedright\arraybackslash}m{3.5cm}}
@@ -331,19 +337,19 @@ The present CALPHAD modeling work implements the mixing enthalpy of liquid at 17
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{moltensalts/Moltensalts-FLiNaKCr-Hmix.jpg}
+    \includegraphics[width=0.45\linewidth]{moltensalts/Moltensalts-FLiNaKCr-Hmix.jpg}
     \caption{Predicted mixing enthalpy of liquid at 1700 K in (a) LiF-CrF$_3$, (b) NaF-CrF$_3$, and (c) KF-CrF$_3$ by the present CALPHAD modeling work (black solid lines), compared with the present AIMD results (circles) and modeling results by Dumaire et al. (blue dashed lines) \cite{dumaire2021thermodynamic} and Yin et al. (brown dotted lines) \cite{yin2018thermodynamic}.}
     \label{ms:fig:FLiNaKCr-Hmix}
 \end{figure}
 
-In Yin et al.’s modeling work \cite{yin2018thermodynamic}, the associate model was used to describe the liquid phase. This model was applied to describe the short-range ordering (SRO) by assuming ‘associates’, such as K$_3$CrF$_6$ and Na$_3$CrF$_6$ associates. This kind of assumption may cause issues when extrapolation into higher-order systems \cite{pelton2018phase}. In the present work, the MQMQA was employed to describe liquid and provide information on the first and the second nearest neighbors in complex liquid. As an example, Figure \ref{ms:fig:FLiNaKCr-QuadFrac} shows the predicted fraction of each quadruplet in the liquid phase. The composition where the peak fraction of the ACr/FF (A=Li, Na, and K) quadruplets appears, indicates the SRO. In the LiF-CrF$_3$ system, the peak fraction of LiCr/FF with strong SRO is around $x$(CrF$_3$) = 0.25, which is consistent with the lowest mixing enthalpy around the $x$(CrF$_3$) = 0.25 as shown in Figure \ref{ms:fig:FLiNaKCr-Hmix}. In addition, Figure \ref{ms:fig:FLiNaKCr-QuadFrac} presents the quadruplet fractions and the neighboring environments of ions in liquid, which are difficult to obtain from the associate model due to its focus on associate clusters.
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{moltensalts/Moltensalts-FLiNaKCr-QuadFrac.jpg}
+    \includegraphics[width=0.45\linewidth]{moltensalts/Moltensalts-FLiNaKCr-QuadFrac.jpg}
     \caption{Precited quadruplet fractions in (a) LiF-CrF$_3$ (green lines), (b) NaF-CrF$_3$ (red lines), and (c) KF-CrF$_3$ (blue lines) liquid at 1700 K according to the present CALPHAD modeling. }
     \label{ms:fig:FLiNaKCr-QuadFrac}
 \end{figure}
+
+In Yin et al.’s modeling work \cite{yin2018thermodynamic}, the associate model was used to describe the liquid phase. This model was applied to describe the short-range ordering (SRO) by assuming ‘associates’, such as K$_3$CrF$_6$ and Na$_3$CrF$_6$ associates. This kind of assumption may cause issues when extrapolation into higher-order systems \cite{pelton2018phase}. In the present work, the MQMQA was employed to describe liquid and provide information on the first and the second nearest neighbors in complex liquid. As an example, Figure \ref{ms:fig:FLiNaKCr-QuadFrac} shows the predicted fraction of each quadruplet in the liquid phase. The composition where the peak fraction of the ACr/FF (A=Li, Na, and K) quadruplets appears, indicates the SRO. In the LiF-CrF$_3$ system, the peak fraction of LiCr/FF with strong SRO is around $x$(CrF$_3$) = 0.25, which is consistent with the lowest mixing enthalpy around the $x$(CrF$_3$) = 0.25 as shown in Figure \ref{ms:fig:FLiNaKCr-Hmix}. In addition, Figure \ref{ms:fig:FLiNaKCr-QuadFrac} presents the quadruplet fractions and the neighboring environments of ions in liquid, which are difficult to obtain from the associate model due to its focus on associate clusters.
 
 \section{Thermodynamic modeling of LiF-LnF${_3}$ systems with uncertainty propagation to vapor-liquid equilibrium property} \label{moltensalts:sec:LiFLnF3}
 

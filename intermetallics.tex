@@ -1,4 +1,4 @@
-\chapter{Thermodynamic modeling of the Pd-Zn-M system and its implication to tailor catalysts} \label{chap:intermetallics}
+\chapter{Thermodynamic modeling of the Pd-Zn-M system for intermetallic catalysts design} \label{chap:intermetallics}
 
 \section{Introduction} \label{intermetallics:sec:intro}
 Catalytic applications of intermetallic compounds (IMCs) are quickly expanding due to the precise design of binary and ternary metal active sites \cite{armbruster2014intermetallic, dasgupta2019intermetallics, furukawa2017intermetallic, armbruster2020intermetallic, yang2020intermetallic}. Atomic arrangement in IMCs provides an opportunity to isolate active metal atoms in a majority of an inactive host metal to tune the nuclearity of the active site, defined as the number of catalytically active metal atoms in a contiguous unit. Palladium (Pd) alloys are known for their excellent catalytic properties in a variety of reactions such as hydrogenation of alkynes (including acetylene) and butadiene \cite{teschner2006alkyne, zhou2016pdzn, sarkany1993hydrogenation}. By alloying with inert components such as zinc (Zn), catalytic ensembles on the surface of Pd can be controlled to enhance selectivity for semi/partial-hydrogenation reactions \cite{zhou2016pdzn, Dasgupta2022}. The Pd-Zn catalyst is also effective for other reactions, such as methanol steam reforming and ester hydrogenation \cite{conant2008stability, green1993ester}.
@@ -219,8 +219,6 @@ Figure \ref{Intermetallics:fig:PdZnPhaseDiagram} shows the calculated phase diag
     \label{Intermetallics:fig:PdZnPhaseDiagram}
 \end{figure} 
 
-Table \ref{intermetallics:tab:inv} lists the temperatures and compositions of invariant reactions. The experimentally reported invariant reactions, i.e., Liquid $\rightarrow$ Pd$_9$Zn$_{91}$ $+$ HCP by Vizdal et al. \cite{vizdal2006experimental} and other four invariant reactions by Massalski \cite{massalski1986binary}, are well reproduced. The largest discrepancy is seen for the eutectic reaction, Liquid $\rightarrow$ Pd$_9$Zn$_{91}$ + HCP, i.e., 681 K calculated from the present work versus 690 K in the literature \cite{vizdal2006experimental}.
-
 \begin{table}[H]
     \centering
     \caption{Temperatures and compositions of invariant reactions in the Pd-Zn system calculated from the present CALPHAD modeling with available experimental data included.}
@@ -244,18 +242,20 @@ Table \ref{intermetallics:tab:inv} lists the temperatures and compositions of in
     \label{intermetallics:tab:inv}
 \end{table}
 
-Figure \ref{intermetallics:fig:PdZnQHAPd2Zn} and Figure \ref{intermetallics:fig:PdZnQHAPdZn2} show the heat capacity, entropy, and enthalpy of stoichiometric compounds Pd$_2$Zn and PdZn$_2$ from the present model in comparison with results from the phonon calculations. Good agreement is found, especially for enthalpy with a difference less than 4.7\% for Pd$_2$Zn and 2.8\% for PdZn$_2$. The entropy of PdZn$_2$ from phonon calculations compared with the present model shows the largest discrepancy with a difference of around 6.5 J/mol-atom-K. This is because the model parameters of stoichiometric compounds, which are obtained from first-principles calculated enthalpy and entropy, were adjusted with the experimental data of the peritectoid temperature.
+Table \ref{intermetallics:tab:inv} lists the temperatures and compositions of invariant reactions. The experimentally reported invariant reactions, i.e., Liquid $\rightarrow$ Pd$_9$Zn$_{91}$ $+$ HCP by Vizdal et al. \cite{vizdal2006experimental} and other four invariant reactions by Massalski \cite{massalski1986binary}, are well reproduced. The largest discrepancy is seen for the eutectic reaction, Liquid $\rightarrow$ Pd$_9$Zn$_{91}$ + HCP, i.e., 681 K calculated from the present work versus 690 K in the literature \cite{vizdal2006experimental}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{intermetallics/Intermetallics-PdZnQHAPd2Zn.jpg}
+    \includegraphics[width=0.45\linewidth]{intermetallics/Intermetallics-PdZnQHAPd2Zn.jpg}
     \caption{Predicted (a) heat capacity C$_p$, (b) entropy S, and (c) enthalpy H $-$ H$_{300}$ of Pd$_2$Zn using the present results form DFT-based phonon calculations, compared with those from the present CALPHAD modeling.}
     \label{intermetallics:fig:PdZnQHAPd2Zn}
 \end{figure}
 
+Figure \ref{intermetallics:fig:PdZnQHAPd2Zn} and Figure \ref{intermetallics:fig:PdZnQHAPdZn2} show the heat capacity, entropy, and enthalpy of stoichiometric compounds Pd$_2$Zn and PdZn$_2$ from the present model in comparison with results from the phonon calculations. Good agreement is found, especially for enthalpy with a difference less than 4.7\% for Pd$_2$Zn and 2.8\% for PdZn$_2$. The entropy of PdZn$_2$ from phonon calculations compared with the present model shows the largest discrepancy with a difference of around 6.5 J/mol-atom-K. This is because the model parameters of stoichiometric compounds, which are obtained from first-principles calculated enthalpy and entropy, were adjusted with the experimental data of the peritectoid temperature.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{intermetallics/Intermetallics-PdZnQHAPdZn2.jpg}
+    \includegraphics[width=0.45\linewidth]{intermetallics/Intermetallics-PdZnQHAPdZn2.jpg}
     \caption{Predicted (a) heat capacity C$_p$, (b) entropy S, and (c) enthalpy H $-$ H$_{300}$ of PdZn$_2$ using the present results form DFT-based phonon calculations, compared with those from the present CALPHAD modeling.}
     \label{intermetallics:fig:PdZnQHAPdZn2}
 \end{figure}
