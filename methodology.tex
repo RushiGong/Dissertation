@@ -76,7 +76,7 @@ In the liquid phase, the constituents have no fixed environment and the number o
 
 \subsubsection{Associate model} \label{method:sssec:assm}
 %Introducting paragraph
-To account for SRO, fictitious constituents, or \textit{associates}, are introduced in the model. For an experimentally determined sharp minimum in the enthalpy curve, the selection of stoichiometry of the associate usually corresponds to the composition of the minimum. For example, for a binary A-B liquid with AB associate introduced, the surface of reference Gibbs energy can be described as:
+To account for SRO, fictitious constituents, or \textit{associates}, are introduced in the model. For an experimentally determined sharp minimum in the enthalpy curve, the selection of stoichiometry of the associate usually corresponds to the composition of the minimum or is based on experimental observation. For example, for a binary A-B liquid with AB associate introduced, the surface of reference Gibbs energy can be described as:
 \begin{equation} \label{method:eq:assmGsrf}
     ^{srf}G_m=\sum_{i={\rm A,AB,B}} y_i\:^{o}G_{i}
 \end{equation}
@@ -90,16 +90,151 @@ where the summation of $i$ is over all the constituents (here $i$ = A, AB, and B
 \end{equation}
 where the interaction terms $L$ can also be expanded with Redlich-Kister polynomial \cite{redlich1948algebraic} as in (\ref{method:eq:CEFLT}).
 
+This model is regarded as a convenient way of formally representing the thermodynamic effects of SRO \cite{sommer1982association} and it has been extensively applied to binary metallic melts. However, sometimes there are no physical indications of real associates and this may result in failure predictions when extrapolation into the higher-order system.
+
 \subsubsection{Two-sublattice ionic model} \label{method:sssec:ionic}
 %Introducting paragraph
+A different model for treating SRO in liquid solutions was developed
+by Hillert et al. \cite{hillert1985two}. In a liquid, there are no distinguished sites for anions or cations, but the mathematical formalism using mixing on two different sites gives good agreement with experimental information \cite{lukas2007computational}. In addition to cations and anions in the liquid, hypothetical vacancies are introduced on the anion sublattice for a liquid with only cations, i.e., a metallic liquid. Neutral species can also be included in this model for non-metallic systems. The model can be written as:
+\begin{equation} \label{method:eq:ionicM}
+    ({\rm C}_i^{v_i+})_P({\rm A}_j^{v_j-}, {\rm Va}, {\rm B}_k^0)_Q
+\end{equation}
+where C represents the cation, A is the anion, Va is the vacancy, B is the neutral species, $v$ denotes the charge of the ion, $i$, $j$, and $k$ are constituents. $P$ and $Q$ are the number of sites that will vary with the composition in order to maintain charge neutrality. $P$ and $Q$ can be calculated as:
+\begin{equation} \label{method:eq:ionicPQ}
+    \begin{aligned}
+        & P=\sum_jv_jy_{{\rm A}_j}+Qy_{\rm Va}\\
+        & Q=\sum_iv_iy_{{\rm C}_i}
+    \end{aligned}
+\end{equation}
+where $y_i$ represents the constituent fraction of constituent $i$. The Gibbs energy in this model can be expressed as:
+\begin{equation} \label{method:eq:ionicGsrf}
+    ^{srf}G_m=\sum_i\sum_jy_{{\rm C}_i}y_{{\rm A}_j}\:^{o}G_{{\rm C}_i:{\rm A}_j}+Qy_{\rm Va}\sum_iy_{{\rm C}_i}\:^{o}G_{{\rm C}_i}+Q\sum_ky_{{\rm B}_k}\:^{o}G_{{\rm B}_k}
+\end{equation}
+\begin{equation} \label{method:eq:ionicScnf}
+    -T\:^{cnf}S_m=RT(P\sum_iy_{{\rm C}_i}\ln (y_{{\rm C}_i})+Q(\sum_jy_{{\rm A}_j}\ln (y_{{\rm A}_j})+y_{\rm Va}\ln (y_{\rm Va})+\sum_ky_{{\rm B}_k}\ln (y_{{\rm B}_k})))
+\end{equation}
+\begin{equation} \label{method:eq:ionicGxs}
+    \begin{aligned}
+        ^{xs}G_m=&\sum_{i_1}\sum_{i_2}\sum_jy_{i_1}y_{i_2}y_{j}L_{i_1i_2:j}+\sum_{i_1}\sum_{i_2}y_{i_1}y_{i_2}y_{\rm Va}L_{i_1i_2:{\rm Va}}\\&+\sum_{i}\sum_{j_1}\sum_{j_2}y_{i}y_{j_1}y_{j_2}L_{i:j_1j_2}+\sum_{i}\sum_{j}y_iy_jy_{\rm Va}L_{i:j{\rm Va}}\\&+\sum_{i}\sum_{j}\sum_{k}y_{i}y_{j}y_{k}L_{i:jk}+\sum_{i}\sum_{k}y_{i}y_{k}y_{\rm Va}L_{i:{\rm Va}k}+\sum_{k_1}\sum_{k_2}y_{k_1}y_{k_2}L_{k_1k_2}
+    \end{aligned}
+\end{equation}
+where in (\ref{method:eq:ionicGsrf}), $^{o}G_{{\rm C}_i:{\rm A}_j}$ is the Gibbs energy of formation for $v_i+v_j$ moles of atoms of liquid ${\rm C}_i{\rm A}_j$. $^{o}G_{{\rm C}_i}$ and $^{o}G_{{\rm B}_k}$ are the Gibbs energies of formation per mole of atoms of liquids ${\rm C}_i$ and ${\rm B}_k$. Interaction terms $L$ in (\ref{method:eq:ionicGxs}) can be expanded as in (\ref{method:eq:CEFLT}).
 
 \subsubsection{Modified quasichemical model with quadruplets approximation} \label{method:ssec:mqmqa}
+The mathematical expression of the modified quasichemical model (MQM), which only considers pairs of elements, will be discussed first before introducing the modified quasichemical model with quadruplets approximation (MQMQA), which is based on the quadruplet structures. If one considers a hypothetical A-B system, the model can be mathematically expressed by distributing A and B atoms over lattice sites in a quasi-lattice. An important distinction of this model is that its internal degrees of freedom are based on the number of pairs (bonds) between atoms or species rather than atoms occupying a sublattice. In this quasi-lattice scenario, the A-B pair interaction energy is described as:
+\begin{equation} \label{method:eq:mqmpair}
+    \left({\rm A-A}\right)+\left({\rm B-B}\right)=2\left({\rm A-B}\right);\:\:\:\mathrm{\Delta}g_{\rm AB}
+\end{equation}
+where $\mathrm{\Delta}g_{AB}$ is the Gibbs energy of the formation of two A-B pair bonds in the system. This energy formation physically represents the energy favorability for atoms of element A and atoms of element B to be next to each other in the lattice. 
+
+The composition of the overall system is linked to the number of pairs in the system through the coordination number, which is mathematically expressed as:
+\begin{equation} \label{method:eq:mqmZa}
+    n_{\rm A}Z_{\rm A}={2n}_{\rm AA}+n_{\rm AB}
+\end{equation}
+where $n_{\rm A}$, $Z_{\rm A}$, $n_{\rm AA}$, and $n_{\rm AB}$ are the number of moles of element A, first-nearest-neighbor (FNN) coordination number of element A, and the number of moles of A-A and A-B pairs, respectively. In the MQM model, the coordination number of the elements are values used to denominate the composition of maximum short-range ordering (SRO) of the solution being described. Another important value in the quasichemical model is the site equivalent fraction, defined as follows:
+\begin{equation} \label{method:eq:mqmYa}
+    Y_A=\frac{n_{\rm A}Z_{\rm A}}{(Z_{\rm A}n_{\rm A}+Z_{\rm B}n_{\rm B})}=\frac{X_{\rm A}Z_{\rm A}}{(Z_{\rm A}X_{\rm A}+Z_{\rm B}X_{\rm B})}=X_{\rm AA}+\frac{1}{2}X_{\rm AB}
+\end{equation}
+where $X_{\rm A}$ is the mole fraction of A, $X_{\rm AA}$ is the pair fraction of A-A bonds, and $X_{\rm AB}$ is the pair fraction of A-B bonds. Pair fractions in this expression are simply the number of moles of a specific pair divided by the total number of moles of pairs considered in the system. These values are used to describe the configurational entropy of the model, which for the hypothetical A-B system is expressed as:
+\begin{equation} \label{method:eq:mqmScnf}
+    ^{cnf}S_m=-R(n_{\rm A}\ln X_{\rm A}+n_{\rm B}\ln X_{\rm B}+n_{\rm AA}\ln \frac{X_{\rm AA}}{Y_{\rm A}^2}+n_{\rm BB}\ln \frac{X_{\rm BB}}{Y_{\rm B}^2}{+n}_{\rm AB}\ln \frac{X_{\rm AB}}{2Y_{\rm A}Y_{\rm B}})
+\end{equation}
+When the $\mathrm{\Delta}g_{AB}=0$, the expressions that are based on $X_{ii}$ and $Y_i$ cancel each other, and (\ref{method:eq:mqmScnf}) reduces to the expression for ideal configurational entropy. 
+
+Pelton later developed a quadruplet approximation in which 2 sublattices would be used to simultaneously describe SRO for FNN and second-nearest-neighbors (SNN) \cite{pelton2018phase, poschmann2021recent}. The two sublattices from MQMQA separate the cations from the anions (FNN) with two cations and two anions in each (SNN). For further discussion of the MQMQA model, a hypothetical A-B-X-Y system where A and B are cations and X, and Y are anions will be considered. Three different categories of quadruplets are formed, i.e., the unary quadruplets [A$_2$X$_2$, B$_2$X$_2$, A$_2$Y$_2$, and B$_2$Y$_2$], the binary quadruplets [ABX$_2$ ABY$_2$, A$_2$XY, and B$_2$XY], and the reciprocal quadruplet [ABXY]. 
+
+In MQMQA, the internal degree of freedom is the quadruplet rather than the pair, and therefore adjustments to previous mathematical expressions were employed. For instance, the relationship between quadruplet fractions, coordination numbers, and moles of pure elements of the total system is represented as:
+\begin{equation} \label{method:eq:mqmna}
+    n_{\rm A}=\frac{{2n}_{{\rm A}_2:{\rm X}_2}}{Z_{{\rm A}_2:{\rm X}_2}^{\rm A}}+\frac{{2n}_{{\rm A}_2:{\rm Y}_2}}{Z_{{\rm A}_2:{\rm Y}_2}^{\rm A}}+\frac{{2n}_{{\rm A}_2:{\rm XY}}}{Z_{{\rm A_2:XY}}^{\rm A}}+\frac{n_{\rm AB:X_2}}{Z_{\rm AB:X_2}^{\rm A}}+\frac{n_{\rm AB:Y_2}}{Z_{\rm AB:Y_2}^{\rm A}}+\frac{n_{\rm AB:XY}}{Z_{\rm AB:XY}^{\rm A}}
+\end{equation}
+where $n_{\rm quadruplet}$ and $Z_{\rm quadruplet}^{\rm A}$ are the molar fraction and coordination number of element A of any specified quadruplet (SNN coordination number), respectively. Additionally, the relationship between equivalent site fractions and quadruplet fractions can be written as:
+\begin{equation} \label{method:eq:mqmqaya}
+    Y_{\rm A}=n_{\rm A_2:X_2}+n_{\rm A_2:Y_2}+n_{\rm A_2:YX}+{0.5n}_{\rm AB:X_2}+0.5n_{\rm AB:Y_2}+{0.5n}_{\rm AB:XY}
+\end{equation}
+
+The SNN coordination number is a model parameter used to describe SRO \cite{pelton2018phase} in the liquid phase. With the SNN coordination number of A in the [ABXY] reciprocal quadruplet denoted by $Z_{\rm AB:XY}^{\rm A}$, the condition of charge neutrality for this quadruplet is maintained as follows:
+\begin{equation}\label{method:eq:mqmqaZ}
+    \frac{q_{\rm A}}{Z_{\rm AB:XY}^{\rm A}}+\frac{q_{\rm B}}{Z_{\rm AB:XY}^{\rm B}}=\frac{q_{\rm X}}{Z_{\rm AB:XY}^{\rm X}}+\frac{q_{\rm Y}}{Z_{\rm AB:XY}^{\rm Y}}
+\end{equation}
+where $q_i$ is the charges of ion $i$ (=A, B, X, or Y) and $Z_i$ are ion’s corresponding SNN coordination number.
+
+The surface of reference Gibbs energy can be expressed as:
+\begin{equation} \label{method:eq:mqmqaGsrf}
+    ^{srf}G=(\sum_{i={\rm A,B}}\:\sum_{j={\rm A,B};\:j\geq i}\:\sum_{m={\rm X,Y}}\:\sum_{n={\rm X,Y};\:n\geq m}X_{ij:mn}\:^oG_{ij:mn})/N_{tot}
+\end{equation}
+where $X_{ij:mn}$, $^oG_{ij:mn}$, and $N_{tot}$ are the quadruplet mole fraction, the standard Gibbs energy per mole of the quadruplet [$ijmn$], and the total number moles of elements of the system, respectively \cite{pelton2018phase}. The configurational entropy per mol-atom is approximately represented by,
+\begin{equation}\label{method:eq:mqmqaScnf}
+    \begin{aligned}
+        -^{cnf}S/R=&\sum_{i={\rm A,B}}{X_i\ln X_i}+\sum_{m={\rm X,Y}}{X_m\ln X_m}+\sum_{i={\rm A,B}}\sum_{m={\rm X,Y}}{X_{i:m}^{tot}\ln{\left(\frac{X_{i:m}}{Y_iY_m}\right)}}\\&+\sum_{i={\rm A,B}}\:\sum_{j={\rm A,B};\:j\geq i}\:\sum_{m={\rm X,Y}}\:\sum_{n={\rm X,Y};\:n\geq m}X_{ij:mn}^{tot}\ln{\left(\frac{X_{ij:mn}}{\frac{fX_{i:m}^{e_1}X_{j:m}^{e_1}X_{i:n}^{e_1}X_{j:n}^{e_1}}{Y_i^{e_2}Y_j^{e_2}Y_m^{e_2}Y_n^{e_2}}}\right)}
+    \end{aligned}
+\end{equation}
+where $X_i$ is the mole fraction of species i, $X_{i:m}$ the mole fraction of the pair $i:m$, $X_{i:m}^{tot}$ the number of moles pair i:m normalized to total number of moles of elements in the system, $X_{ij:mn}^{tot}$ the number of moles quadruplet $ij:mn$ normalized to total number of moles of elements in the system. The third term on the right side of (\ref{method:eq:mqmqaScnf}) represents the contribution from FNN, where $Y_i$ is the coordination equivalent site fraction and can be calculated as follows:
+\begin{equation} \label{method:eq:mqmqaYi}
+    Y_i=\frac{Z_iX_i}{\sum_{j}{Z_jX_j}}
+\end{equation}
+
+Note that the third and the fourth terms in (\ref{method:eq:mqmqaScnf}) are based on two different derivations from Pelton \cite{pelton2018phase}. The original formalism \cite{pelton2001modified}, which is labeled as SUBG in the software FactSage, kept $\zeta$ (a parameter that relates how many quadruplets emanate from a specific pair) as a constant value. However, the new formalism derived by Lambotte and Chartrand \cite{lambotte2011thermodynamic}, denoted as SUBQ in FactSage, allows $\zeta$ to be a function of composition. This change results in a modified coordination equivalent site fraction, $F_i$ as:
+\begin{equation} \label{method:eq:mqmqaFi}
+    F_i=\sum_{m} X_{i:m}
+\end{equation}
+and replaces the $Y_i$ term in (\ref{method:eq:mqmqaScnf}). These two different formalisms affect the last term in the configurational entropy expression in (\ref{method:eq:mqmqaScnf}) as well. The last term in (\ref{method:eq:mqmqaScnf}) represents the contribution from SNN, where $f$ is a factor that equals 1 for unary quadruplets, 2 for binary quadruplets, and 4 for reciprocal quadruplets. Note that the exponents $e_1$ and $e_2$ in the denominator of the fourth term in (\ref{method:eq:mqmqaScnf}) correspond to the symbols SUBG and SUBQ used by FactSage \cite{bale2002factsage}, with $e_1$ = 1 and $e_2$ = 1 for the case of SUBG; and $e_1$ = 0.75 and $e_2$ = 0.5 for SUBQ.
+
+The excess Gibbs energy $^{xs}G$ relates to the Gibbs energy of the quadruplet formation. For example, the following reaction forms quadruplets:
+\begin{equation} \label{method:eq:mqmqareac}
+    \left({\rm A_2X_2}\right)+\left({\rm B_2X_2}\right)=2\left({\rm ABX_2}\right);\:\:\:\mathrm{\Delta}g_{\rm AB:X_2}^{ex}
+\end{equation}
+where ${\Delta}g_{\rm AB:X_2}^{ex}$ of this equation indicates the Gibbs energy change when forming the quadruplet [ABX$_2$]. If ${\Delta}g_{\rm AB:X_2}^{ex}=0$, the ideal random mixing occurs. If ${\Delta}g_{\rm AB:X_2}^{ex}<0$, the reaction of (\ref{method:eq:mqmqareac}) moves to the right, and SRO with the [ABX$_2$] SNN pairs is promoted \cite{pelton2018phase}. Pelton \cite{pelton2018phase} indicated the necessity to describe multicomponent systems with appropriate interaction parameters and take into account what chemical groups the elements of interest when extrapolating into higher-order composition space. This was done by incorporating the Kohler-Toop extrapolation model, taking into consideration different extrapolations when elements within the same sublattice are not in the same chemical group. In this case the variables $\xi_{ij:{\rm X}_2}$ and $\chi_{12:{\rm X}_2}$ are introduced to the excess Gibbs energy expression, where the $\xi_{ij:{\rm X}_2}$ is defined as follows:
+\begin{equation} \label{method:eq:mqmqaxi}
+    \xi_{ij:{\rm X}_2}=Y_i+\sum_{k}Y_k
+\end{equation}
+where $k$ is the component in the $(i-j-k):{\rm X}_2$ pseudoternary system with $j$ being the asymmetrical component. The $\chi_{12:{\rm X}_2}$is defined as follows:
+\begin{equation} \label{method:eq:mqmqachi}
+    \Delta \chi_{12:{\rm X}_2}=\frac{\sum_{{\rm A}=1,k}\sum_{{\rm B}=1,k}{(X_{\rm AB:X_2}+\sum_{\rm Y\neq X}{0.5X_{\rm AB:XY})}}}{\sum_{{\rm A}=1,2,k,l}\sum_{{\rm B}=1,2,k,l}{(X_{\rm AB:X_2}+\sum_{\rm Y\neq X}{0.5X_{\rm AB:XY})}}}
+\end{equation}
+where $k$ represents all elements in the asymmetrical $(1-2-k):{\rm X}_2$ pseudoternary system with 2 being the asymmetrical component, and $l$ represents all asymmetrical $(1-2-l):{\rm X}_2$ pseudoternary systems with 1 being the asymmetrical component. By considering these variables, the expression of ${\Delta}g_{\rm AB:X_2}^{ex}$ is obtained as follows:
+\begin{equation}
+    \begin{aligned}
+        {\Delta}g_{\rm AB:X_2}^{ex}=&(\Delta g^o+\sum_{\left(i+j\geq1\right)}{\chi_{\rm AB:X_2}^i\chi_{\rm BA:X_2}^jg_{\rm AB:X_2}^{ij}}\\&+\sum_{i\geq 0, j\geq 0, k\geq 1}\chi_{\rm AB:X_2}^i\chi_{\rm BA:X_2}^j(\sum_{l}{\frac{g_{{\rm AB}\left(l\right){:\rm X}_2}^{ijk}X_{l:{\rm X}}}{Y_{\rm X}}\left(1-\xi_{\rm AB:X_2}-\xi_{\rm BA:X_2}\right)^{k-1}}\\&+\sum_m\frac{g_{{\rm AB}\left(m\right):{\rm X}_2}^{ijk}X_{m:{\rm X}}}{Y_{\rm X}\xi_{\rm BA:X_2}}\left(1-\frac{X_{\rm B:X}}{Y_{\rm X}\xi_{\rm BA:X_2}}\right)^{k-1}\\&+\sum_{n}{\frac{g_{{\rm AB}\left(n\right):{\rm X}_2}^{ijk}X_{n:X}}{Y_{\rm X}\xi_{\rm AB:X_2}}\left(1-\frac{X_{\rm A:X}}{Y_{\rm X}\xi_{\rm AB:X_2}}\right)^{k-1}+\sum_{\rm Y\neq X}{Y_{\rm Y}\left(1-Y_{\rm X}\right)^{k-1}}})/N_{tot}
+    \end{aligned}
+\end{equation}
+where the first two terms on the right-hand side are binary expressions, and the rest terms describe ternary interactions with symmetrical and asymmetrical considerations for the components being mixed. The first of the three ternary interactions represents the scenario when either component $k$ is the asymmetrical component or when all components are symmetrical. The second term is when species B is the asymmetrical component in the system. The third term is when species A is the asymmetrical component in the system. The final term represents a reciprocal ternary interaction parameter to describe the interaction between [AB:X$_2$] quadruplet when component Y is present. The whole expression is then normalized to Joules per mol-atom by dividing with the total number of elements in the system, $N_{tot}$. 
 
 \subsection{Open-source software} \label{method:ssec:tools}
-The model parameters are evaluated in two steps in ESPEI. The first step is parameter generation. In this step, the thermochemical data from DFT-based first-principles calculations with all internal degrees of freedom specified [30,39], such as site fractions in each sublattice, are used to select the number of parameters and evaluate their values. The experimental thermochemical data can also be used in the first step if their internal degrees of freedom are specified, such as stoichiometric compounds or fully random solutions. This is because the minimization of Gibbs energy for the internal variables is not performed in the first step. PDUQ relies on the PyCalphad for predicting thermodynamic properties of interest and ESPEI for Bayesian samples to leverage the distribution of model parameters and estimate uncertainties based on the estimated Gaussian distribution of input data uncertainty [14,16]. The statistical distributions of model parameters are evaluated from the samples during MCMC optimization based on the Metropolis criteria [14].
+The tools used for computational thermodynamics are open-source software PyCalphad \cite{otis2017pycalphad} and ESPEI \cite{bocklund2019espei}. PyCalphad \cite{otis2017pycalphad} is a Python library for designing thermodynamic models, calculating phase diagrams, and investigating phase equilibria using the CALPHAD method. ESPEI \cite{bocklund2019espei} is designed for evaluating model parameters with PyCalphad as the computational engine. Model parameters are evaluated in two steps using ESPEI. The first step is parameter generation. In this step, the thermochemical data from DFT-based first-principles calculations with all internal degrees of freedom specified, such as site fractions in each sublattice, are used to select the number of parameters and evaluate their values. The experimental thermochemical data can also be used in the first step if their internal degrees of freedom are specified, such as stoichiometric compounds or fully random solutions. This is because the minimization of Gibbs energy for the internal variables is not performed in the first step. In the second step, all model parameters are simultaneously optimized through the Bayesian parameter estimation using a Markov Chain Monte Carlo (MCMC) method \cite{bocklund2019espei} (see Section \ref{method:ssec:Bayesian}). The input data for the second step refining parameters are primarily the experimental phase equilibrium information including two or more co-existing phases and equilibrium thermochemical data. The statistical distributions of model parameters are evaluated from the samples during MCMC optimization based on the Metropolis criteria \cite{bocklund2019espei}. In addition to parameter optimization, uncertainty quantification (UQ) of model parameters and propagation (UP) to calculate thermodynamic properties and phase stability from the models are enabled by PDUQ (Phase Diagram Uncertainty Quantification) \cite{paulson2019quantified}. PDUQ relies on the PyCalphad for predicting thermodynamic properties of interest and ESPEI for Bayesian samples to leverage the distribution of model parameters and estimate uncertainties based on the estimated Gaussian distribution of input data uncertainty \cite{paulson2019quantified}. 
 
+In order to model complex liquids such as molten salts, MQMQA has been implemented into PyCalphad for thermodynamic calculations. This endeavor facilitates the development of an MQMQA-based thermodynamic database with UQ and UP using ESPEI. A new database structure based on Extensible Markup Language (XML) is proposed for ESPEI evaluation of MQMQA model parameters \cite{palma2023thermodynamic}. This implementation hence offers an open-source capability for performing CALPHAD modeling for complex liquids with SRO using various models including associate model, two-sublattice ionic model, and MQMQA plus a new XML database structure.
 
 \section{Bayesian parameter estimation} \label{method:ssec:Bayesian}
+ESPEI \cite{bocklund2019espei} uses Bayesian parameter estimation to optimize model parameters \cite{gelman1995bayesian}:
+\begin{equation}\label{method:eq:Bayes}
+    p\left(\theta\middle| D,\ M\right)=\frac{p\left(D\middle|\theta,\ M\right)p\left(\theta\middle| M\right)}{p\left(D\middle| M\right)}
+\end{equation}
+where $\theta$ are the model parameters, $M$ the model, and $D$ the input data for parameter optimization. In (\ref{method:eq:Bayes}), the posterior $p\left(\theta\middle| D,\ M\right)$ is the probability of model parameters conditioned on data, the likelihood $p\left(D\middle|\theta,\ M\right)$ is the probability that the data are described by parameters, the prior $p\left(\theta\middle| M\right)$ contains the domain knowledge in the probability distribution of each parameter, and the marginal likelihood (or evidence) $p\left(D\middle| M\right)$ is the probability of data being generated by the model. The evaluation of evidence $p\left(D\middle| M\right)$ is often usually difficult and computationally expensive. Hence, Bayes’ theorem can be expressed proportionally:
+\begin{equation} \label{method:eq:Bayespropotion}
+    p\left(\theta\middle| D,\ M\right)\propto p\left(D\middle|\theta,\ M\right)p\left(\theta\middle| M\right)
+\end{equation}
+ESPEI optimize parameters by obtain posterior probability $p\left(\theta\middle| D,\ M\right)$ numerically using MCMC \cite{bocklund2019espei}. Naturally, it is desired to minimize the residual between the expected data and the current value. This is equivalent to maximum likelihood estimation, which means under the current assumed statistical model, the expected data is most probable. 
+
+The Metropolis-Hasting criteria \cite{metropolis1953equation} is applied to determine whether to accept newly proposed parameters:
+\begin{equation} \label{method:eq:BayesMH}
+    p_{accept}=min\left(\frac{p_{proposed}}{p_{current}},\ 1\right)
+\end{equation}
+where $p_{accept}$ is the probability of accepting newly proposed parameters, $p_{current}$ is the posterior probability for the current set of parameters and $p_{proposed}$ is the posterior probability for the newly proposed parameters. It accepts parameters that increase probability while still accepting parameters that decrease the probability with a chance $\frac{p_{proposed}}{p_{current}}$. Acceptance of parameters that decrease the posterior probability systematically constructs the set of parameters that describe the posterior distribution.
+
+Bayesian statistics employed in parameter optimization provide a strategy for model selection for CALPHAD modeling \cite{paulson2019bayesian, honarmandi2019bayesian}. Bayes factor usually suggests which model is more favorite by the data, which can be evaluated from the ratio of marginal likelihoods for two competing models:
+\begin{equation} \label{method:eq:BayesFactor}
+    K=\frac{p\left(D\middle| M_1\right)}{p\left(D\middle| M_2\right)}
+\end{equation}
+The marginal likelihood has the desirable qualities of rewarding models that match the data well and penalizing models that are overly complex (i.e., have too many degrees of freedom or parameters). The marginal likelihood is determined by:
+\begin{equation} \label{method:eq:BayesEvd}
+    p\left(D\middle| M\right)=\int_{\Omega_\theta}^{\ }{p\left(D\middle|\theta,\ M\right)p\left(\theta\middle| M\right)d\theta}
+\end{equation}
+where $\Omega_\theta$ represents the complete parameter space. The evaluation of marginal likelihood requires computation of an integral with dimension given by the number of parameters, which is typically high-dimensional. The evaluation of the marginal likelihood $p\left(D\middle| M\right)$ is usually difficult and computationally expensive. The harmonic mean estimator was hence proposed by Newton and Raftery \cite{newton1994approximate} to estimate the marginal likelihood: 
+\begin{equation} \label{method:eq:BayesHME}
+    p\left(D\middle| M\right)\approx(\frac{1}{N}\sum_{i=1}^{N}{p\left(D\middle|\theta_i,\ M\right)}^{-1})^{-1}
+\end{equation}
+where $\theta_i$ are samples from the parameters’ prior $p\left(\theta\middle| M\right)$. Likelihood values can be obtained from the ESPEI MCMC output, which provides a statistical comparison of liquid models through the Bayes factor. 
 
 \section{Summary} \label{method:ssec:summary}
 %Introducting paragraph
+In this work, first-principles calculations are utilized to provide critical thermochemical data for various phases. CALPHAD modeling is performed using PyCalphad and ESPEI, offering several significant advantages: i) the extensive scientific Python language ecosystem, ii) high-throughput CALPHAD modeling based on MCMC optimization, iii) UQ and UP for both model parameters and thermodynamic properties, and iv) statistical model comparison and selection among diverse solution models. This highly accessible software further enables users to tailor functionalities and models to specific requirements, thereby enriching the capabilities and contributions within the CALPHAD community.
