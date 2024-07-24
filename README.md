@@ -10,10 +10,15 @@ Understanding atomic environments is essential for optimizing the performance an
 ## List of Chapters
 
 - Chapter 1 - **Introduction**
+- Chapter 2 - **Computational methodology**
+- Chapter 3 - **Thermodynamic modeling of the Pd-Zn-M system for intermetallic catalysts design**
+- Chapter 4 - **Thermodynamic modeling of fluoride and chloride molten salts with model selection, uncertainty quantification, and uncertainty propagation**
+- Chapter 5 - **Exploring and implementing thermodynamic models for complex liquid in open-source software PyCalphad**
+- Chapter 6 - **Conclusion**
 
 ## Vita 
 
-Rushi Gong was born on October 15, 1997, in the city of Yiyang, Hunan Province in China. She graduated from Beihang University, Beijing, China in 2019 with a B.S. in Materials Science and Engineering and a minor in Mathematics. In 2020, Rushi began her Ph.D. studies at the Pennsylvania State University, advised by Dr. Zi-Kui Liu.
+Rushi Gong was born on October 15, 1997, in Yiyang, Hunan Province, China. She grew up in Changsha, Hunan, and later moved to Shenzhen, Guangdong. In 2019, she graduated from Beihang University in Beijing, China, with a B.S. in Materials Science and Engineering and a minor in Mathematics. In 2020, Rushi began her Ph.D. studies at the Pennsylvania State University, advised by Dr. Zi-Kui Liu.
 
-As of 2024, Rushi has published several scientific publications listed under her ORCID record [0009-0004-0543-581X](https://orcid.org/0009-0004-0543-581X) and Google Scholar (id:[naO8fOgAAAAJ](https://scholar.google.com/citations?user=naO8fOgAAAAJ)) including 3 first-author publications and 5 co-author publications.
+As of 2024, Rushi has published several scientific publications listed under Google Scholar (id:[naO8fOgAAAAJ](https://scholar.google.com/citations?user=naO8fOgAAAAJ)) including 3 first-author publications and 5 co-author publications.
 
