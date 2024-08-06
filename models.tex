@@ -139,13 +139,6 @@ Figure \ref{models:fig:UQCGibbsE}, Figure \ref{models:fig:UQCS}, and Figure \ref
     \label{models:tab:UQCS}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\linewidth]{models/Models-UQC-Activity.png}
-    \caption{Comparison of PyCalphad with OpenCalphad calculating activity to verify the implementation of UNIQUAC. The red $\times$ symbols represent results from OpenCalphad; green and blue lines are calculated from PyCalphad.}
-    \label{models:fig:UQCacr}
-\end{figure}
-
 \begin{table}[H]
     \centering
     \caption{The activity value calculated from PyCalphad compared to values from OpenCalphad at four different compositions.}
@@ -162,7 +155,12 @@ Figure \ref{models:fig:UQCGibbsE}, Figure \ref{models:fig:UQCS}, and Figure \ref
     \label{models:tab:UQCacr}
 \end{table}
 
-Figure \ref{models:fig:UQCBinary} and Figure \ref{models:fig:UQCTernary} shows the binary and ternary phase diagram for an artificial system modeled with UNIQUAC calculated from PyCalphad. The phase boundary matches well with phase diagram data obtained using OpenCalphad. These calculations and plots were generated using the existing functions in PyCalphad, namely \textit{equilibrium()} and \textit{eqplot()}. This alignment underscores the success of the UNIQUAC implementation in PyCalphad and demonstrates the robustness and capability of PyCalphad's existing functions for custom thermodynamic models.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{models/Models-UQC-Activity.png}
+    \caption{Comparison of PyCalphad with OpenCalphad calculating activity to verify the implementation of UNIQUAC. The red $\times$ symbols represent results from OpenCalphad; green and blue lines are calculated from PyCalphad.}
+    \label{models:fig:UQCacr}
+\end{figure}
 
 \begin{figure}[H]
     \centering
@@ -177,6 +175,8 @@ Figure \ref{models:fig:UQCBinary} and Figure \ref{models:fig:UQCTernary} shows t
     \caption{Comparison of PyCalphad with OpenCalphad calculating the ternary phase diagram to verify the implementation of UNIQUAC. The red $+$ symbols represent results from OpenCalphad; green lines are tie lines calculated from PyCalphad.}
     \label{models:fig:UQCTernary}
 \end{figure}
+
+Figure \ref{models:fig:UQCBinary} and Figure \ref{models:fig:UQCTernary} shows the binary and ternary phase diagram for an artificial system modeled with UNIQUAC calculated from PyCalphad. The phase boundary matches well with phase diagram data obtained using OpenCalphad. These calculations and plots were generated using the existing functions in PyCalphad, namely \textit{equilibrium()} and \textit{eqplot()}. This alignment underscores the success of the UNIQUAC implementation in PyCalphad and demonstrates the robustness and capability of PyCalphad's existing functions for custom thermodynamic models.
 
 \section{Custom model template generator} \label{models:sec:CMTG}
 \subsection{Framework} \label{models:ssec:CMTGframework}

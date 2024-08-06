@@ -50,9 +50,9 @@ All DFT-based first-principles and phonon calculations in the present work were 
 \end{table}
 
 %%% CALPHAD modeling details
-The MQMQA \cite{pelton2001modified} is used to describe the liquid phase by considering the short-range ordering (SRO) that occurs in liquid salts. Here, the model (A, Cr)(F) is introduced and hence the A$_2$F$_2$, Cr$_2$F$_2$, and ACrF$_2$ quadruplets (A=Li, Na, and K) are formed to consider the interactions among them. Coordination numbers Z describe the SNN coordination number of the species i (= Li, Na, K, Cr, or F) in quadruplets. Z of anions can be calculated to maintain charge neutrality as follows:
+The MQMQA \cite{pelton2001modified} is used to describe the liquid phase by considering the short-range ordering (SRO) that occurs in liquid salts. Here, the model (A, Cr)(F) is introduced and hence the A$_2$F$_2$, Cr$_2$F$_2$, and ACrF$_2$ quadruplets (A=Li, Na, and K) are formed to consider the interactions among them. Coordination numbers Z describe the SNN coordination number of the species $i$ (= Li, Na, K, Cr, or F) in quadruplets. Z of anions can be calculated to maintain charge neutrality as follows:
 \begin{equation} \label{ms:eq:MQMZ}
-    \dfrac{q_A}{(Z_{AB/FF}^A)}+\dfrac{q_B}{(Z_{AB/FF}^B)}=2\times \dfrac{q_F}{(Z_{AB/FF}^F)}
+    \dfrac{q_A}{(Z_{AB:FF}^A)}+\dfrac{q_B}{(Z_{AB:FF}^B)}=2\times \dfrac{q_F}{(Z_{AB:FF}^F)}
 \end{equation}
 where $q_i$ is the charges of ion $i$ (= Li, Na, K, Cr, or F). Table \ref{ms:tab:CrZ} shows the coordination numbers used in the present work.
 
@@ -61,7 +61,7 @@ where $q_i$ is the charges of ion $i$ (= Li, Na, K, Cr, or F). Table \ref{ms:tab
     \caption{Coordination number used in the present CALPHAD modeling work with MQMQA for the liquid phase.}
     \begin{tabular}{>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2.5cm}}
     \hline
-    \textbf{A}&\textbf{B}&\textbf{$Z_{AB/FF}^A$}&\textbf{$Z_{AB/FF}^B$}&\textbf{$Z_{AB/FF}^F$}\\
+    \textbf{A}&\textbf{B}&\textbf{$Z_{AB:FF}^A$}&\textbf{$Z_{AB:FF}^B$}&\textbf{$Z_{AB:FF}^F$}\\
     \hline
     Li$^+$&Li$^+$&6&6&6 \\
     Na$^+$&Na$^+$&6&6&6\\
@@ -79,17 +79,17 @@ where $q_i$ is the charges of ion $i$ (= Li, Na, K, Cr, or F). Table \ref{ms:tab
 
 The excess Gibbs energy $G^{excess}$ relates to the formation Gibbs energy of the quadruplet, $\Delta g_{quadruplet}^{ex}$, by considering the following reaction:
 \begin{equation} \label{ms:eq:MQMGrea}
-    \left(\rm {A_2/F_2}\right)_{quad}+\left({\rm Cr_2/F_2}\right)_{quad}=2\left({\rm ACr/F_2}\right)_{quad}\;\;\;\;\;\Delta g_{\rm ACr/F_2}^{ex}
+    \left(\rm {A_2F_2}\right)_{quad}+\left({\rm Cr_2F_2}\right)_{quad}=2\left({\rm ACrF_2}\right)_{quad}\;\;\;\;\;\Delta g_{\rm ACr:F_2}^{ex}
 \end{equation}
-where $\Delta g_{\rm ACr/F_2}^{ex}$ represents the Gibbs energy change when forming the quadruplet and can be described by:
+where $\Delta g_{\rm ACr:F_2}^{ex}$ represents the Gibbs energy change when forming the quadruplet and can be described by:
 \begin{equation} \label{ms:eq:MQMGex}
-    \Delta g_{\rm {ACr/F_2}}^{ex}=\Delta g_{\rm {ACr/F_2}}^o+\sum_{(i+j)\geq1} g_{\rm {ACr/F_2}}^{ij}\chi _{\rm {ACr/F_2}}^{i}\chi _{\rm {CrA/F_2}}^{j}
+    \Delta g_{\rm {ACr:F_2}}^{ex}=\Delta g_{\rm {ACr:F_2}}^o+\sum_{(i+j)\geq1} g_{\rm {ACr:F_2}}^{ij}\chi _{\rm {ACr:F_2}}^{i}\chi _{\rm {CrA:F_2}}^{j}
 \end{equation}
-where $g_{\rm {ACr/F_2}}^{ij}$ is a function of temperature and it is independent of composition. $\chi _{\rm {ACr/F_2}}^{i}$ and $\chi _{\rm {CrA/F_2}}^{j}$ are composition-dependent terms as:
+where $g_{\rm {ACr:F_2}}^{ij}$ is a function of temperature and it is independent of composition. $\chi _{\rm {ACr:F_2}}^{i}$ and $\chi _{\rm {CrA:F_2}}^{j}$ are composition-dependent terms as:
 \begin{equation} \label{ms:eq:chi}
-    \chi_{\rm {ACr/F_2}} = \dfrac{X_{\rm {A_2/F_2}}}{X_{\rm {A_2/F_2}}+X_{\rm {ACr/F_2}}+X_{\rm {Cr_2/F_2}}}
+    \chi_{\rm {ACr:F_2}} = \dfrac{X_{\rm {A_2:F_2}}}{X_{\rm {A_2:F_2}}+X_{\rm {ACr:F_2}}+X_{\rm {Cr_2:F_2}}}
 \end{equation}
-where $X_{\rm{ACr/F_2}}$ is the fractions of $\left(\rm{ACr/F_2}\right)_{quad}$ shown in (\ref{ms:eq:MQMGrea}). 
+where $X_{\rm{ACr:F_2}}$ is the fractions of $\left(\rm{ACr:F_2}\right)_{quad}$ shown in (\ref{ms:eq:MQMGrea}). 
 
 In the CrF${_2}$-CrF${_3}$ system, there are three solid solution phases, i.e., CrF${_2}$ near the Cr-rich region, CrF${_3}$ near the F-rich region, and Cr$_2$F$_5$ showing on the middle region of the CrF${_2}$-CrF${_3}$ phase diagram. The present work adopts the same models used by Dumaire et al. \cite{dumaire2021thermodynamic}, where the regular solution model with the Kohler-Toop interpolation \cite{kohler1960estimation, toop1965predicting, chartrand2000choice, pelton2001general} is used for Cr$_2$F$_5$. For solid solution phases near CrF${_2}$ and CrF${_3}$, the sublattice model is used for each phase, respectively, considering the Wyckoff positions of CrF${_2}$ and CrF${_3}$ as follows. CrF${_2}$ possesses the symmetry with space group $P2_1/c$ with two Wyckoff sites of 2a and 4e, and the sublattice model (Cr, Va)$_1$(F, Va)$_2$ is hence used with Va representing the vacancy. CrF${_3}$ phase is modeled by (Cr, Va)$_1$(F, Va)$_3$ by considering its space group $R\bar{3}c$ and the two Wyckoff sites of 2b and 6e. The Gibbs energy is formulated as:
 \begin{equation} \label{ms:eq:Crssoln}
@@ -349,29 +349,245 @@ The present CALPHAD modeling work implements the mixing enthalpy of liquid at 17
     \label{ms:fig:FLiNaKCr-QuadFrac}
 \end{figure}
 
-In Yin et al.’s modeling work \cite{yin2018thermodynamic}, the associate model was used to describe the liquid phase. This model was applied to describe the short-range ordering (SRO) by assuming ‘associates’, such as K$_3$CrF$_6$ and Na$_3$CrF$_6$ associates. This kind of assumption may cause issues when extrapolation into higher-order systems \cite{pelton2018phase}. In the present work, the MQMQA was employed to describe liquid and provide information on the first and the second nearest neighbors in complex liquid. As an example, Figure \ref{ms:fig:FLiNaKCr-QuadFrac} shows the predicted fraction of each quadruplet in the liquid phase. The composition where the peak fraction of the ACr/FF (A=Li, Na, and K) quadruplets appears, indicates the SRO. In the LiF-CrF$_3$ system, the peak fraction of LiCr/FF with strong SRO is around $x$(CrF$_3$) = 0.25, which is consistent with the lowest mixing enthalpy around the $x$(CrF$_3$) = 0.25 as shown in Figure \ref{ms:fig:FLiNaKCr-Hmix}. In addition, Figure \ref{ms:fig:FLiNaKCr-QuadFrac} presents the quadruplet fractions and the neighboring environments of ions in liquid, which are difficult to obtain from the associate model due to its focus on associate clusters.
-
-\section{Thermodynamic modeling of LiF-LnF${_3}$ systems with uncertainty propagation to vapor-liquid equilibrium property} \label{moltensalts:sec:LiFLnF3}
-
-\subsection{Literature review} \label{moltensalts:ssec:LiFLnF3lit}
-
-
-\subsection{Modeling details} \label{moltensalts:ssec:LiFLnF3model}
-
-
-\subsection{Results and discussion} \label{moltensalts:ssec:LiFLnF3result}
-
+In Yin et al.’s modeling work \cite{yin2018thermodynamic}, the associate model was used to describe the liquid phase. This model was applied to describe the short-range ordering (SRO) by assuming ‘associates’, such as K$_3$CrF$_6$ and Na$_3$CrF$_6$ associates. This kind of assumption may cause issues when extrapolation into higher-order systems \cite{pelton2018phase}. In the present work, the MQMQA was employed to describe liquid and provide information on the first and the second nearest neighbors in complex liquid. As an example, Figure \ref{ms:fig:FLiNaKCr-QuadFrac} shows the predicted fraction of each quadruplet in the liquid phase. The composition where the peak fraction of the ACr/FF (A=Li, Na, and K) quadruplets appears, indicates the SRO. In the LiF-CrF$_3$ system, the peak fraction of LiCr:FF with strong SRO is around $x$(CrF$_3$) = 0.25, which is consistent with the lowest mixing enthalpy around the $x$(CrF$_3$) = 0.25 as shown in Figure \ref{ms:fig:FLiNaKCr-Hmix}. In addition, Figure \ref{ms:fig:FLiNaKCr-QuadFrac} presents the quadruplet fractions and the neighboring environments of ions in liquid, which are difficult to obtain from the associate model due to its focus on associate clusters.
 
 \section{Bayesian model selection in thermodynamic modeling of LiCl-KCl-LaCl${_3}$} \label{moltensalts:sec:LaCl3}
+In the CALPHAD community, several thermodynamic models, including the associate model, the two-sublattice ionic model, and the MQMQA, have been utilized to capture the complexity of molten salts. In the present work, the Bayes factor is used to guide the model selection process for thermodynamic modeling of the KCl-LaCl$_3$ system and provide statistical comparisons of various models. The results indicate that the MQMQA model is the most favorable based on available thermochemical data. The LiCl-KCl-LaCl$_3$ system has been further modeled with uncertainty quantification using MQMQA. Thermodynamic properties as a function of temperature for the compounds in KCl-LaCl$_3$ are predicted by the quasiharmonic approach in terms of first-principles phonon calculations. The calculated phase stability shows excellent agreement with experimental data, indicating that an appropriate thermodynamic model is important for accurately predicting the critical characteristics of complex molten salts.
 
-\subsection{Literature review} \label{moltensalts:ssec:LaCl3lit}
+The LiCl-KCl-LaCl$_3$ system contains the liquid phase, three binary compounds of LiCl, KCl, and LaCl$_3$, and two ternary compounds of K$_2$LaCl$_5$ and K$_3$La$_5$Cl$_{18}$ as summarized by Hao et al. \cite{hao2024thermodynamic}. K$_2$LaCl$_5$ was reported with a Pnma structure measured by Meyer et al. \cite{meyer1983k2mcl5}. Seifert et al. \cite{seifert1985thermodynamic} determined the structure of K$_3$La$_5$Cl$_{18}$ with a space group of $P6_3/m$ through X-ray diffraction. The values of formation enthalpy of K$_2$LaCl$_5$ and K$_3$La$_5$Cl$_{18}$ were measured by Seifert et al. \cite{seifert1985thermodynamic} using solution calorimetry. Reuter and Seifert \cite{reuter1994heat} reported the heat capacity values of K$_2$LaCl$_5$ and K$_3$La$_5$Cl$_{18}$ using differential scanning calorimetry (DSC). Gaune-Escard and Rycerz \cite{gaune1999heat} also measured the heat capacity of K$_3$La$_5$Cl$_{18}$ using DSC. Papatheodorou and Ostvold \cite{papatheodorou1974thermodynamic} reported mixing enthalpy in KCl-LaCl$_3$ through calorimetric experiments. Qiao et al. \cite{qiao1989measurement} utilized the differential thermal analysis (DTA) techniques to determine melting and phase transition temperatures. In the KCl-LaCl$_3$ system, Song and Zheng \cite{song1995investigation} measured liquidus by DTA. Seifert et al. \cite{seifert1985thermodynamic} measured phase boundaries in the LaCl$_3$-rich range by DTA.
 
+In the ternary LiCl-KCl-LaCl$_3$ system, Bagri and Simpson \cite{bagri2016determination} and Samin et al. \cite{samin2016estimation} reported activity values for LaCl$_3$ in molten LiCl-KCl eutectic salt using electromotive force measurements and cyclic voltammetry, respectively. Regarding the phase diagram, Song and Zheng \cite{song1995investigation} reported the liquidus projection and six isopleths. Two research works, by Nakamura et al. \cite{nakamura1997thermal} and Venkata Krishnan et al. \cite{venkata2006pseudo}, constructed the pseudo-binary phase diagram from the LiCl-KCl eutectic to 25 mol\% of LaCl$_3$ in the LiCl-KCl eutectic through DSC.
 
 \subsection{Modeling details} \label{moltensalts:ssec:LaCl3model}
+Four frequently used models to describe complex molten salts are considered for the liquid phase in the KCl-LaCl$_3$, including the associate model \cite{sommer1982association}, the two-sublattice ionic model \cite{hillert1985two}, and the MQMQA \cite{pelton2001modified} (two sets of coordination numbers). 
+
+The species KCl and LaCl$_3$ are assumed using the associate model \cite{sommer1982association} since no observation of other complex associates exists in the literature. The Gibbs energy of liquid can be expressed as: 
+\begin{equation} \label{ms:eq:laassmG}
+    \begin{aligned}
+        G_m&=y_{\rm KCl}{{^o}G}_{\rm KCl}^{\rm Liquid}+y_{\rm {LaCl}_3}{{^o}G}_{\rm {LaCl}_3}^{Liquid}+RT\left(y_{KCl}\ln y_{\rm KCl}+y_{\rm {LaCl}_3}\ln y_{\rm {LaCl}_3}\right)\\&+y_{\rm KCl}y_{\rm {LaCl}_3}\sum_{v=0}{L_{\rm KCl,\rm {LaCl}_3}^v{(y_{\rm KCl}-y_{\rm {LaCl}_3})}^v}
+    \end{aligned}
+\end{equation}
+where $y_i$ is the mole fraction of species $i$ (= KCl or LaCl$_3$), ${{^o}G}_i^{Liquid}$ the Gibbs energy of species $i$, $R$ the gas constant, and $L_{\rm KCl,{LaCl}_3}^v$ the $v^{th}$ interaction parameter, which can be expanded as in (\ref{method:eq:CEFLT}).
+
+Using the two-sublattice ionic model \cite{hillert1985two}, the liquid phase in KCl-LaCl$_3$ can be described as: 
+\begin{equation} \label{ms:eq:laionic}
+    {({\rm K}^+,{\rm La}^{3+})}_P{({\rm Cl}^-)}_Q
+\end{equation}
+where the cations and anions are separated into two sublattices. The site ratios of $P$ and $Q$ follow the following relationships to maintain charge neutrality: 
+\begin{equation} \label{ms:eq:laionicP}
+    P=y_{{\rm Cl}^-}=1
+\end{equation}
+\begin{equation} \label{ms:eq:laionicQ}
+    Q=y_{\rm K^+}+y_{{\rm La}^{3+}}
+\end{equation}
+where $y_i$ represents the mole fraction of ion $i$. The Gibbs energy function according to (\ref{method:eq:ionicGsrf}) and (\ref{method:eq:ionicScnf}) can be expressed as: 
+\begin{equation} \label{ms:eq:laionicGm}
+    G_m=y_{\rm K^+}{{^o}G}_{\rm KCl}^{Liquid}+y_{{\rm La}^{3+}}{{^o}G}_{{\rm LaCl}_3}^{Liquid}+RT\left(y_{\rm K^+}\ln y_{\rm K^+}+y_{{\rm La}^{3+}}lny_{{\rm La}^{3+}}\right)+{{^{xs}}G}_m 
+\end{equation}
+where ${{^{xs}}G}_m$ represents the excess Gibbs energy, which can be described based on the Redlich-Kister polynomial \cite{redlich1948algebraic} as described in (\ref{method:eq:ionicGxs}):
+\begin{equation} \label{ms:eq:laionicGxs}
+    {{^{xs}}G}_m=y_{\rm K^+}y_{{\rm La}^{3+}}\sum_{v=0}{L_{\rm K^+,{\rm La}^{3+}:{\rm Cl}^-}^v{(y_{K^+}-y_{{\rm La}^{3+}})}^v}
+\end{equation}
+where $L_{\rm K^+,{\rm La}^{3+}:{\rm Cl}^-}^v$ is the $v^{th}$ interaction parameter which can be described as in (\ref{method:eq:CEFLT}).
+
+The MQMQA \cite{pelton2001modified} describes the KCl-LaCl$_3$ liquid phase by assuming interactions between the quadruplets of $\rm K_2{\rm Cl}_2$, ${\rm La}_2{\rm Cl}_2$, and ${\rm KLa}{\rm Cl}_2$. Coordination numbers $Z$ are defined to describe the second nearest neighbor coordination number of the species $i$ (= K, La, or Cl) in the quadruplets. $Z$ of anions can be calculated according to (\ref{method:eq:mqmqaZ}) to maintain charge neutrality. Coordination numbers used in the present work are summarized in Table \ref{ms:tab:lamqmZ}, where two sets of coordination numbers were applied to ${\rm KLa}{\rm Cl}_2$. The selection of MQMQA-M3 is based on Sun et al.’s modeling for KCl-NdCl$_3$ \cite{sun2004optimization}, while the MQMQA-M4 is based on the MSTDB-TC for KCl-LaCl$_3$ \cite{ard2022development}.
+
+\begin{table}[H]
+    \caption{Coordination numbers used in the present CALPHAD modeling with MQMQA for the liquid phase.}
+    \centering
+    \begin{tabular}{>{\raggedright\arraybackslash}m{1.5cm}>{\raggedright\arraybackslash}m{1.5cm}>{\raggedright\arraybackslash}m{3.5cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2.5cm}}
+    \hline
+    \textbf{A}&\textbf{B}&&$Z_{\rm AB:ClCl}^{\rm A}$&$Z_{\rm AB:ClCl}^{\rm B}$&$Z_{\rm AB:ClCl}^{\rm F}$ \\
+    \hline
+    K$^+$&K$^+$&&6.0&6.0&6.0\\
+    La$^{3+}$&La$^{3+}$&&6.0&6.0&2.0\\
+    K$^+$&La$^{3+}$&MQMQA-M3&2.0&6.0&2.0\\
+    &&MQMQA-M4&3.5&6.0&2.55\\
+    \hline
+    \end{tabular}
+    \label{ms:tab:lamqmZ}
+\end{table}
+
+The excess Gibbs energy is related to the formation Gibbs energy of the quadruplets as discussed in (\ref{method:eq:mqmqareac}). In the KCl-LaCl$_3$ system, this can be expressed as:
+\begin{equation} \label{ms:eq:lamqmreac}
+    \left(\rm K_2{\rm Cl}_2\right)_{quad}+\left({\rm La}_2{\rm Cl}_2\right)_{quad}=2\left(\rm KLa{\rm Cl}_2\right)_{quad}\;\;\;\;\Delta g_{\rm AB:Cl_2}^{ex}
+\end{equation}
+where $\Delta g_{\rm AB:Cl_2}^{ex}$ represents the Gibbs energy change when forming the quadruplets and can be described by: 
+\begin{equation} \label{ms:eq:lamqmgex}
+    \Delta g_{\rm AB:Cl_2}^{ex}=\Delta g_{\rm AB:Cl_2}^{o}+\sum_{(i+j)\geq1}{g_{\rm KLa:{\rm Cl}_2}^{ij}\chi_{\rm KLa:{\rm Cl}_2}^i\chi_{\rm LaK:{\rm Cl}_2}^j}
+\end{equation}
+where $g_{\rm KLa/{\rm Cl}_2}^{ij}$is a function of temperature and independent of composition. $\chi_{\rm KLa/{\rm Cl}_2}^i$ and $\chi_{\rm LaK/{\rm Cl}_2}^j$ are composition-dependent terms, defined as:
+\begin{equation} \label{ms:eq:lamqmchi}
+    \chi_{\rm KLa/{\rm Cl}_2}^i=\frac{X_{\rm K_2:Cl_2}}{X_{\rm K_2:Cl_2}+X_{\rm KLa:Cl_2}+X_{{\rm La}_2:{\rm Cl}_2}}
+\end{equation}
+where $X_{\rm KLa:Cl_2}$ is the fraction of $\left(\rm KLaCl_2\right)_{quad}$. 
+
+All model parameters in the present work were optimized through the Bayesian approach using the MCMC method as implemented in ESPEI \cite{bocklund2019espei}. Each model parameter employed two Markov chains with a standard derivation of 0.1 when initializing its Gaussian distribution. During the modeling process, the chain values can be tracked and the MCMC processes were performed until the model parameters converged. The input data included primarily experimental phase equilibrium data for two or more co-existing phases, mixing enthalpy data, and activity data from the literature. For stochiometric compounds, their thermochemical data from DFT-based calculations were also used as input. 
+
+The ternary compounds in the KCl-LaCl$_3$ system are considered stoichiometric compounds, including K$_2$LaCl$_5$ and K$_3$La$_5$Cl$_{18}$. Thermodynamic functions of the binary endmembers KCl and LaCl$_3$ are sourced from the JANAF tables \cite{chase1982janaf} and the SSUB database \cite{sgteurl}. The Gibbs energy for a given compound is expressed as in (\ref{ms:eq:Gstoi}). For these ternary compounds, their thermodynamic data including enthalpy, entropy, and heat capacity are obtained through DFT-based first-principles and phonon calculations. All DFT-based first-principles and phonon calculations in the present work were performed by the VASP \cite{kresse1996efficient}. The plane-wave basis cutoff energy was 262 eV for structural relaxations and 520 eV for the final static calculations of total energy. The convergent criterion of electronic self-consistency was set as $5\times10^{−6}$ eV/atom for relaxations and static calculations. Seifert et al. \cite{seifert1985thermodynamic} reported that K$_3$La$_5$Cl$_{18}$ possesses the symmetry of $P6_3/m$ with three Wyckoff sites of 2b, 2c, and 6h. However, the occupancy of the 2b site is less than 1, while the 2c site is occupied by both K and La atoms. Considering these, ATAT \cite{van2009multicomponent} was used to search for all possible configurations under these conditions, and 9 symmetry inequivalent configurations were found in terms of a 26-atom unit cell. The configuration with the lowest energy was predicted using DFT calculations. Phonon calculations were performed using the supercell method. Table \ref{ms:tab:ladftsetting} provides detailed settings for DFT-based first-principles and phonon calculations, including reciprocal k-points meshes and supercell sizes for phonon calculations, which ensures the convergence and accuracy of the DFT calculations.
+
+\begin{table}[H]
+    \caption{Details of the present DFT-based first-principles and phonon calculations for each compound, including space group, total atoms in the supercells, k-point meshes for structure relaxations, and the final static calculations (indicated by DFT), supercell sizes for phonon calculations, and k-point meshes for phonon calculations.}
+    \centering
+    \begin{tabular}{>{\raggedright\arraybackslash}m{2cm}>{\raggedright\arraybackslash}m{2cm}>{\raggedright\arraybackslash}m{3.5cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2.5cm}}
+    \hline
+    \textbf{Phase}&\textbf{Space Group}&\textbf{Atoms in crystallographic cell}&\textbf{k-points for DFT}&\textbf{Atoms in supercell for phonon}&\textbf{k-points for phonon}\\
+    \hline
+    KCl&$Fm\bar{3}m$&8&$8\times8\times8$&64&$3\times3\times3$\\
+    LaCl$_3$&$P6_3/m$&8&$8\times8\times12$&64&$2\times2\times2$\\
+    K$_2$LaCl$_5$&$Pnma$&32&$7\times7\times4$&32&$4\times4\times2$\\
+    K$_3$La$_5$Cl$_{18}$&$P3$&26&$8\times8\times5$&26&$5\times5\times3$\\
+    \hline
+    \end{tabular}
+    \label{ms:tab:ladftsetting}
+\end{table}
+
+\subsection{Thermodynamic properties in LiCl-KCl-LaCl$_3$ by first-principles calculations} \label{moltensalts:ssec:LaCl3DFTresult}
+Thermodynamic properties of compounds in the KCl-LaCl$_3$ system were predicted using first-principles calculations. Table \ref{ms:tab:lacl3eosresults} summarizes the equilibrium properties of V$_0$, B$_0$, and B$^\prime$ at 0 K obtained by DFT-based calculations in comparison with experiments. The present work predicts the bulk modulus B$_0$ value to be 16.23 GPa for KCl, which is slightly lower than the experimental measurement of 19.7 GPa by Norwood et al. \cite{norwood1958elastic}. The equilibrium volume V$_0$ of LaCl$_3$ is predicted to be 27.37 \r{A}$^3$/atom in the present work, which is in good agreement with the measured 26.38 \r{A}$^3$/atom by Zachariasen \cite{Zachariasen1947}. It indicates that the present DFT calculations provide reliable predictions regarding the equilibrium properties of compounds in the KCl-LaCl$_3$ system. The present DFT calculations predicted the V$_0$ of K$_2$LaCl$_5$ to be 29.96 \r{A}$^3$/atom and B$_0$ to be 15.89 GPa. For K$_3$La$_5$Cl$_{18}$, the V$_0$ is reported to be 27.49 \r{A}$^3$/atom and B$_0$ to be 26.46 GPa.
+
+\begin{table}[H]
+    \caption{Predicted equilibrium properties of volume V$_0$, bulk modulus B$_0$, and the first derivative of bulk modulus with respect to pressure B$^\prime$ for compounds in the KCl-LaCl$_3$ system based on the present EOS fitting at 0 K. Experimental data are also listed for comparison.}
+    \centering
+    \begin{tabular}{>{\raggedright\arraybackslash}m{3cm}>{\raggedright\arraybackslash}m{3cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{2cm}>{\raggedright\arraybackslash}m{4cm}}
+    \hline
+    \textbf{Compounds}&\textbf{V$_0$}\ (\r{A}$^3$/atom)&\textbf{B$_0$}\ (GPa)&\textbf{B$^\prime$}&\textbf{Reference}\\
+    \hline
+    KCl&32.62&16.23&4.67&This work\\
+    &&19.7&&Norwood et al. \cite{norwood1958elastic}\\
+    LaCl$_3$&27.37&29.02&6.40&This work\\
+	&26.38&&&Zachariasen \cite{Zachariasen1947}\\
+    K$_2$LaCl$_5$&29.96&15.89&5.38&This work\\
+    K$_3$La$_5$Cl$_{18}$&27.49&26.46&6.35&This work\\
+    \hline
+    \end{tabular}
+    \label{ms:tab:lacl3eosresults}
+\end{table}
+
+Thermodynamic properties at finite temperatures are obtained through DFT-based QHA in terms of phonon. Figure \ref{ms:fig:lacl3pureQHA} compares the predicted values of heat capacity C$_p$, entropy $S$, and enthalpy $H-H_{300}$ of KCl and LaCl$_3$ to those from the SGTE database \cite{sgteurl}. For the KCl, the present QHA results align closely with the SGTE data \cite{sgteurl}, although the DFT values are slightly higher. The $S$ also shows a good agreement, with a minor difference of about 6\%. For the LaCl$_3$, the present QHA results slightly underpredict C$_p$ and $H-H_{300}$ compared to SGTE \cite{sgteurl}, particularly at higher temperatures. The differences in C$_p$ for LaCl$_3$ remain less than 3.2 J/mol-atom-K at high temperatures, while the entropy and enthalpy differences closely match the SGTE values \cite{sgteurl}. Figure \ref{ms:fig:lacl3CompoundsCp} shows the predicted heat capacities C$_p$ of K$_2$LaCl$_5$ and K$_3$La$_5$Cl$_{18}$ in comparison with experiments \cite{reuter1994heat, gaune1999heat}, demonstrating an excellent agreement. For example, at 500 K, QHA results show the K$_2$LaCl$_5$ C$_p$ of 26.99 J/mol-K, which is 0.8\% higher compared to 26.77 J/mol-K reported by Reuter et al. \cite{reuter1994heat} and 0.5\% higher than 26.86 J/mol-K by Gaune-Escard et al. \cite{gaune1999heat}. For K$_3$La$_5$Cl$_{18}$, the C$_p$ at 500 K is predicted to be 25.99 J/mol-K, slightly lower than 26.34 J/mol-K by Reuter et al. \cite{reuter1994heat}. These results of K$_2$LaCl$_5$ and K$_3$La$_5$Cl$_{18}$ obtained from the present DFT calculations are then used in the present CALPHAD modeling.
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{moltensalts/Moltensalts-LaCl3-Cp-S-H.png}
+    \caption{Comparison of the present values (blue lines) of heat capacity C$_p$, entropy $S$, and enthalpy with reference at 300 K ($H-H_{300}$) for (a) KCl and (b) LaCl$_3$ from the DFT-based phonon calculations (blue lines) with the SGTE data \cite{sgteurl} (red dash lines).}
+    \label{ms:fig:lacl3pureQHA}
+\end{figure}
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{moltensalts/Moltensalts-LaCl3-Compounds-Cp.png}
+    \caption{Comparison of heat capacity C$_p$ values for (a) K$_2$LaCl$_5$ and (b) K$_3$La$_5$Cl$_{18}$ from the present DFT-based QHA (blue lines) with experiments by Reuter et al. \cite{reuter1994heat} (yellow dash lines) and Gaune-Escard et al. \cite{gaune1999heat} (red circles).}
+    \label{ms:fig:lacl3CompoundsCp}
+\end{figure}
+
+\subsection{Model selection for the liquid phase in the KCl-LaCl$_3$ system} \label{moltensalts:ssec:LaCl3modelselection}
+The KCl-LaC3 system is modeled using four models, the associate model (Associate-M1), the ionic model (Ionic-M2), and the MQMQA-M3 and the MQMQA-M4 with different coordination numbers as introduced in Section \ref{moltensalts:ssec:LaCl3model}. Experimental data are also listed for comparison. Each model has four adjustable parameters and was optimized by at least 1000 MCMC iterations. This process continued until the posterior probability values from each Markov chain stabilized, i.e., the model parameters converged. Figure \ref{ms:fig:lacl3PDfourm} compares the phase diagrams of these four models with experimental data \cite{seifert1985thermodynamic, song1995investigation}. It shows that for the liquidus of the KCl-rich region, MQMQA-M3 and MQMQA-M4 provide better agreements with experimental data than Associate-M1 and Ionic-M2. Table \ref{ms:tab:lacl3inv} lists the invariant reactions predicted by different models in comparison with experimental data \cite{seifert1985thermodynamic, song1995investigation}. All these four models show excellent agreement with the experimental data. Ionic-M2 and MQMQA-M4 slightly overpredict the invariant temperatures compared to those from Asscociate-M1 and MQMQA-M3. Specifically, Ionic-M2 and MQMQA-M4 predict a eutectic temperature of 854 K for the reaction of Liquid $\leftrightarrow$ KCl+K$_2$LaCl$_5$, which is 9 K higher than 845 K reported by Song et al. \cite{song1995investigation} and 1 K above 853 K by Seifert et al. \cite{seifert1985thermodynamic}. For the melting temperature of K$_2$LaCl$_5$, Ionic-M2 predicts 917 K, while MQMQA-M4 predicts 926 K, both are higher than the measured 913 K by Seifert et al. \cite{seifert1985thermodynamic} and 916 K by Song et al. \cite{song1995investigation}. Associate-M1 slightly underpredicts the peritectic temperature of the reaction Liquid+LaCl$_3$ $\leftrightarrow$ K$_3$La$_5$Cl$_{18}$ at 882 K, which is 3 K lower than the 885 K by Seifert et al. \cite{seifert1985thermodynamic} and the other models. The MAE for predicting these invariant temperatures using Associate-M1 is 2.5 K. MQMQA-M3 provides a good agreement with experimental data, with a slightly lower prediction of eutectic temperature for the reaction Liquid $\leftrightarrow $K$_2$LaCl$_5$+K$_3$La$_5$Cl$_{18}$ at 845 K, which is 6 K lower than 851 K reported by Seifert et al. \cite{seifert1985thermodynamic}. Regarding the invariant compositions $x$(LaCl$_3$), MQMQA-M3 and MQMQA-M4 offer better predictions with an MAE of 0.017 for both, compared to 0.025 for Associate-M1 and 0.022 for Ionic-M2. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{moltensalts/Moltensalts-LaCl3-PhaseDiagram-Fourmodels-m.png}
+    \caption{Predicted phase diagrams of the KCl-LaCl$_3$ system with the liquid phase modeled using (a) associate model (Associate-M1), (b) ionic model (Ionic-M2), (c) MQMQA (MQMQA-M3), and (d) MQMQA (MQMQA-M4) in comparison to experimental data \cite{seifert1985thermodynamic, song1995investigation}.}
+    \label{ms:fig:lacl3PDfourm}
+\end{figure}
+
+\begin{table}[H]
+    \caption{Predicted invariant equilibria in the KCl-LaCl$_3$ system by the four models, compared with experimental data.}
+    \centering
+    \begin{tabular}{>{\raggedright\arraybackslash}m{2cm}>{\raggedright\arraybackslash}m{5.5cm}>{\raggedright\arraybackslash}m{2cm}>{\raggedright\arraybackslash}m{2.5cm}>{\raggedright\arraybackslash}m{3.5cm}}
+    \hline
+    \textbf{Reaction}&&\textbf{$x$(LaCl$_3$)}&\textbf{Temperature} (K)&\textbf{Reference}\\
+    \hline
+    Eutectic&Liquid$\leftrightarrow$KCl+K$_2$LaCl$_5$&0.22&853&Seifert et al. \cite{seifert1985thermodynamic}\\
+    &&0.22&845&Song et al. \cite{song1995investigation}\\
+    &&0.197&848&Associate-M1\\
+    &&0.202&854&Ionic-M2\\
+    &&0.204&847&MQMQA-M3\\
+    &&0.200&854&MQMQA-M4\\
+    Melting&Liquid$\leftrightarrow$K$_2$LaCl$_5$&0.333&913&Seifert et al. \cite{seifert1985thermodynamic}\\
+    &&0.333&916&Song et al. \cite{song1995investigation}\\
+    &&0.333&913&Associate-M1\\
+    &&0.333&917&Ionic-M2\\
+    &&0.333&915&MQMQA-M3\\
+    &&0.333&926&MQMQA-M4\\
+    Eutectic&Liquid$\leftrightarrow$K$_2$LaCl$_5$+K$_3$La$_5$Cl$_{18}$&0.51&851&Seifert et al. \cite{seifert1985thermodynamic}\\
+    &&0.485&852&Associate-M1\\
+    &&0.481&851&Ionic-M2\\
+    &&0.482&845&MQMQA-M3\\
+    &&0.49&851&MQMQA-M4\\
+    Peritectic&Liquid+LaCl$_3$$\leftrightarrow$K$_3$La$_5$Cl$_{18}$&0.595&885&Seifert et al. \cite{seifert1985thermodynamic}\\
+    &&0.565&882&Associate-M1\\
+    &&0.573&885&Ionic-M2\\
+    &&0.586&885&MQMQA-M3\\
+    &&0.586&885&MQMQA-M4\\
+    \hline
+    \end{tabular}
+    \label{ms:tab:lacl3inv}
+\end{table}
+
+Figure \ref{ms:fig:lacl3HMRfourm} shows the values of mixing enthalpy of liquid at 1173 K calculated using these four models, compared with experimental data by Papatheodorou and Ostvold \cite{papatheodorou1974thermodynamic}. The comparison indicates that Associate-M1 and Ionic-M2 predict lower mixing enthalpy values than those by MQMQA-M3 and MQMQA-M4. For example, at $x$(LaCl$_3$) = 0.496, Associate-M1 predicts $-$15.469 kJ/mol and Ionic-M2 predicts $-$15.455 kJ/mol, slightly lower than the $-$15.097 kJ/mol predicted by MQMQA-M3 and $-$15.118 kJ/mol by MQMQA-M4. When compared to the mixing enthalpy value of $-$15.319 kJ/mol reported by Papatheodorou and Ostvold  \cite{papatheodorou1974thermodynamic}, Associate-M1 and Ionic-M2 show a closer alignment, with a difference of 0.9\%, compared to a 1.4\% difference for MQMQA-M3 and MQMQA-M4. Notably, Associate-M1 and Ionic-M2 align more closely with experimental data \cite{papatheodorou1974thermodynamic}, particularly in the composition region with $x$(LaCl$_3$) > 0.4. 
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{moltensalts/Moltensalts-LaCl3-HMR-FourModels.png}
+    \caption{Predicted values of mixing enthalpy of the KCl-LaCl$_3$ liquid at 1173K from four models in comparison with experimental data by Papatheodorou and Ostvold \cite{papatheodorou1974thermodynamic}. The red dash line represents Associate-M1, the blue dotted line represents Ionic-M2, the black solid line represents MQMQA-M3, and the green dash-dotted line represents MQMQA-M4.}
+    \label{ms:fig:lacl3HMRfourm}
+\end{figure}
+
+According to phase diagrams (Figure \ref{ms:fig:lacl3PDfourm}) and mixing enthalpy predictions (Figure \ref{ms:fig:lacl3HMRfourm}), each model demonstrates a strength in predicting thermodynamic properties of the KCl-LaCl$_3$ system. Associate-M1 and Ionic-M2 perform well in predicting mixing enthalpy, showing a better match with experimental data as discussed above. However, these two models are less accurate in predicting phase boundaries compared to MQMQA-M3 and MQMQA-M4, especially in the LaCl$_3$-rich region. Choosing an appropriate model remains a challenge, as it requires balancing agreement with all available experimental data. A quantitative method is hence needed to determine the overall favorability for the models of study.
+
+Bayesian parameter estimation through MCMC offers a powerful tool to statistically compare models, as demonstrated in Section \ref{method:ssec:Bayesian}. In the present work, the last 600 iterations from MCMC were used to compute the marginal likelihood $p\left(D\middle| M\right)$ for each model. Table \ref{ms:tab:lacl3bayesK} lists the estimated marginal likelihood value for each model, indicating that MQMQA-M3 has the highest marginal likelihood value of $\ln(p\left(D\middle| M_3\right))$ = $-370.628$. Consequently, the Bayes factors for the other models were calculated with respect to MQMQA-M3, using the marginal likelihood value of MQMQA-M3 as the numerator in (\ref{method:eq:BayesFactor}). The interpretation of the Bayes factor is also included in Table \ref{ms:tab:lacl3bayesK} according to the guideline by Kass and Raftery \cite{kass1995bayes}. That is, a ${log}_{10}({\rm Bayes factor})$ value between 0 and 1/2 suggests not worth more than a bare mention in comparing two models even if it points very slightly towards the model at the denominator, a range of 1/2 to 1 indicates substantial evidence in favor of the model at the denominator, 1 to 2 denotes strong evidence, and a value greater than 2 represents decisive evidence in favor of the model at the denominator. The present results indicate that the marginal likelihoods of Ionic-M2 $\ln(p\left(D\middle| M_2\right))$ = $-373.410$ and MQMQA-M4 $\ln(p\left(D\middle| M_4\right))$ = $-371.420$ are close to that of MQMQA-M3. In contrast, the marginal likelihood of Associate-M1 $\ln(p\left(D\middle| M_1\right))$ = $-439.135$ is significantly lower than that of MQMQA-M3, indicating that the Associate-M1 model is less favorable compared to the other three models. The Bayes factor ${log}_{10}K_{M3/M1}$ is 29.752, suggesting decisive evidence of favoring MQMQA-M3 over Associate-M1. This is due to the larger discrepancy in phase boundary predictions from Associate-M1 compared to the experimental phase diagram data shown in Figure \ref{ms:fig:lacl3PDfourm}(a). Regarding the Ionic-M2, the Bayes factor ${log}_{10}K_{M3/M2}$ = 1.208 indicates strong evidence of favoring MQMQA-M3 over Ionic-M2. Additionally, the Bayes factor comparing the two MQMQA models, ${log}_{10}K_{M3/M4}$, is 0.344, suggesting that MQMQA-M3 is slightly favored over MQMQA-M4, but not worth a bare mention when comparing these two models. It implies that the choice of these two sets of coordination numbers did not significantly affect the performance of MQMQA models in predicting thermodynamic properties in the KCl-LaCl$_3$ system. 
+
+\begin{table}[H]
+    \caption{Summary of the predicted marginal likelihood and Bayes factor for each model with respect to those of MQMQA-M3, and the suggested strength of evidence according to Kass and Raftery \cite{kass1995bayes}.}
+    \centering
+    \begin{tabular}{>{\raggedright\arraybackslash}m{3cm}>{\raggedright\arraybackslash}m{4.5cm}>{\raggedright\arraybackslash}m{4cm}>{\raggedright\arraybackslash}m{4.5cm}}
+    \hline
+    \textbf{Model name}&\textbf{Marginal likelihood ($\ln$ value)}&\textbf{Bayes factor $log_{10}K$}&\textbf{Strength of evidence}\\
+    \hline
+    Associate-M1&$-439.135$&29.752&Decisive\\
+    Ionic-M2&$-373.410$&1.208&Strong\\
+    MQMQA-M3&$-370.628$&-&-\\
+    MQMQA-M4&$-371.420$&0.344&Not worth more than a bare mention\\
+    \hline
+    \end{tabular}
+    \label{ms:tab:lacl3bayesK}
+\end{table}
+
+In summary, Bayesian parameter estimation through MCMC indicates that MQMQA-M3 is more favored, in terms of the input data of phase boundary and mixing enthalpy, over the other three models. This approach provides a robust technique for estimating the marginal likelihood values to assess the probability of data being generated by the model and calculating Bayes factors to statistically compare different models.
+
+\subsection{Thermodynamic modeling of the LiCl-KCl-LaC$_3$ system} \label{moltensalts:ssec:LaCl3ternarymodeling}
+The MQMQA-M3 is selected for the KCl-LaCl$_3$ system according to the Bayes factor. The ternary LiCl-KCl-LaCl$_3$ system is further improved by this model. The other two binary systems of LiCl-KCl and LiCl-LaCl$_3$ are taken from the MSTDB-TC \cite{ard2022development}. The available experimental data used for CALPHAD modeling include phase boundary data measured by Nakamura et al. \cite{nakamura1997thermal} and Venkata Krishnan et al. \cite{venkata2006pseudo}, activity data measured by Bagri and Simpson \cite{bagri2016determination} and Samin et al. \cite{samin2016estimation}, and mixing enthalpy data of LaCl$_3$ in LiCl-KCl eutectic. 
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=1\linewidth]{moltensalts/Moltensalts-LaCl3-Gamma-Ternary-UQ.png}
+    \caption{(a) Activity coefficients of LaCl$_3$ in KCl-LiCl eutectic at 773 K calculated from the present modeling in comparison with the modeling works from Hao et al. \cite{hao2024thermodynamic} (blue dash line) and MSTDB-TC \cite{ard2022development} (purple dash-dotted line), experimental measurements by Bagri et al. \cite{bagri2016determination} (red circles) and Samin et al. \cite{samin2016estimation} (green squares). (b) The uncertainty of the present modeling in predicting activity is shown in the grey region using a 95\% credible interval in predicting the activity values.}
+    \label{ms:fig:lacl3ternaryGammaUQ}
+\end{figure}
+
+Thermodynamic properties predicted from the present CALPHAD modeling are compared with available experimental data. In addition, uncertainty quantification is performed to propagate parameter uncertainties into property predictions. Figure \ref{ms:fig:lacl3ternaryGammaUQ}(a) presents the values of the activity coefficient of LaCl$_3$ in the eutectic LiCl-KCl at 773 K, compared with the measurements by Bagri et al. \cite{bagri2016determination} and Samin et al. \cite{samin2016estimation}. The present modeling aligns more closely with the results by Bagri et al. \cite{bagri2016determination} since they provided a larger dataset over a broader composition range than those by Samin et al. \cite{samin2016estimation}. The model shows a good agreement in the low $x$(LaCl$_3$) region ($x$(LaCl$_3$) < 0.015) but slightly overestimates the activity coefficients when $x$(LaCl$_3$) increases to 0.02. The MAE of the present modeling, compared with values reported by Bagri et al. \cite{bagri2016determination}, is 0.0016. The present modeling represents a significant improvement over the previous work by Hao et al. \cite{hao2024thermodynamic}, which had an MAE of 0.0078 for predicting the activity coefficients. While MSTDB-TC \cite{ard2022development} shows a good agreement in the composition range of $x$(LaCl$_3$) from 0.022 to 0.027, it has a lower overall MAE of 0.0024 compared to the values reported by Bagri et al. \cite{bagri2016determination}. The present UQ values were performed using the last 10 MCMC iterations with 60 MCMC samples. The shadow region in Figure \ref{ms:fig:lacl3ternaryGammaUQ}(b) illustrates the uncertainties in predicting activity coefficients, with a 95\% credible interval (Bayesian credible intervals containing 95\% of the activity coefficients samples). This indicates that the present model has an uncertainty range of $-$10\% to +2\% in predicting the activity coefficient values.
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=1\linewidth]{moltensalts/Moltensalts-LaCl3-HMR-Ternary-UQ-models.png}
+    \caption{Values of mixing enthalpy in LiCl-KCl-LaCl$_3$ at (a) 873 K and (b) 1133 K calculated from the present modeling compared with experimental measurements and the previous modeling works by Hao et al. \cite{hao2024thermodynamic} and MSTDB-TC \cite{ard2022development}. (c) The uncertainty of the present modeling in predicting mixing enthalpy is shown in the light red region (for 873 K) and the light blue region (for 1133 K) using a 95\% credible interval.}
+    \label{ms:fig:lacl3ternaryHMRUQ}
+\end{figure}
 
 
-    \subsection{Results and discussion} \label{moltensalts:ssec:LaCl3result}
+Figure \ref{ms:fig:lacl3ternaryHMRUQ} shows the mixing enthalpy calculations at 873 K and 1133 K from the present modeling, in comparison with experimental data and modeling results by Hao et al. \cite{hao2024thermodynamic} and MSTDB-TC \cite{ard2022development}. In Figure \ref{ms:fig:lacl3ternaryHMRUQ}(a), at 873 K, all these three modeling works closely match experimental measurements for $x$(LaCl$_3$) < 0.2. For example, at $x$(LaCl$_3$) = 0.1926, the present modeling predicts a mixing enthalpy of $-4231$ J/mol, which is 51 J/mol lower than the experimental value of $-4180$ J/mol. In comparison, Hao et al. \cite{hao2024thermodynamic} predicts $-4266$ J/mol and MSTDB-TC \cite{ard2022development} predicts $-4659$ J/mol, showing larger differences of 86 J/mol and 389 J/mol, respectively. The MAE of the present modeling in predicting mixing enthalpy at 873 K is 101 J/mol, compared to 120 J/mol for Hao et al. \cite{hao2024thermodynamic} and 312 J/mol for MSTDB-TC \cite{ard2022development}, highlighting the improved accuracy of the present modeling. Figure \ref{ms:fig:lacl3ternaryHMRUQ}(a) also shows different curve shapes in the LaCl$_3$-rich region predicted by three modeling works. The present modeling predicts a minimum energy similar to that by MSTDB-TC \cite{ard2022development} at around -5650 J/mol, whereas Hao et al. \cite{hao2024thermodynamic} predicts a value of $-6186$ J/mol, which is around 540 J/mol lower mixing enthalpy. Note that experiments investigations at 1133 K primarily focus on the LaCl$_3$-rich region.
 
+Figure \ref{ms:fig:lacl3ternaryHMRUQ}(b) indicates that both Hao et al. \cite{hao2024thermodynamic} and MSTDB-TC \cite{ard2022development} predict lower values of mixing enthalpy compared to the present modeling and experiments. The present work improves the accuracy of mixing enthalpy predictions, reducing the MAE to 45.84 J/mol, compared to 159.75 J/mol by Hao et al. \cite{hao2024thermodynamic} and 183.30 J/mol by MSTDB-TC \cite{ard2022development}. Figure \ref{ms:fig:lacl3ternaryHMRUQ}(c) presents the uncertainty quantification of the present modeling in predicting mixing enthalpy, represented by the 95\% credible interval. At 873 K, the uncertainty range in predicting mixing enthalpy is around $-$5\% to +5\%. At 1133 K, the uncertainty range in predicting mixing enthalpy is around $-$6\% to +6\% with all existing experimental data falling within the lower boundary of the uncertainty region. This implies that the present modeling might underestimate the mixing enthalpy, particularly around $x$(LaCl$_3$) = 0.4. Further experiments or simulations in this composition range are recommended to enhance the accuracy of the present CALPHAD modeling.
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{moltensalts/Moltensalts-Isopleth-LaCl3-LiCl-KCl.png}
+    \caption{Partial isopleth between the eutectic KCl-LiCl and LaCl$_3$ calculated from the present modeling work in comparison with experimental measurements by Venkata Krishnan et al. (blue squares) \cite{venkata2006pseudo} and Nakamura and Kurata (green circles) \cite{nakamura1997thermal}.}
+    \label{ms:fig:lacl3ternaryisopleth}
+\end{figure}
+
+Figure \ref{ms:fig:lacl3ternaryisopleth} shows the partial isopleth between the eutectic KCl-LiCl and LaCl$_3$ calculated from the present CALPHAD modeling compared with experimental measurements \cite{nakamura1997thermal, venkata2006pseudo}, demonstrating a close match of liquidus and solidus lines. For the eutectic reaction Liquid$\leftrightarrow$KCl+LiCl\\+K$_2$LaCl$_5$, the present modeling predicts a eutectic temperature of 630 K, which is 5 K higher than the 625 K reported by Nakamura et al. \cite{nakamura1997thermal} and Venkata Krishnan et al. \cite{venkata2006pseudo}. Similarly, for the reaction Liquid$\leftrightarrow$LiCl+K$_2$LaCl$_5$+ K$_3$La$_5$Cl$_{18}$, the present modeling predicts the eutectic temperature at 705 K, which is 3 K higher than the reported 702 K by Nakamura et al. \cite{nakamura1997thermal} and Venkata Krishnan et al. \cite{venkata2006pseudo}. Overall, the present modeling of LiCl-KCl-LaCl$_3$ demonstrates a good agreement with experimental data \cite{bagri2016determination,samin2016estimation,nakamura1997thermal, venkata2006pseudo} regarding phase boundary properties. 
 
 \section{Summary} \label{moltensalts:sec:Summary}
-The present work revisits the thermodynamic properties of compounds and liquids in the (LiF, NaF, KF, CrF$_2$)-CrF$_3$ systems by utilizing CALPHAD modeling with inputs from the DFT-based first-principles, phonon, and AIMD calculations. Thermodynamic properties, including enthalpy, entropy, and heat capacity of the binary (endmember) compounds LiF, NaF, KF, CrF$_3$, and CrF$_2$ as a function of temperature, have been predicted by DFT-based phonon calculations, agreeing with available experimental data in the literature and validating the reliability of the present methodology. They enabled the remodeling of the (LiF, NaF, KF, CrF$_2$)-CrF$_3$ systems with more accurate inputs. The MQMQA is employed to describe the liquid phase, providing valuable insights into the complex nature of molten salts such as the short-range ordering and neighboring of cations. Phase equilibria from the present CALPHAD modeling match better with experimental data in comparison with previous modeling work in the literature. The present thermodynamic data, including equilibrium volumes, bulk moduli, enthalpies, entropies, and heat capacities of compounds in the (LiF, NaF, KF, CrF$_2$)-CrF$_3$ system can be used to facilitate the development of advanced molten salt reactors.
+This chapter revisits the thermodynamic properties of compounds and liquids in the (LiF, NaF, KF, CrF$_2$)-CrF$_3$ systems by utilizing CALPHAD modeling with inputs from the DFT-based first-principles, phonon, and AIMD calculations. Thermodynamic properties, including enthalpy, entropy, and heat capacity of the binary (endmember) compounds LiF, NaF, KF, CrF$_3$, and CrF$_2$ as a function of temperature, have been predicted by DFT-based phonon calculations, agreeing with available experimental data in the literature and validating the reliability of the present methodology. They enabled the remodeling of the (LiF, NaF, KF, CrF$_2$)-CrF$_3$ systems with more accurate inputs. The MQMQA is employed to describe the liquid phase, providing valuable insights into the complex nature of molten salts such as the short-range ordering and neighboring of cations. Phase equilibria from the present CALPHAD modeling match better with experimental data in comparison with previous modeling work in the literature. The present thermodynamic data, including equilibrium volumes, bulk moduli, enthalpies, entropies, and heat capacities of compounds in the (LiF, NaF, KF, CrF$_2$)-CrF$_3$ system can be used to facilitate the development of advanced molten salt reactors.
+
+In addition, this chapter demonstrates an application of Bayesian model selection to identify the optimal model for describing atomic environments in molten salts, focusing on the KCl-LaCl$_3$ system. Four candidate models are considered, which are the associate model, the two-sublattice ionic model, and two MQMQA models with different coordination numbers. By estimating the marginal likelihoods of each model from MCMC optimization and calculating Bayes factors to compare models, one of the MQMQA models is suggested as the most favorable one to describe the KCl-LaCl$_3$ system based on available input data. DFT-based calculations provide important thermodynamic properties for compounds in KCl-LaCl$_3$, including equilibrium volumes, bulk moduli, enthalpies, entropies, and heat capacities. Furthermore, the ternary LiCl-KCl-LaCl$_3$ system is modeled, demonstrating a better agreement with experimental data compared to the previous CALPHAD modeling works in the literature. The uncertainty quantification and propagation show that the present modeling provides reliable predictions of activity and mixing enthalpy when compared with experimental data. The present work indicates that the Bayesian model selection approach facilitates a more rational comparison among different liquid models, enhancing the accuracy of thermodynamic predictions in molten salts.
