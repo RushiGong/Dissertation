@@ -1,4 +1,4 @@
-# Investigation of atomic environments from computational thermodynamics: applications in intermetallic catalysts and molten salts
+# Investigation of atomic environments from computational thermodynamics: Applications in intermetallic catalysts and molten salts
 
 - A Dissertation in Materials Science and Engineering by Rushi Gong
 - Submitted in Partial Fulfillment of the Requirements for the Degree of Doctor of Philosophy in December 2024
