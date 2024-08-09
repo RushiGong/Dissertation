@@ -224,7 +224,7 @@ The major two functions in the custom model template generator are \textit{model
 The output of using the custom model template generator includes a \texttt{rng$\_$file$\_$name.rng} and a \texttt{model$\_$file$\_$name.py}, which users can start with for further improvement and implementation into PyCalphad.
 
 \subsection{Application: the Peng-Robinson Euqation of State} \label{models:ssec:CMTGapp} %Add PR EOS introduction and impact
-The custom model template generator has been utilized to implement the Peng-Robinson equation of state (PR EOS) \cite{peng1976new}. Developed by Peng and Robinson, this model is designed to predict the behavior of substances in gas, liquid, and supercritical fluid states \cite{peng1976new}. 
+The custom model template generator has been utilized to implement the Peng-Robinson equation of state (PR EOS) \cite{peng1976new}. Developed by Peng and Robinson, this model is designed to predict the behavior of substances in gas, liquid, and supercritical fluid states \cite{peng1976new}. With more than 40 years of development, there are more than 220 modifications to the PR EOS for compounds and mixtures \cite{LopezEcheverry201739}. PR EOS is highly regarded in industrial applications, particularly in the oil, gas, and petrochemical, for its effectiveness in investigating phase equilibrium. However, there is a need to enhance the optimization process for this model, where it could greatly benefit from the capabilities offered by PyCalphad and ESPEI.
 
 The Gibbs energy derived from PR EOS can be expressed as \cite{tang2005supercritical}:
 \begin{equation} \label{models:eq:PRGm}
