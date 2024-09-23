@@ -2,6 +2,7 @@
 
 - A Dissertation in Materials Science and Engineering by Rushi Gong
 - Submitted in Partial Fulfillment of the Requirements for the Degree of Doctor of Philosophy in December 2024
+- [Final Version PDF](https://github.com/RushiGong/Dissertation/releases/download/Final/Gong_Dissertation_Final.pdf)
 
 ## Abstract
 
